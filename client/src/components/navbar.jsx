@@ -1,15 +1,35 @@
+import React from "react";
+import cart from "../assets/cart-icon.png";
 
-export default function Navbar(){
-    return(
-        <div className="w-100">
-            <div className="w-[80%] border-cyan-600 border-[2px] justify-between flex items-center pl-[20px] pr-[20px] rounded-full h-[50px] ml-auto mr-auto mt-[10px]">
-                <div className="font-bold">
-                    <h1 className="text-lg">QuizNova</h1>
-                </div>
-                <div className="">
-                    <a href="/login">Login</a>
-                </div>
-            </div>
-        </div>
-    )
+function Navbar() {
+	return (
+		<div className="py-8 px-28 flex justify-around items-center font-Satoshi-Regular">
+			<a href="">
+				<img
+					src="https://assets.website-files.com/623865af2eee366912508587/623891ef81d2e4d287675658_Group%2022.svg"
+					alt=""
+				/>
+			</a>
+			<ul className="flex gap-10 text-base">
+				<li>About</li>
+				<li>Pricing</li>
+				<li>Features</li>
+				<li>Integration</li>
+				<li>Blog</li>
+				<li>Contact</li>
+			</ul>
+			<div className="nav-items-right flex items-center gap-4">
+				<div className="cart flex items-center gap-2">
+					<img src={cart} alt="" className="w-4 h-4" />
+					<p>Cart</p>
+				</div>
+				<p>Log In</p>
+				<button className="bg-black text-white rounded-3xl px-6 py-3">
+					Sign Up
+				</button>
+			</div>
+		</div>
+	);
 }
+
+export default Navbar;

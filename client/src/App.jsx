@@ -1,16 +1,22 @@
-import './App.css';
-import { Routes, Route } from "react-router-dom";
-import Layout from './components/layout';
-import Home from './pages/home';
-import Login from './pages/login';
+import React from 'react'
+import Navbar from './components/Navbar'
+import LandingPage from './components/LandingPage'
+import Page2 from './components/Page2'
+import Cards from './components/Cards'
+import Page3 from './components/Page3'
+import Page4 from './components/Page4'
 
-export default function App() {
+function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout/>}>
-        <Route index element={<Home/>}/>
-      </Route>
-      <Route path="/login" element={<Login/>}/>
-    </Routes>
-  );
+    <div>
+      <Navbar/>
+      <LandingPage/>
+      <Page2/>
+      <Cards/>
+      <Page3/>
+      <Page4/>
+    </div>
+  )
 }
+
+export default App
