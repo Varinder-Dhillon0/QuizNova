@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily : {
+        satoshi : ['Satoshi' , 'sans-serif'],
+      },
+    
       fontFamily:{
         'Satoshi-Regular':['Satoshi-Regular', 'sans-serif'],
         'Satoshi-Bold':['Satoshi-Bold', 'sans-serif'],
