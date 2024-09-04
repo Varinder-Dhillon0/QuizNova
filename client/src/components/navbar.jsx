@@ -19,11 +19,9 @@ function Navbar() {
 				<li>Contact</li>
 			</ul>
 			<div className="nav-items-right flex items-center gap-4">
-				<div className="cart flex items-center gap-2">
-					<img src={cart} alt="" className="w-4 h-4" />
-					<p>Cart</p>
-				</div>
-				<p>Log In</p>
+				<a href="/login" >
+					Login
+				</a>
 				<button className="bg-black text-white rounded-3xl px-6 py-3">
 					Sign Up
 				</button>

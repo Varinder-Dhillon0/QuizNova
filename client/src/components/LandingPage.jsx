@@ -1,7 +1,12 @@
 import React from 'react'
+import Page2 from './Page2'
+import Cards from './Cards'
+import Page3 from './Page3'
+import Page4 from './Page4'
 
 function LandingPage() {
   return (
+    <>
     <div className='flex flex-col w-full items-center justify-center text-center relative max-h-screen'>
       <img src="https://assets.website-files.com/623865af2eee366912508587/623d5980fbc033885da2c334_Highlight_05.svg" alt="" className='absolute left-72 top-5 right-auto' />
       <h1 className='max-w-screen-xl px-20 text-8xl font-Satoshi-Bold mt-12'>Save more and <span className='font-Boska-BoldItalic'>get visibility</span> on your finances</h1>
@@ -10,6 +15,8 @@ function LandingPage() {
         <p className='uppercase text-white text-lg font-Satoshi-Bold tracking-wide min-w-[250px]'>Try it on browser</p>
         <img src="https://assets.website-files.com/623865af2eee366912508587/6238747d9d3f5e4e5097b087_ArrowUpRight.svg" alt="" />
       </button>
+      <img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute left-[-15vw] bottom-0' alt="" />
+      <img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d3e22f1763bfb3a480_Blue%20Gradient%20Image%20(2)-p-500.png" className='absolute left-[-15vw] bottom-[-18vh]' alt="" /> 
       <div className='logo-wrapper flex mt-10 gap-3'>
         <div className='flex gap-2'>
           <div className='flex flex-col items-center'>
@@ -43,7 +50,16 @@ function LandingPage() {
           </div>
         </div>
       </div>
-    </div>
+      <img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute h-[75%] right-[14vw] bottom-[-29vh]' alt="" />
+    </div> 
+    <div>
+        <img src="https://assets.website-files.com/623865af2eee366912508587/627c3f3fc791a48e717c4118_iPad%20Pro%202020-min-p-1600.png" className='h-[75%]' alt="" />
+      </div>
+      <Page2/>
+      <Cards/>
+      <Page3/>
+      <Page4/>
+    </>
   )
 }
 
