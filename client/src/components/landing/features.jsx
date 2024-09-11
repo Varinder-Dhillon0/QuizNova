@@ -1,6 +1,6 @@
 import React from "react";
 
-function Cards() {
+export default function Features() {
 	return (
 		<div className="flex justify-center py-20">
 			<div className="w-10/12 grid grid-cols-3 gap-4">
@@ -42,5 +42,3 @@ function Cards() {
 		</div>
 	);
 }
-
-export default Cards;

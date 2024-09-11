@@ -1,15 +1,15 @@
-// import axios from "axios"
-// import { useQueryClient, useQuery } from "@tanstack/react-query";
+import Features from "../components/landing/features"
+import Main from "../components/landing/main"
+import Testimonial from "../components/landing/testimonial"
+import MoreFeatures from "../components/landing/moreFeatures"
 
-export default function Home(){
-
-    // const getTest = async() =>{
-    //     axios.post("http://localhost:5000/test" , {"name" : "hello there"}).then((data) =>{
-    //         console.log(data);
-    //     }).catch((err) => console.log(err));
-    // }
-
-    return(
-        <h1 className="text-2xl text-black">this compiles</h1>
-    )
+export default function Home() {
+  return (
+    <>
+        <Main/>
+        <Testimonial/>
+        <Features/>
+        <MoreFeatures/>
+    </>
+  )
 }

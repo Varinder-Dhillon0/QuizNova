@@ -1,8 +1,7 @@
-import React from "react";
 
-function Page2() {
-	return (
-		<div className="flex flex-col justify-center items-center mt-7">
+export default function Testimonial(){
+    return(
+        <div className="flex flex-col justify-center items-center mt-7">
 			<h1 className="font-Satoshi-Bold text-6xl w-7/12 text-center px-10 leading-tight">
 				Customers have consistently <span className="font-Boska-MediumItalic">rated</span> Milestone 4.9/5
 			</h1>
@@ -96,7 +95,5 @@ function Page2() {
 				</div>
 			</div>
 		</div>
-	);
+    )
 }
-
-export default Page2;
