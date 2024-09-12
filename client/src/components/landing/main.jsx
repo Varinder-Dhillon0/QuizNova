@@ -47,10 +47,10 @@ export default function Main() {
 		</div>
 		<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute h-[75%] right-[14vw] bottom-[-29vh]' alt="" />
 	  </div> 
-	  <div>
-		  <img src="https://assets.website-files.com/623865af2eee366912508587/627c3f3fc791a48e717c4118_iPad%20Pro%202020-min-p-1600.png" className='h-[75%]' alt="" />
+	  <div className="flex items-center justify-center">
+		  <img src="https://assets.website-files.com/623865af2eee366912508587/627c3f3fc791a48e717c4118_iPad%20Pro%202020-min-p-1600.png" className='h-[71%] w-[71%] object-contain' alt="" />
 		</div>
-		</>
+		</>	
 	);
 }
 
