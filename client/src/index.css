@@ -57,3 +57,11 @@
     font-family: 'Boska-BlackItalic';
     src: url(./fonts/Boska-BlackItalic.ttf);
 }
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.input-date::-webkit-input-placeholder {
+    color: rgba(31, 41, 55, 0.5)
+}

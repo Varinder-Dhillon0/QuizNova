@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 export default function Login() {
     return (
@@ -14,7 +15,7 @@ export default function Login() {
                         </button>
                         <h1 className="font-Satoshi-Bold text-white mb-4">OR</h1>
                         <input
-                            type="text"
+                            type="email"
                             placeholder="E-mail address*"
                             className="bg-gray-800 text-white p-3 rounded mb-4 w-full"
                         />
@@ -27,8 +28,8 @@ export default function Login() {
                             SIGN IN
                         </button>
                         <h1 className="text-white mb-2">
-                            Don't have an account?{" "}
-                            <a href="#" className="text-[#caef45]">Register</a>
+                            Don't have an account?
+                            <Link to="/register" className="text-[#caef45] ml-1">Register</Link>
                         </h1>
                         <a href="#" className="text-[#caef45]">Forgot Password?</a>
                     </form>
