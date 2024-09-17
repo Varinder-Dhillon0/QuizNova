@@ -3,7 +3,7 @@ export default function Testimonial(){
     return(
         <div className="flex flex-col justify-center items-center mt-7">
 			<h1 className="font-Satoshi-Bold text-6xl w-7/12 text-center px-10 leading-tight">
-				Customers have consistently <span className="font-Boska-MediumItalic">rated</span> Milestone 4.9/5
+				Customers have consistently <span className="font-Boska-MediumItalic">rated</span> Quiznova 4.9/5
 			</h1>
 			<div className="flex justify-evenly items-center mt-16 w-10/12">
 				<div className="flex flex-col justify-center items-center gap-5">

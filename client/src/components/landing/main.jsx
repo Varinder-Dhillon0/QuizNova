@@ -4,8 +4,8 @@ export default function Main() {
 		<>
 		<div className='flex flex-col w-full items-center justify-center text-center relative max-h-screen'>
 		<img src="https://assets.website-files.com/623865af2eee366912508587/623d5980fbc033885da2c334_Highlight_05.svg" alt="" className='absolute left-72 top-5 right-auto' />
-		<h1 className='max-w-screen-xl px-20 text-8xl font-Satoshi-Bold mt-12'>Save more and <span className='font-Boska-BoldItalic'>get visibility</span> on your finances</h1>
-		<h2 className='font-Satoshi-Regular text-xl mt-10 max-w-xl leading-8'>Know where your spend is going and manage your finances more efficiently with Milestone.</h2>
+		<h1 className='max-w-screen-xl px-20 text-7xl font-Satoshi-Bold mt-12'>Create, share and conquer<span className='font-Boska-BoldItalic'> quizzes</span> with QuizNova!</h1>
+		<h2 className='font-Satoshi-Regular text-xl mt-10 max-w-xl leading-8'>Design unique quizzes and questions, share them with a vibrant community, and test your skills across a wide range of topics.</h2>
 		<button className='bg-black flex rounded-full p-6 mt-10'>
 		  <p className='uppercase text-white text-lg font-Satoshi-Bold tracking-wide min-w-[250px]'>Try it on browser</p>
 		  <img src="https://assets.website-files.com/623865af2eee366912508587/6238747d9d3f5e4e5097b087_ArrowUpRight.svg" alt="" />

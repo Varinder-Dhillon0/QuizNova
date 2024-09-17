@@ -1,6 +1,3 @@
-import React from "react";
-import cart from "../assets/cart-icon.png";
-
 function Navbar() {
 	return (
 		<div className="py-8 px-28 flex justify-around items-center font-Satoshi-Regular">
