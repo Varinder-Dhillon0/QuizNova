@@ -1,6 +1,11 @@
 import React from "react";
+import { useContext } from "react";
+import { LoginContext } from "../../context/loginContext";
 
 function Navbar() {
+
+	const {user , loggedin, logout} = useContext(LoginContext);
+
 	return (
 		<div className="py-8 px-28 flex justify-around items-center font-Satoshi-Regular">
 			<a href="">
@@ -17,14 +22,18 @@ function Navbar() {
 				<li>Blog</li>
 				<li>Contact</li>
 			</ul>
-			<div className="nav-items-right flex items-center gap-4">
+			{loggedin ? 
+				<div>Hi , {user.name}
+				<button onClick={logout}> log out</button>
+				</div>	
+			: <div className="nav-items-right flex items-center gap-4">
 				<a href="/login" >
 					Login
 				</a>
 				<button className="bg-black text-white rounded-3xl px-6 py-3">
 					Sign Up
 				</button>
-			</div>
+			</div>}
 		</div>
 	);
 }
