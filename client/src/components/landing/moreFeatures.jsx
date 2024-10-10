@@ -1,4 +1,6 @@
 import React from "react";
+import SideLeftImg from "../../assets/img/side-left-img.svg";
+import SideRightImg from "../../assets/img/side-right-img.svg";
 
 export default function MoreFeatures() {
 	return (
@@ -6,7 +8,7 @@ export default function MoreFeatures() {
 			<div className="flex w-full p-32">
 				<div className="w-6/12">
 					<img
-						src="https://assets.website-files.com/623865af2eee366912508587/627c3fc3bffc76f17c501cbd_Group%20892.svg"
+						src={SideLeftImg}
 						alt=""
 					/>
 				</div>
@@ -14,36 +16,35 @@ export default function MoreFeatures() {
 					<h1 className="text-6xl font-Satoshi-Bold">
 						Manage{" "}
 						<span className="font-Boska-BoldItalic">
-							all your cards{" "}
+							all your quizzes{" "}
 						</span>
-						in one place
+						at one place
 					</h1>
 					<p className="font-Satoshi-Regular text-xl">
-						Centralize and simplify payments, and get comprehensive
-						insights on your financials. Connect your bank account and
-						your card to Milestone.
+						Attempt and make custom Quizzes, and get comprehensive
+						insights on your dashboards. Connect with people around th globe.
 					</p>
 					<div className="flex flex-col gap-5">
 						<div className="flex text-xl gap-4">
 							<img
-								src="https://assets.website-files.com/623865af2eee366912508587/623b3326fcec4a5beb0c1e51_CheckCircle.svg"
+								src={"https://assets.website-files.com/623865af2eee366912508587/623b3326fcec4a5beb0c1e51_CheckCircle.svg"}
 								alt=""
 							/>
-							<p>No hidden fees.</p>
+							<p>Join discussions, share tips.</p>
 						</div>
 						<div className="flex text-xl gap-4">
 							<img
 								src="https://assets.website-files.com/623865af2eee366912508587/623b3326fcec4a5beb0c1e51_CheckCircle.svg"
 								alt=""
 							/>
-							<p>100% security. Guaranteed.</p>
+							<p>Unlock premium quizzes.</p>
 						</div>
 						<div className="flex text-xl gap-4">
 							<img
 								src="https://assets.website-files.com/623865af2eee366912508587/623b3326fcec4a5beb0c1e51_CheckCircle.svg"
 								alt=""
 							/>
-							<p>No training or maintenance needed.</p>
+							<p>Track your progress and compete with others.</p>
 						</div>
 					</div>
 				</div>
@@ -51,17 +52,13 @@ export default function MoreFeatures() {
 			<div className="flex w-full p-32">
 				<div className="flex flex-col w-6/12 gap-10 px-5 py-16">
 					<h1 className="font-Satoshi-Bold text-6xl">
-						Pay invoices, <span className="font-Boska-BoldItalic">on time, every </span>time across
-						borders
+						Create quizzes, <span className="font-Boska-BoldItalic">effortlessly, anytime, anywhere </span>
 					</h1>
 					<p className="font-Satoshi-Regular text-xl">
-						Send and receive payments in any currency, without any extra
-						charges, within 24 hours or less. Make international
-						transactions a piece of cake.
+					Design and share quizzes with ease, in any format, without limits, and get instant feedback in real-time. Making learning fun and interactive has never been simpler.
 					</p>
 					<p className="font-Satoshi-Regular text-xl">
-						Avoid late fees and penalties, and capture every early
-						payment discount with reminders and automated approvals.
+					Stay ahead of deadlines and boost engagement with automated reminders, detailed analytics, and seamless collaboration features.
 					</p>
 					<div className="flex gap-4">
 						<div className="bg-black rounded-full">
@@ -76,7 +73,7 @@ export default function MoreFeatures() {
 				</div>
 				<div className="w-6/12">
 					<img
-						src="https://assets.website-files.com/623865af2eee366912508587/627c4088c506c33633b42df6_Group%20891-p-800.png"
+						src={SideRightImg}
 						alt=""
 					/>
 				</div>
