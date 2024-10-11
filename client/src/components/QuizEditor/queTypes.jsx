@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { QuesContext } from "../../context/quesContext";
+import { useQues } from "../../hooks/useQues";
 
 export default function QueTypes(){
 
-    const {ques ,setQues , setSelectedQue} = useContext(QuesContext);
+    const {ques ,setQues , setSelectedQue} = useQues();
 
     const Types = [{
         type : 1,
@@ -33,6 +32,6 @@ export default function QueTypes(){
                     <img className="w-5 h-5" src="https://img.icons8.com/ios-glyphs/30/multiple-choice.png" alt="multiple-choice"/>
                     <h3 className="ml-3 font-semibold text-[13px]">Multiple choice</h3>
                 </div>
-            </div>        
+            </div>
     )
 }

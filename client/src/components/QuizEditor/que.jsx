@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { QuesContext } from "../../context/quesContext";
 import MultipleChoice from "./MutipleChoice";
+import { useQues } from "../../hooks/useQues";
 
 export default function Que() {
-  const {ques,selectedQue } = useContext(QuesContext);
+  const {ques,selectedQue } = useQues();
 
   return (
     <div className="border-[#e2e2e2] border-[1px] w-[100%] h-[475px] overflow-auto flex justify-center">

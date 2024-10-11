@@ -1,10 +1,12 @@
-import Editor from "../components/admin/editor";
+import { Outlet} from "react-router-dom";
 
-export default function Admin(){
+export default function Admin() {
 
-    return(
-        <div className="flex w-[100%]">
-            <Editor />
-        </div>
+    return (
+        <>
+            <div className="flex w-[100%]">
+                <Outlet/>
+            </div> 
+        </>
     )
 }

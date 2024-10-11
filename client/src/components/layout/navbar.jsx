@@ -1,10 +1,9 @@
 import React from "react";
-import { useContext } from "react";
-import { LoginContext } from "../../context/loginContext";
+import { useAuth } from "../../hooks/useAuth";
 
 function Navbar() {
 
-	const {user , loggedin, logout} = useContext(LoginContext);
+	const {user , loggedin, logout} = useAuth();
 
 	return (
 		<div className="py-8 px-28 flex justify-around items-center font-Satoshi-Regular">

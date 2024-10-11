@@ -1,10 +1,10 @@
-import { useContext, useState } from "react"
-import { QuesContext } from "../../context/quesContext"
+import { useState } from "react"
 import QueTypes from "./queTypes";
+import { useQues } from "../../hooks/useQues";
 
 export default function Menu({id , item}){
 
-    const {ques, setQues} = useContext(QuesContext);
+    const {ques, setQues} = useQues();
     const [showTypes , setShowTypes] = useState(false);
 
     return(

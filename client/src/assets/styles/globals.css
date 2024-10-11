@@ -7,55 +7,55 @@
 
 @font-face {
     font-family: 'Satoshi-Black';
-    src: url(./fonts/Satoshi-Black.ttf);
+    src: url(../fonts/Satoshi-Black.ttf);
 }
 @font-face {
     font-family: 'Satoshi-BlackItalic';
-    src: url(./fonts/Satoshi-BlackItalic.ttf);
+    src: url(../fonts/Satoshi-BlackItalic.ttf);
 }
 @font-face {
     font-family: 'Satoshi-Bold';
-    src: url(./fonts/Satoshi-Bold.ttf);
+    src: url(../fonts/Satoshi-Bold.ttf);
 }
 @font-face {
     font-family: 'Satoshi-BoldItalic';
-    src: url(./fonts/Satoshi-BoldItalic.ttf);
+    src: url(../fonts/Satoshi-BoldItalic.ttf);
 }
 @font-face {
     font-family: 'Satoshi-Italic';
-    src: url(./fonts/Satoshi-Italic.ttf);
+    src: url(../fonts/Satoshi-Italic.ttf);
 }
 @font-face {
     font-family: 'Satoshi-LightItalic';
-    src: url(./fonts/Satoshi-LightItalic.ttf);
+    src: url(../fonts/Satoshi-LightItalic.ttf);
 }
 @font-face {
     font-family: 'Satoshi-Light';
-    src: url(./fonts/Satoshi-Light.ttf);
+    src: url(../fonts/Satoshi-Light.ttf);
 }
 @font-face {
     font-family: 'Satoshi-Medium';
-    src: url(./fonts/Satoshi-Medium.ttf);
+    src: url(../fonts/Satoshi-Medium.ttf);
 }
 @font-face {
     font-family: 'Satoshi-MediumItalic';
-    src: url(./fonts/Satoshi-MediumItalic.ttf);
+    src: url(../fonts/Satoshi-MediumItalic.ttf);
 }
 @font-face {
     font-family: 'Satoshi-Regular';
-    src: url(./fonts/Satoshi-Regular.ttf);
+    src: url(../fonts/Satoshi-Regular.ttf);
 }
 @font-face {
     font-family: 'Boska-MediumItalic';
-    src: url(./fonts/Boska-MediumItalic.ttf);
+    src: url(../fonts/Boska-MediumItalic.ttf);
 }
 @font-face {
     font-family: 'Boska-BoldItalic';
-    src: url(./fonts/Boska-BoldItalic.ttf);
+    src: url(../fonts/Boska-BoldItalic.ttf);
 }
 @font-face {
     font-family: 'Boska-BlackItalic';
-    src: url(./fonts/Boska-BlackItalic.ttf);
+    src: url(../fonts/Boska-BlackItalic.ttf);
 }
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {

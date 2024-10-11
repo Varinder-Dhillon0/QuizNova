@@ -1,17 +1,19 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useToast } from "../hooks/useToast";
 
-export const LoginContext = createContext();
+export const AuthContext = createContext();
 
+export default function AuthProvider({children}){
 
-export default function LoginProvider({children}){
-
+    const Toast = useToast();
     const [loggedin , setLoggedin] = useState(false);
     const [user , setUser] = useState({name : "" , email : ""});
+    const [loading, setLoading] = useState(true);
 
-    const {mutate : authenticateMutation , isPending} = useMutation({
+    const {mutate : authenticateMutation} = useMutation({
         mutationFn : async (token) =>{
             const res = await axios.post("http://localhost:5000/validateuser" , {token : token});
             return res.data;
@@ -19,15 +21,18 @@ export default function LoginProvider({children}){
         onSuccess : (data) => {
             if(data.success){
                 setUser({name : data.name , email : data.email});
-                setLoggedin(true);
-                console.log(data);
+                setLoggedin(true);  
+                console.log(data.success);
             }
             if(data.error){
+                Cookies.remove("token");
                 console.log(data.error);
             }
+            setLoading(false);
         },
         onError : (data) =>{
             console.log(data);
+            setLoading(false);
         }
     })
 
@@ -35,18 +40,21 @@ export default function LoginProvider({children}){
         const token = Cookies.get("token");
         if(token){
             authenticateMutation(token);
+        }else{
+            setLoading(false);
         }
     },[])
 
     const logout = () =>{
         Cookies.remove("token");
-        console.log("logged out successfully");
-        
+        setLoggedin(false);
+        setUser({name : "" , email : ""});
+        Toast(2 , "Logged out!" , 3000);
     }
 
     return(
-        <LoginContext.Provider value={{loggedin, setLoggedin , user}}>
+        <AuthContext.Provider value={{loggedin, setLoggedin ,setUser, user, logout , loading}}>
             {children}
-        </LoginContext.Provider>
+        </AuthContext.Provider>
     ) 
 }

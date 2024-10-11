@@ -74,7 +74,6 @@ const login_user = async (req,res) =>{
     const {email , password} = req.body;
 
     const user = await userModel.findOne({email : email});
-    console.log(user);
 
     try{
         if(user){
@@ -87,7 +86,7 @@ const login_user = async (req,res) =>{
                 const expireDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
                 res.cookie("token", jwt_token, {expires : expireDate, httpOnly : false});
-                res.json({success : "logged in successfully", jwt_token : jwt_token});
+                res.json({success : "logged in successfully", name : user.name , email : email});
 
             }else{
                 res.json({warning : "incorrect password."});

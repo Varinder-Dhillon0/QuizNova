@@ -5,6 +5,9 @@ import { BsFillExclamationDiamondFill } from "react-icons/bs";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../hooks/useToast";
+import { useAuth } from "../hooks/useAuth";
 
 const userValidationSchema = Yup.object({
     email : Yup.string().email("Email is invalid").required("required"),
@@ -13,6 +16,10 @@ const userValidationSchema = Yup.object({
 
 export default function Login() {
 
+    const navigate = useNavigate();
+    const Toast = useToast();
+    const {setLoggedin , setUser} = useAuth();
+
     const {mutate : userMutation , isPending} = useMutation({
         mutationFn : async(values) =>{
             const res = await axios.post("http://localhost:5000/login", values, {withCredentials : true});
@@ -20,17 +27,22 @@ export default function Login() {
         },
         onSuccess: (data) => {
 			if (data.success) {
-				console.log("Success:", data.success);
+				navigate("/");
+                setLoggedin(true);
+                setUser({name : data.name , email : data.email});
+                console.log(data);
+                Toast(0 , data.success , 3000);
 			}
 			if (data.warning) {
-				console.log("Warning:", data.warning);
+                Toast(1 , data.success , 3000);
 			}
 			if (data.error) {
-				console.log("Error:", data.error);
+                Toast(2 , data.success , 3000);
 			}
 		},
 		onError: (error) => {
 			console.log("Error occurred:", error);
+            Toast(2 , data.success , 3000);
 		}
     })
 

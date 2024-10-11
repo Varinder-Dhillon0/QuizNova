@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { useContext } from 'react';
-import { QuesContext } from '../../context/quesContext';
+import { useQues } from "../../hooks/useQues";
 
 // Main Component
 export default function Sidebar() {
 
-  const {ques,selectedQue, setSelectedQue} = useContext(QuesContext);
+  const {ques,selectedQue, setSelectedQue} = useQues();
 
   return (
       <div className="w-[100%] p-4 font-Satoshi-Bold">

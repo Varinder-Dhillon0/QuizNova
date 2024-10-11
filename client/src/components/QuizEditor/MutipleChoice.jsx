@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
-import { useContext } from "react";
-import { QuesContext } from "../../context/quesContext";
+import { useQues } from "../../hooks/useQues";
 import { GoPlus } from "react-icons/go";
 
 
 export default function MultipleChoice() {
 
-    const { ques ,  selectedQue, updateQuesContext } = useContext(QuesContext);
+    const { ques ,  selectedQue, updateQuesContext } = useQues();
     const [edited, setEdited] = useState({ ...ques[selectedQue]});
 
     //updating edited for new question

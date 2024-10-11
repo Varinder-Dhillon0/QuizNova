@@ -1,6 +1,6 @@
 import React from "react";
-import SideLeftImg from "../../assets/img/side-left-img.svg";
-import SideRightImg from "../../assets/img/side-right-img.svg";
+import SideLeftImg from "../../../assets/img/side-left-img.svg";
+import SideRightImg from "../../../assets/img/side-right-img.svg";
 
 export default function MoreFeatures() {
 	return (

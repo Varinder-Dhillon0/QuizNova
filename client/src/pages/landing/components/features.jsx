@@ -1,7 +1,7 @@
 import React from "react";
-import brainQuest from "../../assets/img/brainQuest.svg";
-import leaderboard from"../../assets/img/leaderboard.svg";
-import payment from "../../assets/img/payment.svg";
+import brainQuest from "../../../assets/img/brainQuest.svg";
+import leaderboard from"../../../assets/img/leaderboard.svg";
+import payment from "../../../assets/img/payment.svg";
 
 export default function Features() {
 	return (
