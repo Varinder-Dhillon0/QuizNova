@@ -1,9 +1,10 @@
 import React from "react";
 import { useAuth } from "../../hooks/useAuth";
+import User from "../common/user";
 
 function Navbar() {
 
-	const {user , loggedin, logout} = useAuth();
+	const {loggedin} = useAuth();
 
 	return (
 		<div className="py-8 px-28 flex justify-around items-center font-Satoshi-Regular">
@@ -22,9 +23,7 @@ function Navbar() {
 				<li>Contact</li>
 			</ul>
 			{loggedin ? 
-				<div>Hi , {user.name}
-				<button onClick={logout}> log out</button>
-				</div>	
+				<User/>
 			: <div className="nav-items-right flex items-center gap-4">
 				<a href="/login" >
 					Login

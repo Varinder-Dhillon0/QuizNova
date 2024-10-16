@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useQues } from "../../hooks/useQues";
+import { useQues } from "../../../hooks/useQues";
 import { GoPlus } from "react-icons/go";
 
 
@@ -39,7 +39,6 @@ export default function MultipleChoice() {
         const textarea = e.target;
         textarea.style.height = 'auto';
         textarea.style.height = `${textarea.scrollHeight}px`;
-        console.log("handling size");
         handleChanges(e , "que");
     };
 
@@ -66,7 +65,7 @@ export default function MultipleChoice() {
 
     return (
         <div className="flex flex-col font-Satoshi-Bold w-[517px] max-h-[100%] ml-5">
-            <textarea value={edited.que} onChange={handleSize} type="text" className="pt-1 resize-none min-h-[32px] w-[100%] overflow-hidden font-Satoshi-Bold text-2xl outline-none" placeholder="Question here" />
+            <textarea value={edited.que} onChange={handleSize} type="text" className="pt-2 resize-none min-h-[32px] w-[100%] overflow-hidden font-Satoshi-Bold text-2xl !leading-4 outline-none border-dashed border-b-[1.5px] " placeholder="Question here" />
             <div className="mt-3 flex flex-col">
                     {edited.choices.map((cho, i) => {
                         return <>

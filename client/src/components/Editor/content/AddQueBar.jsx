@@ -1,6 +1,7 @@
-import { useQues } from "../../hooks/useQues";
+import { useQues } from "../../../hooks/useQues";
+import listDashes from "../../../assets/img/list-dashes.svg"
 
-export default function QueTypes(){
+export default function AddQueBar(){
 
     const {ques ,setQues , setSelectedQue} = useQues();
 
@@ -29,7 +30,7 @@ export default function QueTypes(){
     return(
             <div className="flex flex-col bg-white absolute mt-[10px] p-4 rounded-md border-[#dbdce1] border-[1px]">
                 <div id="1" className="flex justify-between items-center cursor-pointer" onClick={(e) => {addQuestion(e)}}>
-                    <img className="w-5 h-5" src="https://img.icons8.com/ios-glyphs/30/multiple-choice.png" alt="multiple-choice"/>
+                    <img className="w-5 h-5" src={listDashes} alt="multiple-choice"/>
                     <h3 className="ml-3 font-semibold text-[13px]">Multiple choice</h3>
                 </div>
             </div>

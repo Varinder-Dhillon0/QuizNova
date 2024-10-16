@@ -1,8 +1,8 @@
-import Content from "../QuizEditor/content";
+import Content from "./content";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import QuesProvider from "../../context/quesContext";
-import Contentbar from "./contentbar";
+import OptionsBar from "./optionsbar";
 
 export default function Editor(){
 
@@ -27,7 +27,7 @@ export default function Editor(){
         
                     {/* Content Bar */}
                     <div className="w-[20%]">
-                        <Contentbar/>
+                        <OptionsBar/>
                     </div>
                 </div>
             </div>

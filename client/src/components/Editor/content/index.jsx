@@ -1,7 +1,6 @@
 import Menu from "./menu"
 import Que from "./que"
 
-
 export default function Content(){
 
     return(

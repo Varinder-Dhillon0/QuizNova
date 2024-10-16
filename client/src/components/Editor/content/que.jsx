@@ -1,5 +1,5 @@
 import MultipleChoice from "./MutipleChoice";
-import { useQues } from "../../hooks/useQues";
+import { useQues } from "../../../hooks/useQues";
 
 export default function Que() {
   const {ques,selectedQue } = useQues();

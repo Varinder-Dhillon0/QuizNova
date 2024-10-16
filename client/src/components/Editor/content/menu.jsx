@@ -1,6 +1,6 @@
 import { useState } from "react"
-import QueTypes from "./queTypes";
-import { useQues } from "../../hooks/useQues";
+import AddQueBar from "./AddQueBar";
+import { useQues } from "../../../hooks/useQues";
 
 export default function Menu({id , item}){
 
@@ -15,7 +15,7 @@ export default function Menu({id , item}){
                         <button onClick={() => setShowTypes(!showTypes)} className="bg-black rounded-full pl-3 pr-3 p-1.5 text-white text-xs">
                             + Add Content
                         </button>
-                        {showTypes && <QueTypes/>}
+                        {showTypes && <AddQueBar/>}
                     </div>
                     <button>
                         
