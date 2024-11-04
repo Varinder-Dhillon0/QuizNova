@@ -3,6 +3,8 @@ import Main from "./components/main"
 import Testimonial from "./components/testimonial"
 import MoreFeatures from "./components/moreFeatures"
 import BlackFeatures from "./components/blackFeatures"
+import QuizNavigation from "../../components/common/quizNavigation"
+import SubmitQuizSection from "../../components/common/submitQuiz"
 
 export default function Home() {
 
@@ -13,6 +15,8 @@ export default function Home() {
         <Features/>
         <MoreFeatures/>
         <BlackFeatures/>
+        <QuizNavigation/>
+        <SubmitQuizSection/>
     </>
   )
 }
