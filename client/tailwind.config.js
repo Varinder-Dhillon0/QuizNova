@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      blur:{
+        '80':'80px'
+      },
       fontFamily: {
         'Satoshi-Regular': ['Satoshi-Regular', 'sans-serif'],
         'Satoshi-Bold': ['Satoshi-Bold', 'sans-serif'],
@@ -19,6 +22,19 @@ export default {
       colors: {
         customGreen: '#caef45',
         customPurple: '#512da8', 
+      },
+      animation: {
+        marquee: 'marquee 50s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        marquee2: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
       },
     },
   },
