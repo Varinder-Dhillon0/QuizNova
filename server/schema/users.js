@@ -11,5 +11,5 @@ const userSchema = new Schema({
     gender : String
 })
 
-const userModel = mongoose.model("QuizNova", userSchema, "users");
+const userModel = mongoose.model("Users", userSchema, "users");
 module.exports = {userModel};

@@ -89,9 +89,11 @@ const login_user = async (req,res) =>{
                 res.json({success : "logged in successfully", name : user.name , email : email});
 
             }else{
+                console.log("incorrect");
                 res.json({warning : "incorrect password."});
             }
         }else{
+            console.log("not found");
             res.json({warning : "user not found."});
         }
     }catch(err){

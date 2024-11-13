@@ -1,6 +1,8 @@
 import React from "react";
 import { useAuth } from "../../hooks/useAuth";
 import User from "../common/user";
+import Logo from "/logo.svg";
+
 
 function Navbar() {
 
@@ -8,11 +10,9 @@ function Navbar() {
 
 	return (
 		<div className="py-8 px-28 flex justify-around items-center font-Satoshi-Regular">
-			<a href="">
-				<img
-					src="https://assets.website-files.com/623865af2eee366912508587/623891ef81d2e4d287675658_Group%2022.svg"
-					alt=""
-				/>
+			<a href="" className="items-center flex gap-3">
+				<img src={Logo} className="w-6 h-6" alt="" />
+				<p className="font-Satoshi-Bold text-xl">QuizNova</p>
 			</a>
 			<ul className="flex gap-10 text-base">
 				<li>About</li>

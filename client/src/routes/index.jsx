@@ -34,10 +34,10 @@ export const AppRoutes = [
             path : "/admin",
             element : <Admin/>,
             children : [{
-                path : "editor",
+                path : "editor/:workspaceId/:quizId",
                 element : <Editor/>
             },{
-                path : "dashboard",
+                path : "dashboard/",
                 element : <Dashboard/>
             }]
         }]

@@ -13,6 +13,7 @@ export default function ToastProvider({ children }){
     setTimeout(() => { setToast(null); }, duration);
 
     },[]);
+    
 
   return (
     <ToastContext.Provider value={showToast}>

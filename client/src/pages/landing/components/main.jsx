@@ -1,23 +1,25 @@
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Main() {
 	return (
 		<>
 			<div className='flex flex-col w-full items-center justify-center text-center relative max-h-screen'>
-				<img src="https://assets.website-files.com/623865af2eee366912508587/623d5980fbc033885da2c334_Highlight_05.svg" alt="" className='absolute left-72 top-5 right-auto' />
-				<motion.h1 initial={{y : 100 , opacity:0 }} viewport={{once : true}} transition={{duration : 0.3}} whileInView={{y : 0 , opacity : 1}} className='max-w-screen-xl px-20 text-7xl font-Satoshi-Bold mt-12'>
-					Create, share and conquer<span className='font-Boska-BoldItalic'> quizzes</span> with QuizNova!
+				<motion.h1 initial={{ y: 100, opacity: 0 }} viewport={{ once: true }} transition={{ duration: 0.3 }} whileInView={{ y: 0, opacity: 1 }} className='relative px-20 text-7xl/tight font-Satoshi-Bold mt-12'>
+					<img src="https://assets.website-files.com/623865af2eee366912508587/623d5980fbc033885da2c334_Highlight_05.svg" alt="" className='absolute left-14 -top-9 right-auto' />
+					Build quizzes that  <span className='font-Boska-BoldItalic'>spark <br /> curiosity</span>  and engagement
 				</motion.h1>
-				<motion.h2 initial={{y : 100 , opacity:0 }} viewport={{once : true}} transition={{duration : 0.3 , delay: 0.3}} whileInView={{y : 0 , opacity : 1}}  className='font-Satoshi-Regular text-xl mt-10 max-w-xl leading-8'>
+				<motion.h2 initial={{ y: 100, opacity: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 0.3 }} whileInView={{ y: 0, opacity: 1 }} className='font-Satoshi-Regular text-xl mt-10 max-w-xl leading-8'>
 					Design unique quizzes and questions, share them with a vibrant community, and test your skills across a wide range of topics.
 				</motion.h2>
-				<motion.div initial={{y : 100 , opacity:0 }} viewport={{once : true}} transition={{duration : 0.3 , delay: 0.5}} whileInView={{y : 0 , opacity : 1}}>
-					<button className='bg-black flex rounded-full p-6 mt-10'>
-						<p className='uppercase text-white text-lg font-Satoshi-Bold tracking-wide min-w-[250px]'>Try it on browser</p>
-						<img src="https://assets.website-files.com/623865af2eee366912508587/6238747d9d3f5e4e5097b087_ArrowUpRight.svg" alt="" />
+				<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute left-[-15vw] bottom-0' alt="" />
+				<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d3e22f1763bfb3a480_Blue%20Gradient%20Image%20(2)-p-500.png" className='absolute left-[-15vw] bottom-[-18vh]' alt="" />
+
+				<motion.div initial={{ y: 100, opacity: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 0.5 }} whileInView={{ y: 0, opacity: 1 }}>
+					<button className='bg-black flex items-center gap-3 text-white font-Satoshi-Bold uppercase rounded-full px-9 py-4 mt-10 ml-auto mr-auto'>
+						Try it on browser
+						<ArrowUpRight size={24} />
 					</button>
-					<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute left-[-15vw] bottom-0' alt="" />
-					<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d3e22f1763bfb3a480_Blue%20Gradient%20Image%20(2)-p-500.png" className='absolute left-[-15vw] bottom-[-18vh]' alt="" />
 					<div className='logo-wrapper flex mt-10 gap-3'>
 						<div className='flex gap-2'>
 							<div className='flex flex-col items-center'>
@@ -53,7 +55,7 @@ export default function Main() {
 					</div>
 				</motion.div>
 				<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute h-[75%] right-[14vw] bottom-[-29vh]' alt="" />
-				</div>
+			</div>
 			<div className="flex items-center justify-center">
 				<img src="https://assets.website-files.com/623865af2eee366912508587/627c3f3fc791a48e717c4118_iPad%20Pro%202020-min-p-1600.png" className='h-[71%] w-[71%] object-contain' alt="" />
 			</div>

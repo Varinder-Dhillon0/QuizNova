@@ -35,9 +35,11 @@ export default function Login() {
 			}
 			if (data.warning) {
                 Toast(1 , data.success , 3000);
+                console.log(data.success);
 			}
 			if (data.error) {
                 Toast(2 , data.success , 3000);
+                console.log(data.success);
 			}
 		},
 		onError: (error) => {

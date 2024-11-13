@@ -1,0 +1,14 @@
+Needed Refinements
+- add otp to auth flow
+- fix login and signup
+
+bugs
+- fix id in choices in Multiple Choices
+- selected workspace in quizmanager
+
+Necessary adds
+- add blank responding to cursor position in Fill In the blank
+- remove blank using textarea value in fill in the blank
+-- addthumbnail for quiz and add profile picture(in bucket)
+
+Others

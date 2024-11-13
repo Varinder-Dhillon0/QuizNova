@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
-const workspace = mongoose.Schema({
+const workspaceSchema = new mongoose.Schema({
     title : String,
-    quizzes : []
+    created_at : Date,
+    creator : String
 })
+
+const workspaceModel = mongoose.model("Workspace" , workspaceSchema ,"Workspace");
+module.exports = {workspaceModel};

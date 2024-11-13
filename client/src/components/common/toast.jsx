@@ -1,5 +1,13 @@
-import { useState } from "react"
-import { AnimatePresence, motion } from "framer-motion";
+/**
+ * The `Toast` function in JavaScript React displays a toast notification with different icons and
+ * messages based on the status provided.
+ * @returns The `Toast` component is being returned. It is a functional component that displays a toast
+ * message with different icons based on the `status` prop. The toast message content is determined by
+ * the `msg` prop. The toast can be dismissed by clicking on a cross icon button. The toast also has an
+ * animation effect when it appears and disappears.
+ */
+
+import { motion } from "framer-motion";
 import checkmark from "../../assets/img/checkmark.svg"
 import cross from "../../assets/img/cross.svg"
 import crosscircle from "../../assets/img/cross-circle.svg"
