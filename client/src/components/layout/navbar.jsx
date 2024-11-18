@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "../../hooks/useAuth";
 import User from "../common/user";
-import Logo from "/logo.svg";
+import Logo from "../../assets/img/logo.svg";
 
 
 

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { QuizContext } from "..";
 import { useContext } from "react";
-
+import NotSure from "../notsure";
 
 export default function MultipleChoice({ que , response}) {
 
-    console.log("got response" , response);
+    console.log(response)
 
-    const [correct , setCorrect] = useState(response);
+    const [correct , setCorrect] = useState(response?.correct || []);
     const {updateResponse} = useContext(QuizContext);
 
     const handleCorrect = (choice) => {
@@ -19,7 +19,7 @@ export default function MultipleChoice({ que , response}) {
     }
 
     useEffect(() => {
-        updateResponse({queId : que._id, correct : correct});
+        updateResponse({queId : que._id , correct : correct, notsure : response?.notsure || 0});
     }, [correct, setCorrect])
 
     return (
@@ -50,6 +50,7 @@ export default function MultipleChoice({ que , response}) {
                         </h1>
                     </div>
                 })}
+                <NotSure que={response}/>
             </div>
         </>
     )
