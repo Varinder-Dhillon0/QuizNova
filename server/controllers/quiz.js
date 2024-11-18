@@ -59,10 +59,10 @@ const get_quizzes = async(req,res) =>{
 const get_quiz = async(req,res) =>{
 
     const {id} = req.query;
-    // console.log(workspace);
 
     try{
         const result = await quizModel.findOne({_id : id});
+        console.log(result)
         if(result){
             res.json({success : "found quiz" , quiz : result})
         }

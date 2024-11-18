@@ -31,7 +31,7 @@ export default function Choice({ choice, handleChanges, index, remove , setCorre
             type="text"
             onChange={(e) => handleChanges(e)}
             value={choice.text}
-            className="font-Satoshi-Medium text-md outline-none w-[100%] pl-4 pr-4 p-[2.5px] rounded-sm text-[16px] bg-[#F3F3F3]"
+            className="font-Satoshi-Medium outline-none w-[100%] pl-4 pr-4 p-[2.5px] rounded-sm text-[16px] bg-[#F3F3F3]"
           />
       </RearrangeableItem>
   );

@@ -32,9 +32,9 @@ export default function QuizManager({ setPopup, getQuizzes, selectedworkspace })
             category: [""],
             settings: {
                 shuffleQues: false,
-                passMarks: 0,
-                pickQuesRandom: false,
-                showAnswer: false
+                adaptiveQueBank : false,
+                shuffleOptions : false,
+                showQueAnswers : false
             }
         },
         onSubmit: (values) => {
@@ -99,12 +99,12 @@ export default function QuizManager({ setPopup, getQuizzes, selectedworkspace })
             </div>
 
             {/* content div for quiz */}
-            <div className="flex w-full pl-20">
+            <div className="flex w-full h-full pl-20">
 
                 {/* quiz creation data */}
                 <div className="flex flex-col w-[50%] ml-auto mr-auto  mt-10">
 
-                    <motion.div initial={{ y: 30 }} exit={{ y: 30 }} animate={{ y: 0 }} transition={{ ease: "linear", duration: 0.1 }} className="w-full ">
+                    <motion.div layout initial={{ y: 30 }} exit={{ y: 30 }} animate={{ y: 0 }} transition={{ ease: "linear", duration: 0.1 }} className="w-full ">
                         {/* Image selecting logic */}
                         <div className="flex flex-col ml-auto mr-auto">
 
@@ -161,5 +161,5 @@ function Category({ title, formik }) {
     return <div className="text-sm font-Silka-Bold mt-4 flex justify-normal text-[#5f5f5f]">
         <p className="mr-2 w-[30%]">{title}</p>
         <input type="text" placeholder="Empty" {...formik} className="outline-none ml-3 font-Silka-Medium" />
-    </div>
+    </div>  
 }

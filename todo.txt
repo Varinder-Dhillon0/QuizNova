@@ -12,3 +12,8 @@ Necessary adds
 -- addthumbnail for quiz and add profile picture(in bucket)
 
 Others
+832847
+
+2
+1 in response 1 answered 0
+2 in ques 

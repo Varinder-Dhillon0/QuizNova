@@ -60,7 +60,6 @@ export default function Sidebar({selectedworkspace,setselectedWorkspace}){
                 <button className="bg-white p-1 border-[1px] rounded-full" onClick={() =>setPopup(!popup)}><img src={plus} alt="" /></button>
                 <AnimatePresence>
                     {popup &&
-                    <Backdrop action={() => setPopup(false)} bg="rgb(255 255 255 / 80%)" position="center">
                         <Popup title="Create New Workspace" icon={pencil} action={() => setPopup(false)}>
                             <div className="flex flex-col items-end">
                                 <input ref={inputRef} value={workspacetitle}  onChange={(e) => setworkspacetitle(e.target.value)} className="p-[7px] w-full bg-[#f3f3f3] outline-none" type="text" name="workspace-title" />
@@ -69,7 +68,6 @@ export default function Sidebar({selectedworkspace,setselectedWorkspace}){
                                 </button>
                             </div>
                         </Popup>
-                    </Backdrop>
                     }
                 </AnimatePresence>
             </div>

@@ -1,3 +1,4 @@
+import AttemptQuiz from "../components/AttemptQuiz";
 import Dashboard from "../components/Dashboard";
 import Editor from "../components/Editor";
 import Layout from "../components/layout/layout";
@@ -40,6 +41,9 @@ export const AppRoutes = [
                 path : "dashboard/",
                 element : <Dashboard/>
             }]
+        },,{
+            path : "attempt/:quizId",
+            element : <AttemptQuiz/>
         }]
     }
 ]
