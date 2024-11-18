@@ -4,6 +4,7 @@ import User from "../common/user";
 import Logo from "/logo.svg";
 
 
+
 function Navbar() {
 
 	const {loggedin} = useAuth();
@@ -12,9 +13,9 @@ function Navbar() {
 		<div className="py-8 px-28 flex justify-around items-center font-Satoshi-Regular">
 			<a href="" className="items-center flex gap-3">
 				<img src={Logo} className="w-6 h-6" alt="" />
-				<p className="font-Satoshi-Bold text-xl">QuizNova</p>
+				<p className="font-Satoshi-Bold text-3xl">QuizNova</p>
 			</a>
-			<ul className="flex gap-10 text-base">
+			<ul className="flex gap-10 text-md">
 				<li>About</li>
 				<li>Pricing</li>
 				<li>Features</li>
@@ -26,7 +27,7 @@ function Navbar() {
 				<User/>
 			: <div className="nav-items-right flex items-center gap-4">
 				<a href="/login" >
-					Login
+					Log In
 				</a>
 				<button className="bg-black text-white rounded-3xl px-6 py-3">
 					Sign Up

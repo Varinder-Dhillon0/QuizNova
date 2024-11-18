@@ -2,18 +2,21 @@ import Navbar from "./navbar";
 import Footer from "./footer";
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import AppLoader from "../common/loaders";
+import EarlyAccess from "../../pages/landing/components/earlyAccess";
+import PageNotFound from "../../pages/landing/components/pageNotFound";
 
-export default function Layout(){
+export default function Layout() {
+    const { loading } = useAuth();
 
-    const {loading} = useAuth();
-
-    return loading ? <div>loading</div> :
-    <>
-        <Navbar/>
-        <Outlet/>
-        <Footer/>
-        {/* <EarlyAccess/>
-        <PageNotFound/> */}
-    </>
+    return loading ? (
+        <div>loading</div>
+    ) : (
+        <>
+            <Navbar />
+            <Outlet />
+            <Footer />
+            <EarlyAccess />
+            {/* <PageNotFound /> */}
+        </>
+    );
 }

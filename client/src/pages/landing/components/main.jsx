@@ -20,6 +20,8 @@ export default function Main() {
 						Try it on browser
 						<ArrowUpRight size={24} />
 					</button>
+					<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute left-[-45vw] bottom-[8vh]' alt="" />
+					<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d3e22f1763bfb3a480_Blue%20Gradient%20Image%20(2)-p-500.png" className='absolute left-[-45vw] bottom-[-8vh]' alt="" />
 					<div className='logo-wrapper flex mt-10 gap-3'>
 						<div className='flex gap-2'>
 							<div className='flex flex-col items-center'>
