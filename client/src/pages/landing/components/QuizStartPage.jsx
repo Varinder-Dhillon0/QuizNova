@@ -4,10 +4,10 @@ import QuizStart from "../../../assets/img/QuizStart.png";
 const QuizStartPage = () => {
     return (
         <div className="w-full h-screen bg-[#f4f6fb] object-contain overflow-hidden">
-            <div className="w-2/3 h-full flex flex-col object-contain">
+            <div className="w-1/2 h-full flex flex-col object-contain">
                 <div className="px-8 py-6">
-                    <h1 className="font-Satoshi-Bold text-7xl">Welcome</h1>
-                    <h1 className="font-Boska-MediumItalic text-xl">
+                    <h1 className="font-Boska-BoldItalic text-7xl">Welcome</h1>
+                    <h1 className="font-Satoshi-Medium text-xl">
                         Test yourself on the skills in this course and earn
                         matery points for what you already know!
                     </h1>
