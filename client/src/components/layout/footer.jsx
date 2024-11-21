@@ -3,16 +3,15 @@ import Logo from "/logo.svg";
 export default function Footer() {
     return (
         <div className="flex items-start justify-center gap-28 p-36 ">
-            <div className=" box1 flex flex-col gap-8 items-start justify-center w-[20%]">
-                <div className="flex gap-4 items-center">
+            <div className=" box1 flex flex-col gap-4 items-start justify-center w-[23%]">
+                <div className="flex gap-4 items-center justify-center">
                     <div className="h-8 w-8">
                         <img src={Logo} alt="" className="object-contain" />
                     </div>
-                    <h1 className="font-Satoshi-Bold text-4xl">QuizNova</h1>
+                    <h1 className="font-Satoshi-Bold leading-none text-4xl">QuizNova</h1>
                 </div>
-                <h2 className="font-Satoshi-Regular text-lg">
-                    Faster payments, Expense reports done right. Budgeting made
-                    easy.
+                <h2 className="font-Satoshi-Regular text-md">
+                Empowering creativity, connecting minds, and transforming the way quizzes are shared and experienced.
                 </h2>
             </div>
             <div className="flex gap-20">
@@ -46,7 +45,6 @@ export default function Footer() {
                             <li>Log In</li>
                             <li>Register</li>
                             <li>Pricing</li>
-                            <li>eCommerce</li>
                         </ul>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ export default function Layout() {
             <Outlet />
             <Footer />
             <EarlyAccess />
-            {/* <PageNotFound /> */}
+            <PageNotFound />
         </>
     );
 }

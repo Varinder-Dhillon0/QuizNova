@@ -18,6 +18,7 @@ createRoot(document.getElementById('root')).render(
         </AuthProvider>
       </ToastProvider>
     </QueryClientProvider>
+    
 
   </StrictMode>,
 )

@@ -63,6 +63,9 @@ export default {
           '100%': { transform: 'translateX(-100%)' },
         },
       },
+      boxShadow: {
+        'custom-light': '0 2px 6px rgba(0, 0, 0, 0.08)', // Lighter custom shadow
+      },
     },
   },
   plugins: [],

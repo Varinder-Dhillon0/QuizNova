@@ -3,23 +3,32 @@ import React from "react";
 const EarlyAccess = () => {
     return (
         <div className="flex items-center justify-center">
-            <div className="bg-black rounded-xl w-[75%] text-white relative">
+            <div className="bg-black rounded-xl w-[70%] text-white relative">
                 <div className="absolute top-32 left-3/4">
-                    <img src="https://cdn.prod.website-files.com/623865af2eee366912508587/6239bbc8e75c5b9bfaa79197_Vector%2097.png" alt="" />
+                    <img
+                        src="https://cdn.prod.website-files.com/623865af2eee366912508587/6239bbc8e75c5b9bfaa79197_Vector%2097.png"
+                        alt=""
+                    />
                 </div>
                 <div className="absolute top-[55px] left-[750px] h-72 w-72">
-                    <img src="https://assets.website-files.com/623865af2eee366912508587/6241d295b23ac97b3872a90f_Green%20Oval%20Gradient%20(2)-p-1080.png" alt="" />
+                    <img
+                        src="https://assets.website-files.com/623865af2eee366912508587/6241d295b23ac97b3872a90f_Green%20Oval%20Gradient%20(2)-p-1080.png"
+                        alt=""
+                    />
                 </div>
                 <div className="absolute top-[70px] left-[670px] h-72 w-72">
-                    <img src="https://assets.website-files.com/623865af2eee366912508587/6241d294ad1a5b72d3002ff7_Blue%20Oval%20Gradient%20(2)-p-500.png" alt="" />
+                    <img
+                        src="https://assets.website-files.com/623865af2eee366912508587/6241d294ad1a5b72d3002ff7_Blue%20Oval%20Gradient%20(2)-p-500.png"
+                        alt=""
+                    />
                 </div>
                 <div className="wrapper-early-access flex flex-col">
-                    <div className="mt-20 px-16">
+                    <div className="mt-14 px-16">
                         <h1 className="font-Satoshi-Bold text-5xl">
-                            Get early access to Milestone.
+                            Get early access to QuizNova.
                         </h1>
                         <h1 className="font-Boska-BoldItalic text-5xl mt-3 text-[#B3B3B3]">
-                            Close your books faster and grow.
+                            Grow your community effortlessly.
                         </h1>
                     </div>
                     <div className="flex px-16 mt-14 gap-4">
@@ -94,7 +103,7 @@ const EarlyAccess = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="relative overflow-hidden mt-20 mb-20 h-20">
+                    <div className="relative overflow-hidden mt-14 mb-20">
                         <div className="flex gap-6 animate-marquee whitespace-nowrap">
                             <MarqueeItems />
                             <MarqueeItems />
@@ -110,25 +119,25 @@ const MarqueeItems = () => (
         <div className="flex bg-[#212121] rounded-full py-4 px-6 gap-2 items-center justify-center">
             <div className="bg-white h-7 w-7 rounded-full"></div>
             <h1 className="font-Satoshi-Regular text-lg whitespace-nowrap">
-                No personal guarantee
+                No limits on creativity
             </h1>
         </div>
         <div className="flex bg-[#212121] rounded-full py-4 px-6 gap-2 items-center justify-center">
             <div className="bg-white h-7 w-7 rounded-full"></div>
             <h1 className="font-Satoshi-Regular text-lg whitespace-nowrap">
-                Fraud protection, zero liability.
+                Secure sharing.
             </h1>
         </div>
         <div className="flex bg-[#212121] rounded-full py-4 px-6 gap-2 items-center justify-center">
             <div className="bg-white h-7 w-7 rounded-full"></div>
             <h1 className="font-Satoshi-Regular text-lg whitespace-nowrap">
-                Cards for your whole team.
+                Access for everyone on your team.
             </h1>
         </div>
         <div className="flex bg-[#212121] rounded-full py-4 px-6 gap-2 items-center justify-center">
             <div className="bg-white h-7 w-7 rounded-full"></div>
             <h1 className="font-Satoshi-Regular text-lg whitespace-nowrap">
-                Maintain your quizzes
+                Manage and maintain your quizzes.
             </h1>
         </div>
     </>

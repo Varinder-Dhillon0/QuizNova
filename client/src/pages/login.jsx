@@ -1,4 +1,6 @@
 import React from "react";
+import Logo from "../assets/img/logo.svg"
+import Logo2 from "../assets/img/logo2.png"
 import { Link } from 'react-router-dom';
 import { useFormik } from "formik";
 import { BsFillExclamationDiamondFill } from "react-icons/bs";
@@ -67,17 +69,23 @@ export default function Login() {
 	};
 
     return (    
-        <div className="main-wrapper flex h-full">
+        <div className="main-wrapper flex h-[130vh] relative">
+            
+            <div className="flex absolute items-center justify-center gap-2 left-16 top-16">
+                <img src={Logo2} alt="" className="h-6 w-6" />
+                <h1 className="text-white font-Satoshi-Bold leading-none text-3xl">QuizNova</h1>
+            </div>
             <div className="left-container bg-black w-1/2 flex items-center justify-center">
-                <div className="max-h-[520px] max-w-[520px] bg-gray-900 flex flex-col items-center justify-center mx-auto my-auto p-8 rounded-2xl">
+            <div></div>
+                <div className="min-h-[570px] min-w-[555px] bg-[#212121] flex flex-col items-center justify-center mx-auto my-auto p-8 rounded-2xl">
                     <form className="flex flex-col items-center justify-center" onSubmit={formik.handleSubmit}>
                         <h1 className="text-white font-Satoshi-Bold text-4xl mb-6">
                             Welcome back
                         </h1>
-                        <button className="text-white font-sans text-md border border-[#caef45] rounded-full px-28 py-4 mb-4">
+                        <button className="text-white font-sans text-md border border-[#caef45] rounded-full px-40 py-4 mb-4">
                             SIGN IN VIA GOOGLE
                         </button>
-                        <h1 className="font-Satoshi-Bold text-white mb-4">OR</h1>
+                        <h1 className="font-Satoshi-Bold text-white mb-4"><span className="text-gray-600">-----------------------------    </span>OR<span className="text-gray-600">      -----------------------------</span></h1>
                         <input
                             type="email"
                             placeholder="E-mail address*"
@@ -94,7 +102,7 @@ export default function Login() {
                         />
                         {renderError("password")}
 
-                        <button type="submit" className="text-black font-Satoshi-Bold text-md rounded-full bg-[#caef45] px-40 py-4 mb-4" disabled={isPending}>
+                        <button type="submit" className="text-black font-Satoshi-Bold text-md rounded-full bg-[#caef45] px-52 py-4 mb-4" disabled={isPending}>
                             {isPending ? "Loading" : "SIGN IN"}
                         </button>
                         <h1 className="text-white mb-2">
@@ -106,7 +114,7 @@ export default function Login() {
                 </div>
             </div>
             <div className="right-container bg-white w-1/2 h-full">
-				<div className="right-wrapper w-3/4 flex flex-col mx-auto my-auto px-12 py-24 gap-8">
+				<div className="right-wrapper w-3/4 flex flex-col items-center justify-center mx-auto my-auto px-12 py-24 gap-8">
 					<div className="content flex gap-5">
 						<img src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png" alt="" className="w-16 h-16 object-contain" />
 						<div className="sub-content flex flex-col gap-2">
