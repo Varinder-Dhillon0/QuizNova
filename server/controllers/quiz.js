@@ -6,7 +6,7 @@ const create_quiz = async(req,res) =>{
 
     const { creator, workspace_id } = req.query;
     const quiz_data = { ...req.body, quizThumbnail: req.file ? req.file.filename : null };
-  
+    
     console.log(workspace_id)
 
     const workspace = await workspaceModel.findOne({creator : creator,_id : workspace_id});

@@ -12,6 +12,9 @@ Necessary adds
 -- addthumbnail for quiz and add profile picture(in bucket)
 -- add short navigation in attemptquiz
 
+components to add
+-- add quiz not started , quiz not found and quiz related other components
+
 Others
 832847
 

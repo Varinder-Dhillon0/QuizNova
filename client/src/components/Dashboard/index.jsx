@@ -20,7 +20,7 @@ export default function Dashboard() {
                     <Sidebar selectedworkspace={selectedworkspace} setselectedWorkspace={setselectedWorkspace}/>
                 </div>
 
-                <div className="w-[80%] overflow-hidden p-10 pt-5">
+                <div className="w-[80%]  p-10 pt-5">
                     <Content selectedworkspace={selectedworkspace}/>
                 </div>
             </div>

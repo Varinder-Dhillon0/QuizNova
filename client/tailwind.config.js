@@ -33,6 +33,7 @@ export default {
         '80':'80px'
       },
       fontFamily: {
+        'Satoshi-Black': ['Satoshi-Black', 'sans-serif'],
         'Satoshi-Regular': ['Satoshi-Regular', 'sans-serif'],
         'Satoshi-Bold': ['Satoshi-Bold', 'sans-serif'],
         'Boska-MediumItalic': ['Boska-MediumItalic', 'sans-serif'],

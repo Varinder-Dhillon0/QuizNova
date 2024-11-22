@@ -16,6 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import axios from "axios";
 import DropdownMenu from "../common/dropdownMenu";
+import { Pencil, Trash } from "@phosphor-icons/react";
 
 export default function Workspace({ id, title, i , refetchWorkspaces,selectedworkspace, setselectedWorkspace}) {
 
@@ -59,13 +60,13 @@ export default function Workspace({ id, title, i , refetchWorkspaces,selectedwor
     }, [editingWorkspace])
 
     return (
-        <div className={`mt-2 mb-4 p-2 flex cursor-pointer justify-between items-center pr-3 pl-3 rounded-md  w-full ${selectedworkspace.id == id ? "bg-[#e6e6e6] font-Silka-Bold" : ""}`} onClick={() => { selectedworkspace.id != id && setselectedWorkspace({ id: id, title: title }) }} >
+        <div className={`mt-2 mb-4 p-2 flex cursor-pointer justify-between items-center pr-3 pl-3 rounded-md  w-full ${selectedworkspace.id == id ? "bg-[#e6e6e6] font-Satoshi-Black" : ""}`} onClick={() => { selectedworkspace.id != id && setselectedWorkspace({ id: id, title: title }) }} >
             <div className="flex items-center cursor-pointer">
-                <div className="w-2 rounded-sm h-2" style={{ background: colors[i > 7 ? i % 7 : i] }}></div>
-                <h1 className="ml-2 text-sm">
+                <div className="w-2.5 rounded-sm h-2.5" style={{ background: colors[i > 7 ? i % 7 : i] }}></div>
+                <h1 className="ml-2 text-base">
                     {editingWorkspace ?
                         <Backdrop action={() => { seteditingWorkspace(false); workspacetitle.handleSubmit()}}>
-                            <input className="bg-transparent border-b-[2px] border-black outline-none relative z-50"
+                            <input id="edit-workspace-name" autoFocus className="bg-transparent border-b-[2px] border-black outline-none relative z-50"
                                 type="text"
                                 {...workspacetitle.getFieldProps("title")}
                                 onClick={(e) => { e.stopPropagation() }} 
@@ -77,8 +78,8 @@ export default function Workspace({ id, title, i , refetchWorkspaces,selectedwor
             <div className="">
                 <img className="cursor-pointer" src={threedots} onClick={(e) => { e.stopPropagation(); setDropdown(!dropdown) }} alt="" />
                 {dropdown && <DropdownMenu dropdown={dropdown} setDropdown={setDropdown}>
-                    <HamburgerLink icon={pencil} title="Edit" action={() => { seteditingWorkspace(true) }} />
-                    <HamburgerLink icon={trash} title="Delete" action={() => { deleteWorkspace()}} />
+                    <HamburgerLink icon={<Pencil size={18} />} title="Edit" action={() => { seteditingWorkspace(true) }} />
+                    <HamburgerLink icon={<Trash size={18} color="#ff0000"/>} title="Delete" action={() => { deleteWorkspace()}} />
                 </DropdownMenu>}
             </div>
         </div>

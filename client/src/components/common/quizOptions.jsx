@@ -10,17 +10,17 @@ export default function QuizOptions({ settings, updateSetting }) {
 
     return (
 
-        <motion.div className={`relative h-full`} initial={{width : "10px"}} animate={showOptions ? {width : "400px"} : {width : "10px"}} exit={{width : "10px"}}>
+        <motion.div className={`sticky top-[3.67rem] h-full`} initial={{width : "10px"}} animate={showOptions ? {width : "400px"} : {width : "10px"}} exit={{width : "10px"}}>
 
             {/* button to open options */}
             <motion.div
                 layout
                 transition={{ duration: 0.2 }}
-                className={`absolute h-full  ${showOptions ? "-left-4" : "right-10"}`}>
-                <button className="border-2 p-2 mt-8 rounded-full relative z-10 bg-white" onClick={() => setShowOptions(!showOptions)}>
-                    <ArrowLeft size={10} weight="bold" className={`${showOptions ? "rotate-180" : "rotate-0"}`} />
+                className={`absolute h-full z-[40]   ${showOptions ? "-left-4" : "right-10"}`}>
+                <button className="border-2 p-2  rounded-full mt-8 bg-white" onClick={() => setShowOptions(!showOptions)}>
+                    <ArrowLeft size={13} weight="bold" className={`${showOptions ? "rotate-180" : "rotate-0"}`} />
                 </button>
-                <div className="h-full bg-[#e9e8e8] w-[1px] absolute z-0 left-3.5 top-0" />
+                <div className="h-screen bg-[#e9e8e8] z-[-2] w-[1px] absolute left-3.5 top-0" />
             </motion.div>
 
             {/* Options */}
@@ -36,7 +36,7 @@ export default function QuizOptions({ settings, updateSetting }) {
                         <div className="overflow-auto w-full flex  flex-col rounded-xl">
 
                             <div className="w-full">
-                                <h1 className="font-Satoshi-Bold text-md p-3 border-b-2 border-[#E9E8E8]">
+                                <h1 className="font-Satoshi-Bold text-md p-3 pl-4 border-b-2 border-[#E9E8E8]">
                                     Quiz Settings
                                 </h1>
                             </div>
@@ -53,12 +53,12 @@ export default function QuizOptions({ settings, updateSetting }) {
                                 <div className="border p-3 border-1 mt-4 border-gray-300 rounded-xl flex gap-4 w-full items-start justify-between">
 
                                     <div className="flex items-start gap-3 w-[85%]">
-                                        <Shuffle weight="bold" size={28} />
+                                        <Shuffle weight="bold" size={29} />
                                         <div>
-                                            <h1 className="font-Satoshi-Bold text-sm leading-none">
+                                            <h1 className="font-Satoshi-Bold text-[14.5px] leading-none">
                                                 Shuffle Questions
                                             </h1>
-                                            <p className="font-Satoshi-Medium text-xs pt-1 text-gray-600">
+                                            <p className="font-Satoshi-Medium text-[12px]/snug pt-1 text-gray-600">
                                                 Let the system randomly select a defined amount
                                                 of questions from your question pool
                                             </p>
@@ -73,7 +73,7 @@ export default function QuizOptions({ settings, updateSetting }) {
                                         <ArrowsClockwise weight="bold" size={24.5} />
 
                                         <div>
-                                            <h1 className="font-Satoshi-Bold text-sm leading-none">
+                                        <h1 className="font-Satoshi-Bold text-[14.5px] leading-none">
                                                 Adaptive Question Bank Mode
                                             </h1>
                                             <p className="font-Satoshi-Medium text-xs pt-1 text-gray-600">
@@ -86,7 +86,7 @@ export default function QuizOptions({ settings, updateSetting }) {
                             </div>
 
                             <div className="p-4 pt-5">
-                                <div className="flex items-center justify-between text-base mb-2">
+                                <div className="flex items-center justify-between text-md mb-2">
                                     <h1 className="font-Satoshi-Bold ">Answer</h1>
                                     <CaretDown size={14} weight="bold" />
                                 </div>
@@ -98,7 +98,7 @@ export default function QuizOptions({ settings, updateSetting }) {
                                     <div className="flex items-start gap-3 w-[85%]">
                                     <ShuffleSimple weight="bold" size={16} />
                                         <div>
-                                            <h1 className="font-Satoshi-Bold text-sm leading-none">
+                                        <h1 className="font-Satoshi-Bold text-[14.5px] leading-none">
                                                 Shuffle Answer Options
                                             </h1>
                                             <p className="font-Satoshi-Medium text-xs pt-1 text-gray-600">
@@ -115,7 +115,7 @@ export default function QuizOptions({ settings, updateSetting }) {
                                         <ArrowsClockwise weight="bold" size={24.5} />
 
                                         <div>
-                                            <h1 className="font-Satoshi-Bold text-sm leading-none">
+                                        <h1 className="font-Satoshi-Bold text-[14.5px] leading-none">
                                                 Show answers after quiz
                                             </h1>
                                             <p className="font-Satoshi-Medium text-xs pt-1 text-gray-600">

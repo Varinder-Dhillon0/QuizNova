@@ -4,7 +4,7 @@ const quizSchema = new mongoose.Schema({
     quizThumbnail: String,
     title : String,
     desc : String,
-    timeLimit : String,
+    timeLimit : Number,
     category : [],
     published : {type : Number,default : 0},
     settings : {
@@ -16,6 +16,8 @@ const quizSchema = new mongoose.Schema({
     created_at : Date,
     workspace : String,
     creator : String,
+    startTime : Date,
+    lineantTime : Number,
     questions : [{
         type : {type : Number},
         que : {type : String},
