@@ -37,22 +37,22 @@ export default function Content({selectedworkspace}) {
 
     return (
         <>
-            <AnimatePresence>
-                {popup && <QuizManager setPopup={setPopup} getQuizzes={getQuizzes} selectedworkspace={selectedworkspace}/>}
-            </AnimatePresence>
             <div className="overflow-auto">
                 <div className="text-2xl flex justify-between">
                     <div className="font-Silka-Bold">
                         <h1>{selectedworkspace.title}</h1>
                     </div>
-                    <button className="bg-[#5a4bea] text-white flex justify-between items-center font-Silka-Medium p-[6px] w-[102px] pr-3 pl-3 text-xs rounded-md" onClick={() => setPopup(true)}><img src={plus} /> New Quiz</button>
+                    <button className="bg-[#5a4bea] text-white flex justify-between items-center font-Silka-Medium p-[6px] w-[102px] pr-3 pl-3 text-xs rounded-md" 
+                    onClick={() =>  navigate(`create/${selectedworkspace.id}`)}>
+                     New Quiz
+                     </button>
                 </div>
 
-                <div className="grid grid-cols-3 grid-rows-auto gap-4">
-                {getPending ? "loading" :
-                    quizzes.map((quiz) => {
-                        return <Quiz key={quiz._id} quiz={quiz} selectedworkspace={selectedworkspace}/>
-                    })}
+                <div className="grid grid-cols-3 overflow-auto grid-rows-auto gap-4">
+                    {getPending ? "loading" :
+                        quizzes.map((quiz) => {
+                            return <Quiz key={quiz._id} quiz={quiz} selectedworkspace={selectedworkspace}/>
+                        })}
                 </div>
             </div>
         </>

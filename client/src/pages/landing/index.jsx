@@ -8,7 +8,6 @@ import SubmitQuizSection from "../../components/common/submitQuiz";
 import QuizOverviewCard from "../../components/common/QuizOverviewCard.jsx";
 import BrowseQuizzes from "./components/BrowseQuizzes.jsx";
 import QuizStartPage from "./components/QuizStartPage.jsx";
-import UserQuizDetails from "./components/UserQuizDetails.jsx";
 
 export default function Home() {
     return (
@@ -18,13 +17,11 @@ export default function Home() {
             <Testimonial />
             <Features />
             <MoreFeatures />
-            <SubmitQuizSection />
-            <Share></Share>
+            {/* <SubmitQuizSection /> */}
+            {/* <Share></Share> */}
             <Login></Login>
-            <BrowseQuizzes/>
-            <QuizStartPage/> */
-            <UserQuizDetails />
-            }
+            {/* <BrowseQuizzes/> */}
+            <QuizStartPage/>
         </>
     );
 }

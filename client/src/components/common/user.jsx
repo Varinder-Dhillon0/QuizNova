@@ -14,7 +14,7 @@ export default function User() {
 
     return (
         <div className="relative">
-            <button className="bg-blue-400 text-white h-7 w-7 text-[13px] rounded-full" onClick={() => setMenu(!menu)}>
+            <button className="bg-blue-400 text-white h-7 w-7 text-sm rounded-full" onClick={() => setMenu(!menu)}>
                 {user.name.charAt(0)}
             </button>
             <AnimatePresence>

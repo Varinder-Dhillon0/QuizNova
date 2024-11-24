@@ -41,7 +41,7 @@ export default function MultipleChoice({ que, index }) {
                             <QueTitle form={formik.getFieldProps("que")}/>
 
                             <div className="flex pt-3 text-sm">
-                                <p className="border-r-[2.5px] pr-2 mr-4">Choices *</p>
+                                <p className="border-r-[2.5px] pr-2 font-Satoshi-Bold mr-4">Choices *</p>
                                 <div>
                                     <p>Multiple answers</p>
                                 </div>

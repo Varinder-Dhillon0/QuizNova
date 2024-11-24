@@ -3,12 +3,6 @@ const {workspaceModel} = require("../schema/workspace")
 const create_workspace = async(req,res) => {
     const {title, creator} = req.body;
 
-    const result = await workspaceModel.findOne({title : title});
-    if(result){
-        res.json({warning : "workspace name should be unique"});
-        return;
-    }
-
     try{
         const workspace = new workspaceModel({creator : creator,title : title , created_at : new Date()});
         await workspace.save();

@@ -1,120 +1,123 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { createContext, useState, useMemo } from "react";
+import { useParams } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { useAuth } from "../../hooks/useAuth";
+
+import Popup from "../common/popup";
+import SubmitQuiz from "./submitQuiz";
+import StartQuiz from "./startQuiz";
+import Question from "./Question";
 import Navbar from "./navbar";
-import { QuestionMark } from "@phosphor-icons/react";
-import MultipleChoice from "./queTypes/MultipleChoice";
-import FillInTheBlank from "./queTypes/FillInTheBlank";
+import calculateRemainingTime from "../helpers/calculateRemainingTime";
+import parseDateString from "../helpers/parseDate";
+
+const API_BASE_URL = "http://localhost:5000";
 
 export const QuizContext = createContext();
 
 export default function AttemptQuiz() {
-
     const { quizId } = useParams();
-    const [quiz, setQuiz] = useState();
-    const [ques, setQues] = useState();
+    const { user } = useAuth();
+
+    const [quiz, setQuiz] = useState(null);
+    const [ques, setQues] = useState(null);
+    const [serverResponse, setServerResponse] = useState();
     const [response, setResponse] = useState([]);
     const [selectedQue, setSelectedQue] = useState(1);
+    const [QuizNotAvailable, QuizNotFound, QuizNotStarted, QuizAlreadyStarted] =
+        [new Date(quiz?.startTime).getTime() > Date.now(),
+        quiz?.published === 0,
+        quiz?.published === 1 && serverResponse === undefined,
+        quiz?.published === 1 && serverResponse,
+    ];
 
-    const { isLoading, refetch } = useQuery({
-        queryKey: ["quiz"],
+    const [endQuiz, setEndQuiz] = useState(false);
+    const [timer, setTimer] = useState({
+        time: 0,
+        started: false
+    })
+
+    // fetch quiz and rsponse from server if exists
+    const { isLoading, error } = useQuery({
+        queryKey: ["quiz", quizId, user?.email],
         queryFn: async () => {
-            console.log("ii am here");
-            const res = await axios.get(`http://localhost:5000/quiz/getQuiz?id=${quizId}`, {});
-            console.log("ii am here");
-            if (res.data.quiz) {
-                console.log(res.data.quiz.questions)
-                setQuiz(res.data.quiz);
-                setQues(quiz.questions);
-            }
+            try {
+                const [quizRes, userResponse] = await Promise.all([
+                    axios.get(`${API_BASE_URL}/quiz/getQuiz?id=${quizId}`),
+                    axios.get(`${API_BASE_URL}/response/get?userId=${user.email}&&quizId=${quizId}`)
+                ]);
 
-            return res.data.quiz;
+                if (quizRes.data.quiz) {
+                    const remainingTime = calculateRemainingTime(quizRes.data.quiz.startTime,0, quizRes.data.quiz.timeLimit, quizRes.data.quiz.lineantTime, new Date(), false);
+                    console.log( new Date().getTime() ,new Date(quiz?.startTime).getTime() + quiz?.timeLimit  * 1000)
+                    setTimer({ time: remainingTime});
+
+                    setQuiz(quizRes.data.quiz);
+                    setQues(quizRes.data.quiz.questions);
+                }
+
+                if (userResponse.data.response) {
+                    const remainingTime = calculateRemainingTime(quizRes.data.quiz.startTime,userResponse.data.response.createdAt, quizRes.data.quiz.timeLimit, quizRes.data.quiz.lineantTime, new Date(), true);
+                    console.log( new Date().getTime() ,new Date(quiz?.startTime).getTime() + quiz?.timeLimit  * 1000)
+                    setTimer({ time: remainingTime, started: true });
+    
+                    setServerResponse(userResponse.data.response);
+                    setResponse(userResponse.data.response.quizResponse);
+                }
+
+                return quizRes.data.quiz;
+            } catch (error) {
+                console.error("Error fetching quiz:", error);
+                throw error;
+            }
+        },onError: (err) => {
+            console.log(err)
         },
         refetchOnWindowFocus: false
     });
 
-    const renderQuestion = (question) => {
-        const existingRes = response.find((ele) => ele.queId == question._id) || {};
+    const contextValue = useMemo(() => ({
+        quiz,
+        ques,
+        selectedQue,
+        setSelectedQue,
+        serverResponse,
+        setServerResponse,
+        setResponse,
+        setTimer,
+        setEndQuiz,
+        response
+    }), [quiz, ques, response, selectedQue]);
 
-        switch (question.type) {
-            case 1:
-                return <MultipleChoice key={question._id} que={question} response={existingRes} />;
-            case 2:
-                return <FillInTheBlank key={question._id} que={question} response={existingRes} />;
-            case 3:
-                return <TrueFalse key={question._id} que={question} response={existingRes} />;
-            case 4:
-                return <Matching key={question._id} que={question} response={existingRes} />;
-        }
-    };
 
-    useEffect(() => {
-        // console.log(response)
-    }, [response, setResponse])
-
-    const updateResponse = (obj) => {
-        setResponse((prev) => {
-            const existingIndex = prev.findIndex((res) => res.queId === obj.queId);
-
-            if (existingIndex !== -1) {
-                // Update existing response
-                const updated = [...prev];
-                updated[existingIndex] = obj;
-                return updated;
-            } else {
-                // Add new response
-                return [...prev, obj];
-            }
-        });
-    };
-
+    if (isLoading) return <div>Loading...</div>;
+    if (QuizNotFound || error) return <div>The quiz you are looking for is not found</div>;
 
     return (
-        <QuizContext.Provider value={{ quiz, updateResponse, ques, response  , selectedQue , setSelectedQue}}>
-            <div>
-                {isLoading ? "loading"
+        <QuizContext.Provider value={{ ...contextValue, timer }}>
+            <div className="flex bg-[#f3f3f3] flex-col gap-12 h-screen rounded-xl shadow-md">
 
-                    // rendred question
-                    : quiz?.published ?
-                        <div className="bg-[#f3f3f3] h-screen">
-                            <div className="flex flex-col gap-12 h-screen rounded-xl shadow-md ">
-                                <Navbar ques={ques} response={response} />
+                {(QuizNotStarted || QuizNotAvailable) &&
+                    <StartQuiz />
+                }
 
-                                {/* question part */}
-                                <div className="w-full h-full px-48 py-3 flex gap-10">
-                                    <div className="mid-left flex flex-col w-[50%] gap-3">
-                                        <div className="flex gap-1 items-center">
-                                            <QuestionMark size={19} weight="fill" />
-                                            <h1 className="font-Satoshi-Bold text-[12.5px]">
-                                                Question {selectedQue} of {ques?.length}
-                                            </h1>
-                                        </div>
+                {(QuizAlreadyStarted) && (
+                    <>
+                        <Navbar />
+                        <Question />
+                    </>
+                )}
 
-                                        {ques && renderQuestion(ques[selectedQue - 1])}
-
-                                        <div className="flex items-center gap-5">
-                                            <button onClick={() => { selectedQue > 1 ? setSelectedQue(selectedQue - 1) : setSelectedQue(selectedQue) }} className="font-Satoshi-Bold text-sm gap-2 flex items-center justify-center bg-[#fefefe] shadow-md rounded-md px-4 py-2">
-                                                Previous
-                                            </button>
-                                            <button onClick={() => { selectedQue < ques.length ? setSelectedQue(selectedQue + 1) : setSelectedQue(selectedQue) }} className="font-Satoshi-Bold gap-2 text-sm flex items-center justify-center bg-[#4e41e8] shadow-md rounded-md px-4 py-2 text-white">
-                                                Continue
-                                            </button>
-                                        </div>
-
-                                    </div>
-
-                                    {/* photo if any */}
-                                    <div className="bg-[#d4d4d4] rounded-xl h-[400px] w-[50%]">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        : <div>The quiz you are looking for is not found</div>}
+                <AnimatePresence>
+                    {endQuiz && (
+                        <Popup>
+                            <SubmitQuiz />
+                        </Popup>
+                    )}
+                </AnimatePresence>
             </div>
         </QuizContext.Provider>
-    )
+    );
 }

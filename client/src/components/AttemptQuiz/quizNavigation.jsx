@@ -9,7 +9,7 @@ const QuestionButton = ({ que, number }) => {
   return (
     <div onClick={() => setSelectedQue(number)} className={
 
-      `${number == selectedQue && "bg-[#4e41e7] border-[#4e41e7] text-white"} ${que?.correct.length === 0 && "border-2"} ${que?.correct.length > 0 && "bg-cyan-100 text-cyan-900 border-cyan-100"} ${que?.notsure && "bg-cyan-100 text-cyan-900 border-cyan-100"} cursor-pointer font-Satoshi-Medium relative rounded-full  w-10 h-10 text-sm flex items-center justify-center`
+      `${number == selectedQue && "!bg-[#4e41e7] !border-[#4e41e7] !text-white"} ${que?.correct.length === 0 && "border-2"} ${que?.correct.length > 0 && "bg-cyan-200 text-cyan-900 border-cyan-200"} ${que?.notsure && "bg-cyan-200 text-cyan-900 border-cyan-200"} cursor-pointer border-2 font-Satoshi-Medium relative rounded-full  w-10 h-10 text-sm flex items-center justify-center`
     }>
       {number}
       {number == selectedQue && <span className="bg-white p-[1.5px] absolute rounded-full top-2 right-2.5"></span>}
@@ -82,7 +82,7 @@ export default function QuizNavigation({ ques, response, setQuesNav }) {
         <div className="w-full md:w-[40%] mb-6 md:mb-0">
           <h3 className="font-Satoshi-Bold mb-2 text-gray-600 text-xs">Show question</h3>
 
-          <div onClick={() => setSelectedBar(1)} className={`${selectedBar == 1 && "bg-[#f2f1fd] border-[#aea2e7] !text-black"} cursor-pointer flex items-center text-gray-500 justify-between mt-2 bg-white border-2 border-gray-200 rounded-md px-2.5 py-2 `}>
+          <div onClick={() => setSelectedBar(1)} className={`${selectedBar == 1 && "!bg-[#f2f1fd] !border-[#aea2e7] !text-black"} cursor-pointer flex items-center text-gray-500 justify-between mt-2 bg-white border-2 border-gray-200 rounded-md px-2.5 py-2 `}>
             <div className="flex items-center space-x-2">
               <SquareLogo size={16} />
               <span className=" text-sm font-Satoshi-Bold">All Questions</span>
@@ -90,7 +90,7 @@ export default function QuizNavigation({ ques, response, setQuesNav }) {
             <p className="bg-gray-300 text-gray-700 rounded-md w-6 h-5 flex items-center justify-center font-Satoshi-Medium text-xs">{ques.length}</p>
           </div>
 
-          <div onClick={() => setSelectedBar(2)} className={`${selectedBar == 2 && "bg-[#f2f1fd] border-[#aea2e7] !text-black"} text-gray-500 cursor-pointer flex items-center justify-between mt-2 bg-white border-2 border-gray-200 rounded-md px-2.5 py-2 `}>
+          <div onClick={() => setSelectedBar(2)} className={`${selectedBar == 2 && "!bg-[#f2f1fd] !border-[#aea2e7] !text-black"} text-gray-500 cursor-pointer flex items-center justify-between mt-2 bg-white border-2 border-gray-200 rounded-md px-2.5 py-2 `}>
             <div className="flex items-center space-x-2">
               <CheckSquare size={16} />
               <span className="text-sm font-Satoshi-Bold">Answered</span>
@@ -98,7 +98,7 @@ export default function QuizNavigation({ ques, response, setQuesNav }) {
             <p className="bg-gray-300 text-gray-700 rounded-md w-6 h-5 flex items-center justify-center font-Satoshi-Medium text-xs">{response.filter((ele) => ele.correct.length > 0).length}</p>
           </div>
 
-          <div onClick={() => setSelectedBar(3)} className={`${selectedBar == 3 && "bg-[#f2f1fd] border-[#aea2e7] !text-black"} text-gray-500 cursor-pointer flex items-center justify-between mt-2 bg-white border-2 border-gray-200 rounded-md px-2.5 py-2 `}>
+          <div onClick={() => setSelectedBar(3)} className={`${selectedBar == 3 && "!bg-[#f2f1fd] !border-[#aea2e7] !text-black"} text-gray-500 cursor-pointer flex items-center justify-between mt-2 bg-white border-2 border-gray-200 rounded-md px-2.5 py-2 `}>
             <div className="flex items-center space-x-2">
               <XSquare size={16} />
               <span className="text-sm font-Satoshi-Bold">Not Answered</span>
@@ -106,7 +106,7 @@ export default function QuizNavigation({ ques, response, setQuesNav }) {
             <p className="bg-gray-300 text-gray-700 rounded-md w-6 h-5 flex items-center justify-center font-Satoshi-Medium text-xs">{ques.length - response.filter((ele) => ele.correct.length > 0).length}</p>
           </div>
 
-          <div onClick={() => setSelectedBar(4)} className={`${selectedBar == 4 && "bg-[#f2f1fd] border-[#aea2e7] !text-black"} text-gray-500 cursor-pointer flex items-center justify-between mt-2 bg-white border-2 border-gray-200 rounded-md px-2.5 py-2 `}>
+          <div onClick={() => setSelectedBar(4)} className={`${selectedBar == 4 && "!bg-[#f2f1fd] !border-[#aea2e7] !text-black"} text-gray-500 cursor-pointer flex items-center justify-between mt-2 bg-white border-2 border-gray-200 rounded-md px-2.5 py-2 `}>
             <div className="flex items-center space-x-2">
               <MinusSquare size={16} />
               <span className="text-sm font-Satoshi-Bold">Not Sure</span>

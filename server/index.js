@@ -8,7 +8,7 @@ const testRouter = require("./routes/test");
 const userRouter = require("./routes/users")
 const workspaceRouter = require("./routes/workspace")
 const quizRouter = require("./routes/quiz");
-const quesRouter = require("./routes/questions");
+const resRouter = require("./routes/response");
 const {connectDb} = require("./utils/mongodb");
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -33,7 +33,7 @@ app.use(testRouter);
 app.use(userRouter);
 app.use(workspaceRouter);
 app.use(quizRouter);
-app.use(quesRouter);
+app.use(resRouter);
 
 app.listen(5000, () =>{
     console.log("App started on port 5000");

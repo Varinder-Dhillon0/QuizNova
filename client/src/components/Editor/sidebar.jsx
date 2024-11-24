@@ -59,13 +59,15 @@ export function SidebarItem({ q, i, selectedQue }) {
     }
   }, [selectedQue])
 
-  return <div ref={ref} key={i} className={`border-[#DDDDDD] border-2 p-2 rounded-lg mb-4 ${(selectedQue == i) ? "bg-[#f2f1fd] !border-[#aea2e7]" : ""}`} onClick={() => { scrolltoQue(i) }}>
+  return <div ref={ref} key={i} className={`border-[#DDDDDD] border-2 p-2 rounded-lg cursor-pointer mb-4 ${(selectedQue == i) ? "bg-[#f2f1fd] !border-[#aea2e7]" : ""}`} onClick={() => { scrolltoQue(i) }}>
     <div className="flex cursor-pointer items-center">
-      <p className="font-Silka-Bold text-xs bg-[#d6d8db] w-4 h-4 rounded-lg">{i + 1}.</p>
+      <p className="font-Silka-Bold text-sm bg-[#d6d8db] w-4 h-4 rounded-lg">{i + 1}.</p>
       <h4 className="ml-2 text-sm">{q.que?.length > 18 ? q.que.substring(0, 18) + "..." : q.que.length == 0 ? "..." : q.que}</h4>
     </div>
     <div className="flex bg-[#EBEBEB] p-[4px] mt-3 rounded-full text-xs items-center w-fit">
-      <p className="text-[11px] pl-1 pr-1 flex items-center gap-1"><RenderQueType iconsize={13} type={q.type} /></p>
+      <p className="text-xs pl-1 pr-1 flex items-center gap-1">
+        <RenderQueType iconsize={13} type={q.type} />
+      </p>
     </div>
   </div>
 

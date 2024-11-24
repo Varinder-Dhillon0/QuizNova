@@ -1,9 +1,7 @@
 import { QuizContext } from "."
 import { useContext } from "react"
 
-export default function NotSure({que}) {
-
-    const {updateResponse} = useContext(QuizContext);
+export default function NotSure({que, updateResponse}) {
 
     const handleCheck = () => {
         
@@ -15,7 +13,7 @@ export default function NotSure({que}) {
     }
 
     return (
-        <div className="flex gap-2 font-Satoshi-Medium text-[#6b6b6b] text-sm mt-11" onClick={handleCheck}>
+        <div className="flex gap-2 pt-5 font-Satoshi-Medium text-[#6b6b6b] text-base" onClick={handleCheck}>
             <label className="flex items-center cursor-pointer relative">
                 <input type="checkbox" readOnly checked={que.notsure == 1 ? true : false} className="peer h-4 w-4 cursor-pointer transition-all appearance-none border-[1.5px] border-gray-400 rounded checked:bg-[#6466E9] checked:border-[#6466E9]" id="check" />
 

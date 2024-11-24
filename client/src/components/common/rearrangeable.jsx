@@ -30,12 +30,9 @@ export function RearrangeableItem({ i, value, remove, children }) {
             dragListener={false}
             dragControls={controls}
             value={value}
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -100, opacity: 0 }}
         >
 
-            <div className="flex mt-3 gap-3" id={value.id}>
+            <div className="flex gap-3 w-full" id={value.id}>
 
                 {/* render components of child */}
                 {children}
@@ -51,14 +48,14 @@ export function RearrangeableItem({ i, value, remove, children }) {
                 </button>
 
                 {/* delete button */}
-                <button>
+                {remove ? <button>
                     <div
                         className="bg-[#F3F3F3] p-[7.5px]"
                         onClick={() => remove(i)}
                     >
                         <Trash size={16} />
                     </div>
-                </button>
+                </button> : ""}
 
             </div>
         </Reorder.Item>

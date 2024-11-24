@@ -60,7 +60,7 @@ export default function Question({ question, index }) {
 
     return (
         <div className="p-5">
-            <motion.div layout layoutRoot className="border-[#DDDDDD] border-[1.5px] -scroll-mb-10 rounded-lg w-[100%] overflow-auto flex" ref={ref} id={"que" + index}>
+            <motion.div layout layoutRoot className="border-[#DDDDDD] border-[1.5px] scroll-pb-20 rounded-lg w-[100%] overflow-auto flex" ref={ref} id={"que" + index}>
                 <div className="flex flex-col font-Silka-SemiBold  ml-5 w-[100%] mr-5" >
                     {question && renderQuestion()}
                 </div>

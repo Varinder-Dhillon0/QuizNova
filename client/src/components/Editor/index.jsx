@@ -7,11 +7,11 @@ export default function Editor(){
     return(
             <div className="flex flex-col w-[100vw] h-[100vh] font-Satoshi-Medium bg-white">
                 {/* Navbar */}
-                <div>
+                <div className="h-[60px]">
                     <Navbar/>
                 </div>
 
-                <div className="flex h-[90%]">
+                <div className="flex" style={{height : "calc(100% - 60px)"}}>
                     {/* Sidebar */}
                     <div className="w-[20%] p-4 pt-0 pb-0 bg-[#f7f7f6]  border-[#DDDDDD] border-r-2">
                         <Sidebar/>
