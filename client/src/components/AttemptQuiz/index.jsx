@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { createContext, useState, useMemo } from "react";
+import { createContext, useState, useMemo, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useAuth } from "../../hooks/useAuth";
@@ -11,7 +11,7 @@ import StartQuiz from "./startQuiz";
 import Question from "./Question";
 import Navbar from "./navbar";
 import calculateRemainingTime from "../helpers/calculateRemainingTime";
-import parseDateString from "../helpers/parseDate";
+import QuizNavigation from "./quizNavigation";
 
 const API_BASE_URL = "http://localhost:5000";
 
@@ -24,13 +24,16 @@ export default function AttemptQuiz() {
     const [quiz, setQuiz] = useState(null);
     const [ques, setQues] = useState(null);
     const [serverResponse, setServerResponse] = useState();
+    const [quesNav, setQuesNav] = useState(false);
+
     const [response, setResponse] = useState([]);
     const [selectedQue, setSelectedQue] = useState(1);
-    const [QuizNotAvailable, QuizNotFound, QuizNotStarted, QuizAlreadyStarted] =
+    const [QuizNotAvailable, QuizNotFound, QuizNotStarted, QuizAlreadyStarted,QuizAlreadySubmitted] =
         [new Date(quiz?.startTime).getTime() > Date.now(),
         quiz?.published === 0,
         quiz?.published === 1 && serverResponse === undefined,
         quiz?.published === 1 && serverResponse,
+        serverResponse?.submitted
     ];
 
     const [endQuiz, setEndQuiz] = useState(false);
@@ -40,7 +43,7 @@ export default function AttemptQuiz() {
     })
 
     // fetch quiz and rsponse from server if exists
-    const { isLoading, error } = useQuery({
+    const { isLoading, error, refetch : refetchQuiz } = useQuery({
         queryKey: ["quiz", quizId, user?.email],
         queryFn: async () => {
             try {
@@ -59,8 +62,9 @@ export default function AttemptQuiz() {
                 }
 
                 if (userResponse.data.response) {
+
                     const remainingTime = calculateRemainingTime(quizRes.data.quiz.startTime,userResponse.data.response.createdAt, quizRes.data.quiz.timeLimit, quizRes.data.quiz.lineantTime, new Date(), true);
-                    console.log( new Date().getTime() ,new Date(quiz?.startTime).getTime() + quiz?.timeLimit  * 1000)
+                    console.log("remainingTime : ", remainingTime)
                     setTimer({ time: remainingTime, started: true });
     
                     setServerResponse(userResponse.data.response);
@@ -78,6 +82,18 @@ export default function AttemptQuiz() {
         refetchOnWindowFocus: false
     });
 
+    const { mutate: updateServerResponse, isPending: updatingServerResponse } = useMutation({
+        mutationFn: async (updated) => {
+            await axios.post("http://localhost:5000/response/update", {
+                responseId: serverResponse._id,
+                updated: { ...updated }
+            },)
+
+        }, onError: (err) => {
+            console.log(err)
+        }
+    })
+
     const contextValue = useMemo(() => ({
         quiz,
         ques,
@@ -88,12 +104,17 @@ export default function AttemptQuiz() {
         setResponse,
         setTimer,
         setEndQuiz,
-        response
+        response,
+        refetchQuiz,
+        setQuesNav,
+        updateServerResponse,
+        updatingServerResponse
     }), [quiz, ques, response, selectedQue]);
 
 
     if (isLoading) return <div>Loading...</div>;
     if (QuizNotFound || error) return <div>The quiz you are looking for is not found</div>;
+    if(QuizAlreadySubmitted) return <div>You have already attempted this quiz</div>;
 
     return (
         <QuizContext.Provider value={{ ...contextValue, timer }}>
@@ -103,7 +124,7 @@ export default function AttemptQuiz() {
                     <StartQuiz />
                 }
 
-                {(QuizAlreadyStarted) && (
+                {(QuizAlreadyStarted && !QuizAlreadySubmitted) && (
                     <>
                         <Navbar />
                         <Question />
@@ -112,11 +133,17 @@ export default function AttemptQuiz() {
 
                 <AnimatePresence>
                     {endQuiz && (
-                        <Popup>
-                            <SubmitQuiz />
+                        <Popup action={() => setEndQuiz(!(timer.time > 0))}>
+                            <SubmitQuiz closeQuiz={() => setEndQuiz(!(timer.time > 0))}/>
                         </Popup>
                     )}
+                    {quesNav &&
+                    <Popup title="Create New Workspace" action={() => setQuesNav(false)}>
+                        <QuizNavigation setQuesNav={setQuesNav} ques={ques} response={response} />
+                    </Popup>
+                    }
                 </AnimatePresence>
+                
             </div>
         </QuizContext.Provider>
     );

@@ -15,6 +15,7 @@ export default function TrueFalse({ que, index }) {
             <Formik initialValues={{ ...que }} >
                 {(formik) => {
                     useEffect(() => {
+                        console.log(formik.values)
                         const timer = setTimeout(() => {
                             updateQuesContext({ ...formik.values }, index);
                         }, 400);
@@ -36,10 +37,10 @@ export default function TrueFalse({ que, index }) {
                                 <p className="border-r-[2.5px] pr-2 mr-4">Choices *</p>
                             </div>  
                             <div className="flex font-Silka-Medium text-sm gap-2 mt-2">
-                                <button className={`${formik.values.OneCorrect == "1" && "bg-[#fde9f7] !border-[#cc8cb9]"} rounded-md border-2 border-transparent bg-[#f3f3f3] w-fit p-2`} onClick={() => {formik.setFieldValue("OneCorrect", "1" ) }}>True</button>
-                                <button className={`${formik.values.OneCorrect == "2" && "bg-[#fde9f7] !border-[#cc8cb9]"} rounded-md border-2 border-transparent bg-[#f3f3f3] w-fit p-2`} onClick={() => {formik.setFieldValue("OneCorrect", "2" )}}>False</button>
+                                <button className={`${formik.values.correct.includes("1") && "bg-[#fde9f7] !border-[#cc8cb9]"} rounded-md border-2 border-transparent bg-[#f3f3f3] w-fit p-2`} onClick={() => {formik.setFieldValue("correct", ["1"] ) }}>True</button>
+                                <button className={`${formik.values.correct.includes("2") && "bg-[#fde9f7] !border-[#cc8cb9]"} rounded-md border-2 border-transparent bg-[#f3f3f3] w-fit p-2`} onClick={() => {formik.setFieldValue("correct", ["2"] )}}>False</button>
                             </div>
-                            <QueFooter/>
+                            <QueFooter values={{points : formik.values.points, randomizedOptions : formik.values.randomizedOptions}} updatePoints={(value) => formik.setFieldValue("points" , value || 0)} updateRandomized={(value) => formik.setFieldValue("randomizedOptions" , value)}/>
                         </>
                     )
                 }}

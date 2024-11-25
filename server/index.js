@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const path = require('path');
+require("dotenv").config({ path: "./.env" });
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const testRouter = require("./routes/test");

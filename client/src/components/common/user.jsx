@@ -27,8 +27,8 @@ export default function User() {
                             exit={{ y: -20, x: 20, opacity: 0 }}
                             className="absolute z-50 top-10 right-0 w-max p-4 pt-2 rounded-lg text-[15px] bg-white shadow-lg"
                         >
-                            <HamburgerLink icon={dashboard} title="Dashboard" action={() => navigate("/admin/dashboard")} />
-                            <HamburgerLink icon={signout} title="Logout" action={logout} />
+                            <HamburgerLink icon={""} title="Dashboard" action={() => navigate("/admin/dashboard")} />
+                            <HamburgerLink icon={""} title="Logout" action={logout} />
                         </motion.div>
                     </Backdrop>
                 }

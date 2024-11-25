@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion"
 import Backdrop from "./backdrop"
 import { motion } from "framer-motion"
 
-export default function DropdownMenu({children , dropdown , setDropdown}) {
+export default function DropdownMenu({children , dropdown , setDropdown, position}) {
     
     return(
         <AnimatePresence>
@@ -12,7 +12,7 @@ export default function DropdownMenu({children , dropdown , setDropdown}) {
                     animate={{ height: dropdown ? "auto" : 0, opacity: dropdown ? 1 : 0 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.05 }}
-                    className="absolute p-1 z-50 w-max mt-1  font-Silka-Medium text-xs rounded-md text-[14px] bg-white shadow-lg"
+                    className={`${position === "down" && "mt-1"} fixed p-1 z-50 w-max mt-1 font-Silka-Medium rounded-md text-[14px] bg-white shadow-lg`}
                 >
                     {children}
                 </motion.div>

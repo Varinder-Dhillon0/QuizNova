@@ -7,8 +7,7 @@ import { QuizContext } from ".";
 import QuizTimer from "./quizTimer";
 
 export default function Navbar() {
-    const [quesNav, setQuesNav] = useState(false);
-    const {ques, response, timer} = useContext(QuizContext);
+    const { ques, response, timer, setEndQuiz , setQuesNav } = useContext(QuizContext);
 
 
     return (
@@ -21,7 +20,7 @@ export default function Navbar() {
                     </button>
                     <div className="flex items-center gap-1">
                         <ClockCountdown size={19} color="#747474" />
-                        <QuizTimer/>
+                        <QuizTimer />
                     </div>
                 </div>
                 <div className="nav-right flex items-center gap-4">
@@ -32,27 +31,18 @@ export default function Navbar() {
                         <h1 className="text-base">1</h1>
                     </div>
 
-                    {timer.started ? (<>
-                        <button
-                            className="text-base rounded-lg border-2 font-Satoshi-Bold flex items-center gap-2 bg-white px-2.5 py-1.5"
-                            onClick={() => setQuesNav(!quesNav)}
-                        >
-                            <SquaresFour size={19} weight="bold" />Quiz Nav
-                        </button>
+                    <button
+                        className="text-base rounded-lg border-2 font-Satoshi-Bold flex items-center gap-2 bg-white px-2.5 py-1.5"
+                        onClick={() => setQuesNav(true)}
+                    >
+                        <SquaresFour size={19} weight="bold" />Quiz Nav
+                    </button>
 
-                        <button className="text-base rounded-lg border-2 font-Satoshi-Bold flex items-center gap-2 bg-white px-2.5 py-1.5">
-                            <SealCheck size={19} weight="bold" />Submit Quiz
-                        </button>
-                    </>) : ""}
+                    <button onClick={() => setEndQuiz(true)} className="text-base rounded-lg border-2 font-Satoshi-Bold flex items-center gap-2 bg-white px-2.5 py-1.5">
+                        <SealCheck size={19} weight="bold" />Submit Quiz
+                    </button>
                 </div>
             </div>
-            <AnimatePresence>
-                {quesNav && timer.started ?
-                    <Popup title="Create New Workspace" action={() => setQuesNav(false)}>
-                        <QuizNavigation setQuesNav={setQuesNav} ques={ques} response={response} />
-                    </Popup>
-                    : ""}
-            </AnimatePresence>
         </>
     );
 }

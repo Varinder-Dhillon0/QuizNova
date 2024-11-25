@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../assets/img/logo.svg";
 import Logo2 from "../assets/img/logo2.png";
 import blueglowLogin from "../assets/img/blueglowLogin.png";
 import greenGlowLogin from "../assets/img/greenGlowLogin.png";
@@ -43,11 +42,11 @@ export default function Login() {
                 Toast(0, data.success, 3000);
             }
             if (data.warning) {
-                Toast(1, data.success, 3000);
+                Toast(1, data.warning, 3000);
                 console.log(data.success);
             }
             if (data.error) {
-                Toast(2, data.success, 3000);
+                Toast(2, data.error, 3000);
                 console.log(data.success);
             }
         },
@@ -82,7 +81,7 @@ export default function Login() {
     };
 
     return (
-        <div className="main-wrapper flex h-[130vh] relative">
+        <div className="main-wrapper flex h-[120vh] relative">
             <div className="flex absolute items-center justify-center gap-2 left-16 top-16">
                 <img src={Logo2} alt="" className="h-6 w-6" />
                 <h1 className="text-white font-Satoshi-Bold leading-none text-3xl">
@@ -90,7 +89,7 @@ export default function Login() {
                 </h1>
             </div>
             <div className="left-container bg-black w-1/2 flex items-center justify-center">
-                <div className="min-h-[570px] min-w-[555px] bg-[#212121] flex flex-col items-center justify-center mx-auto my-auto p-8 rounded-2xl">
+                <div className="min-h-[570px] min-w-[555px] bg-[#111827] flex flex-col items-center justify-center mx-auto my-auto p-8 rounded-2xl">
                     <form
                         className="flex flex-col items-center justify-center"
                         onSubmit={formik.handleSubmit}

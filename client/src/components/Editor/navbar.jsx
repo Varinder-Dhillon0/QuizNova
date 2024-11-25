@@ -38,7 +38,7 @@ export default function Navbar() {
                     <button className="p-[6px] rounded-md bg-[#f3f3f3]"><a href="/admin/dashboard"><ArrowLeft size={17} /></a></button>
                 </div>
                 <div className="flex justify-around text-[14px] items-center gap-2 absolute left-1/2 -translate-x-1/2">
-                    <h1 className="font-Satoshi-Bold text-md">{quiz?.title}</h1>
+                    <h1 className="font-Satoshi-Bold text-sm">{quiz?.title}</h1>
                     {updatingQuiz ? <CloudArrowUp size={16} /> : <CloudCheck size={18} />}
                 </div>
                 <div className="flex text-[13px] gap-4 justify-between items-center font-Silka-SemiBold">

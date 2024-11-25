@@ -20,10 +20,10 @@ export default function MultipleChoice({ que, index }) {
         <>
             <Formik
                 initialValues={{...que}}
-                onSubmit={(values) => console.log(values)}
             >
                 {(formik) => {
                     useEffect(() => {
+                        console.log(formik.values);
                         const timer = setTimeout(() => {
                             updateQuesContext({ ...formik.values }, index);
                         }, 400);
@@ -75,7 +75,7 @@ export default function MultipleChoice({ que, index }) {
                                     </>
                                 )}
                             </FieldArray>
-                            <QueFooter/>
+                            <QueFooter values={{points : formik.values.points, randomizedOptions : formik.values.randomizedOptions}} updatePoints={(value) => formik.setFieldValue("points" , value || 0)} updateRandomized={(value) => formik.setFieldValue("randomizedOptions" , value)}/>
                         </Form>)
                 }}
             </Formik>

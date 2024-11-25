@@ -36,12 +36,12 @@ export default function FillInTheBlank({ que, index }) {
                         const newQue = formik.values.que;
 
                         if (newQue.length > 0) {
-                            const blanks = formik.values.Blanks;
+                            const blanks = formik.values.correct;
 
                             const queBlanks = newQue.match(/\[Blank\]/g) || [];
 
                             if (queBlanks.length > blanks.length) {
-                                formik.setFieldValue("Blanks", [...blanks, { id: Date.now(), text: "" }]);
+                                formik.setFieldValue("correct", [...correct, { id: Date.now(), text: "" }]);
                             }else if(queBlanks.length < blanks.length){
                                 setBlankMismatch(true);
                             }else{
@@ -75,7 +75,8 @@ export default function FillInTheBlank({ que, index }) {
                     }, [formik.values.que])
 
                     useEffect(() => {
-                        // console.log(formik.values);
+                        console.log(formik.values);
+
                         const timer = setTimeout(() => {
                             updateQuesContext({ ...formik.values }, index);
                         }, 400);
@@ -99,20 +100,20 @@ export default function FillInTheBlank({ que, index }) {
                                 <p className="border-r-[2.5px] pr-2 mr-4">Correct Blanks*</p>
                             </div>
 
-                            <FieldArray name="Blanks">
+                            <FieldArray name="correct">
                                 {({ remove, push }) => (
                                     <>
                                         <div className="mt-3 flex flex-col mb-3 overflow-x-hidden">
                                             <Reorder.Group
                                                 axis="y"
-                                                values={formik.values.Blanks}
-                                                onReorder={(newOrder) => { formik.setFieldValue("Blanks", newOrder) }}
+                                                values={formik.values.correct}
+                                                onReorder={(newOrder) => { formik.setFieldValue("correct", newOrder) }}
                                             >
-                                                {formik.values.Blanks.map((blank, i) => {
+                                                {formik.values.correct.map((blank, i) => {
                                                     return <Blank
                                                         key={blank.id}
                                                         i={i}
-                                                        handleChanges={(e) => formik.setFieldValue(`Blanks[${i}].text`, e.target.value)}
+                                                        handleChanges={(e) => formik.setFieldValue(`correct[${i}].text`, e.target.value)}
                                                         blank={blank}
                                                         remove={(i) => RemoveBlankUsingTrash(i, remove)}
                                                     />
@@ -131,7 +132,7 @@ export default function FillInTheBlank({ que, index }) {
                                 )}
 
                             </FieldArray>
-                            <QueFooter />
+                            <QueFooter values={{points : formik.values.points, randomizedOptions : formik.values.randomizedOptions}} updatePoints={(value) => formik.setFieldValue("points" , value || 0)} updateRandomized={(value) => formik.setFieldValue("randomizedOptions" , value)}/>
                         </>
                     )
                 }}

@@ -2,7 +2,7 @@ import { ArrowLeft, ArrowsClockwise, CaretDown, ShuffleSimple } from "@phosphor-
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Shuffle, ArrowDown } from "@phosphor-icons/react";
-import ToggleButton from "./toggleButton";
+import ToggleButton from "../common/toggleButton";
 
 export default function QuizOptions({ settings, updateSetting }) {
 
