@@ -11,6 +11,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../hooks/useToast";
 import { useAuth } from "../hooks/useAuth";
+import Pie from "../assets/img/pie.png";
+import CreateQuiz from "../assets/img/createQuiz.png";
+import Pin from "../assets/img/pin.png";
 
 const userValidationSchema = Yup.object({
     email: Yup.string().email("Email is invalid").required("required"),
@@ -81,7 +84,7 @@ export default function Login() {
     };
 
     return (
-        <div className="main-wrapper flex h-[120vh] relative">
+        <div className="main-wrapper flex h-[120vh] relative z-10">
             <div className="flex absolute items-center justify-center gap-2 left-16 top-16">
                 <img src={Logo2} alt="" className="h-6 w-6" />
                 <h1 className="text-white font-Satoshi-Bold leading-none text-3xl">
@@ -165,28 +168,30 @@ export default function Login() {
                 <img
                     src={greenGlowLogin}
                     alt=""
-                    className="absolute right-[-388px] bottom-[-231px] w-auto h-auto"
+                    className="absolute right-[-508px] bottom-[-302px] w-auto h-auto"
                 />
                 <img
                     src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-800.png"
                     alt=""
-                    className="absolute w-80 h-80 bottom-[200px]"
+                    className="absolute w-72 h-72 bottom-[190px] opacity-85 z-0"
                 />
 
-                <div className="right-wrapper w-3/4 flex flex-col px-12 gap-8">
+                <div className="right-wrapper w-3/4 flex flex-col px-12 gap-10">
                     <div className="content flex gap-5">
                         <img
-                            src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png"
+                            src={CreateQuiz}
                             alt=""
                             className="w-16 h-16 object-contain"
                         />
-                        <div className="sub-content flex flex-col gap-2">
+                        <div className="sub-content flex flex-col gap-1">
                             <h1 className="font-Satoshi-Bold text-2xl">
-                                Enhanced User Experience
+                                Create Your Quizzes
                             </h1>
-                            <p>
-                                Seamlessly improve the user interface and
-                                experience for better customer satisfaction.
+                            <p className="font-Satoshi-Medium text-md text-gray-800">
+                                Design custom quizzes with ease and upload them
+                                to share with others. Customize your quizzes
+                                with various question types to make them
+                                engaging.
                             </p>
                         </div>
                     </div>
@@ -196,47 +201,50 @@ export default function Login() {
                             alt=""
                             className="w-16 h-16 object-contain"
                         />
-                        <div className="sub-content flex flex-col gap-2">
+                        <div className="sub-content flex flex-col gap-1">
                             <h1 className="font-Satoshi-Bold text-2xl">
-                                Optimized Conversion Rates
+                                Challenge Yourself
                             </h1>
-                            <p>
-                                Drive higher conversions with advanced analytics
-                                and smarter decision-making tools.
+                            <p className="font-Satoshi-Medium text-md text-gray-800">
+                                Explore a wide range of quizzes crafted by the
+                                community and test your knowledge. Discover
+                                quizzes across diverse topics and levels.
                             </p>
                         </div>
                     </div>
                     <div className="content flex gap-5">
                         <img
-                            src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png"
+                            src={Pie}
                             alt=""
-                            className="w-16 h-16 object-contain"
+                            className="w-14 h-14 object-contain"
                         />
-                        <div className="sub-content flex flex-col gap-2">
+                        <div className="sub-content flex flex-col gap-1">
                             <h1 className="font-Satoshi-Bold text-2xl">
-                                Global Market Expansion
+                                Track Your Progress
                             </h1>
-                            <p>
-                                Expand your reach with localized services,
-                                making your product available in new global
-                                markets.
+                            <p className="font-Satoshi-Medium text-md text-gray-800">
+                                Monitor your performance with detailed stats and
+                                stay motivated to improve. Analyze your
+                                weaknesses to focus on areas that need
+                                attention.
                             </p>
                         </div>
                     </div>
                     <div className="content flex gap-5">
                         <img
-                            src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png"
+                            src={Pin}
                             alt=""
-                            className="w-16 h-16 object-contain"
+                            className="w-14 h-14 object-contain"
                         />
-                        <div className="sub-content flex flex-col gap-2">
+                        <div className="sub-content flex flex-col gap-1">
                             <h1 className="font-Satoshi-Bold text-2xl">
-                                Improved Security and Compliance
+                                Instant Results
                             </h1>
-                            <p>
-                                Ensure data protection and meet international
-                                standards to maintain customer trust and
-                                satisfaction.
+                            <p className="font-Satoshi-Medium text-md text-gray-800">
+                                Receive quick and accurate results for every
+                                quiz you attempt, complete with feedback!
+                                Compare your scores with others and climb the
+                                leaderboard.
                             </p>
                         </div>
                     </div>
