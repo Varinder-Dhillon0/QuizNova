@@ -7,8 +7,10 @@ const result = new mongoose.Schema({
     userId : {type : String},
     firstname : {type : String},
     lastname : {type : String},
+    title : {type : String},
 
     queResponses:[{
+        points : Number,
         queType : Number,
         queId: String,
         userResId: String,
@@ -19,6 +21,8 @@ const result = new mongoose.Schema({
         userAns: {
             type : mongoose.Schema.Types.Mixed
         },
+        correct : {type : Boolean},
+        choices : {type : mongoose.Schema.Types.Mixed}
     }],
    
     grades:{
@@ -30,7 +34,8 @@ const result = new mongoose.Schema({
         percentage: Number,
       },
 
-
+    timeSpent : Number,
+    finishTime : Date
 });
 
 const resultModel = mongoose.model('result',result)

@@ -3,11 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom"
+import { parseTimeFromDate } from "../helpers/parseDate";
+import FormatTime from "../helpers/formatTime";
+import { AnimatePresence } from "framer-motion";
+import UserQuizDetails from "../common/userQuizDetails";
+import Popup from "../common/popup";
 
 export default function QuizSubmitted() {
 
     const { quizId, responseId } = useParams();
     const [result, setResult] = useState();
+    const [showResults, setShowResults] = useState(false);
 
     const { isLoading, error, refetch: refetchQuiz } = useQuery({
         queryKey: ["result", quizId, responseId],
@@ -44,7 +50,7 @@ export default function QuizSubmitted() {
                     <div className="flex items-center justify-center mt-5">
                         <div className="bg-white p-6 border-r-2 rounded-xl shadow-lg">
                             <p className="text-[#7f7f7f] font-Satoshi-Bold text-sm/tight">Total Score</p>
-                            <p className="text-[#7f7f7f] text-sm/tight"><span className="font-Satoshi-Black text-black text-xl pr-1">{result.grades.earnedPoints}12</span> Points</p>
+                            <p className="text-[#7f7f7f] text-sm/tight"><span className="font-Satoshi-Black text-black text-xl pr-1">{result.grades.earnedPoints}</span> Points</p>
                         </div>
                         <div className="bg-white p-6 border-r-2 rounded-xl shadow-lg">
                             <p className="text-[#7f7f7f] font-Satoshi-Bold text-sm/tight">Accuracy</p>
@@ -52,13 +58,20 @@ export default function QuizSubmitted() {
                         </div>
                         <div className="bg-white p-6 rounded-xl shadow-lg">
                             <p className="text-[#7f7f7f] font-Satoshi-Bold text-sm/tight">Time Spent</p>
-                            <p className="text-[#7f7f7f] text-sm/tight"><span className="font-Satoshi-Black text-black text-xl pr-1">01:02:34</span></p>
+                            <p className="text-[#7f7f7f] text-sm/tight"><span className="font-Satoshi-Black text-black text-xl pr-1">{FormatTime(result.timeSpent)}</span></p>
                         </div>
                     </div>
                     <div className="w-fit flex gap-5 mt-10 mx-auto">
-                        <button className="border-2 text-black bg-white font-Satoshi-Bold p-2.5 pr-3 pl-3 text-base rounded-md">Show Details</button>
+                        <button onClick={() => setShowResults(!showResults)} className="border-2 text-black bg-white font-Satoshi-Bold p-2.5 pr-3 pl-3 text-base rounded-md" >Show Details</button>
                         <button className="bg-[#5a4bea] text-white font-Satoshi-Bold p-2.5 px-4 text-base rounded-md">Finish</button>
                     </div>
+                    <AnimatePresence>
+                    {showResults &&
+                    <Popup action={() => setShowResults(false)}>
+                        <UserQuizDetails result={result} setShowResults={setShowResults}/>
+                    </Popup>
+                    }
+                    </AnimatePresence>
                 </>
             }
         </div>

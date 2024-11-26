@@ -44,7 +44,7 @@ const update_response = async (req, res) => {
   try {
     const result = await resModel.updateOne(
       { _id: responseId },
-      { $set: { ...updated } }
+      { $set: { ...updated, endedAt: Date.now() } }
     );
 
     if (result.modifiedCount) {
@@ -63,7 +63,7 @@ const get_result = async (req, res) => {
 
   const quiz = await quizModel.findOne({ _id: quizId });
   const response = await resModel.findOne({ _id: responseId });
-  const user = await userModel.findOne({email : response.userId});
+  const user = await userModel.findOne({ email: response.userId });
 
   console.log(quiz, response);
 
@@ -77,13 +77,16 @@ const get_result = async (req, res) => {
     let correctQuestions = 0;
 
     const result = {
-        quizId : quiz._id,
-        responseId : response._id,
-        userId : response.userId,
-        firstname : user.firstname,
-        lastname : user.lastname,
-        queResponses : [],
-        grades  :{}
+      quizId: quiz._id,
+      title : quiz.title,
+      responseId: response._id,
+      userId: response.userId,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      queResponses: [],
+      grades: {},
+      timeSpent: Math.floor((response.endedAt - response.createdAt) / 1000),
+      finishTime : response.endedAt
     };
 
     quiz.questions.forEach((que) => {
@@ -147,12 +150,15 @@ const get_result = async (req, res) => {
       }
 
       result.queResponses.push({
-        queType : que.type,
+        points : que.points,
+        queType: que.type,
         queId: que._id.toString(),
         userResId: queRes._id,
         que: que.que,
         expectedAns: que.correct,
         userAns: queRes.correct,
+        correct: isCorrect,
+        choices : que.choices
       });
     });
 
@@ -166,7 +172,7 @@ const get_result = async (req, res) => {
     };
 
     const saveResult = new resultModel(result);
-    
+
     await saveResult.save();
 
     return res.json({
@@ -194,23 +200,26 @@ function arraysEqual(a, b) {
   return sortedA.every((val, index) => val === sortedB[index]);
 }
 
-const get_results = async(req,res) =>{
+const get_results = async (req, res) => {
+  const { quizId } = req.body;
 
-  const {quizId} = req.body;
-
-  try{
-
-    const results = await resultModel.find({quizId : quizId});
-    if(results){
-      res.json({success : "results found" , results});
-    }else{
-      res.json({warning : "no results found"})
+  try {
+    const results = await resultModel.find({ quizId: quizId });
+    if (results) {
+      res.json({ success: "results found", results });
+    } else {
+      res.json({ warning: "no results found" });
     }
-
-  }catch(err) {
-    console.log("error while getting results : " , err);
-    res.json({error : "Internal Server Error"});
+  } catch (err) {
+    console.log("error while getting results : ", err);
+    res.json({ error: "Internal Server Error" });
   }
-}
+};
 
-module.exports = { create_response, get_response, update_response, get_result, get_results };
+module.exports = {
+  create_response,
+  get_response,
+  update_response,
+  get_result,
+  get_results,
+};

@@ -19,7 +19,7 @@ export default function SubmitQuiz() {
 
     const handelSubmitQuiz = () => {
         updateServerResponse({submitted : true, quizResponse : response});
-        navigate("/submit/success");
+        navigate(`/submit/success/${quiz._id}/${serverResponse._id}`);
     }
 
     return (

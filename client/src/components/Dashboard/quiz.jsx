@@ -115,7 +115,7 @@ export default function Quiz({ quiz, selectedworkspace, getQuizzes }) {
                     </div>
 
                     <div className="flex flex-col gap-3">
-                        <a href={`/admin/editor/${selectedworkspace.id}/${quiz._id}`}>
+                        <a href={`/admin/editor/${selectedworkspace.id}/${quiz._id}`} onClick={(e) => e.stopPropagation()}>
                             <button className="border-2 p-1 rounded-full">
                                 <ArrowUpRight size={14} />
                             </button>

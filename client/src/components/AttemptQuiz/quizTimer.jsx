@@ -19,7 +19,7 @@ export default function QuizTimer() {
                     time: remainingTime
                 }));
             }, 1000);
-        } else {
+        } else if(!timer.started && timer.time <= 0) {
             clearInterval(intervalId);
             setEndQuiz(true);
         }
