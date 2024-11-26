@@ -20,14 +20,89 @@ const QuestionBox = ({ number, response }) => {
     );
 };
 
+const RenderCorrect = ({ type, expectedAns, userAns }) => {
+
+    switch (type) {
+        case 2:
+            return <div className="gap-4 flex flex-col">
+                {expectedAns.map((ans, i) => {
+                    return  <div className="font-Satoshi-Medium h-7 flex gap-1 items-center text-gray-700 bg-[#f2f2f3] px-4 p-1 rounded-full text-md">
+                            {userAns[i].text == ans.text ? (
+                                <>
+                                    <div className="w-4 h-4">
+                                        <Check size={16} weight="bold" color="#26a67e" />
+                                    </div>
+
+                                    <p>{userAns[i].text}</p>
+                                </>
+                            )
+                                : (
+                                    <div className="flex gap-4">
+                                        <div className=" h-4 flex items-center">
+                                            <X size={16} weight="bold" color="#b94443" />
+                                            {userAns[i].text}
+                                        </div>
+
+                                        <div className="h-4 flex items-center">
+                                            <Check size={16} weight="bold" color="#26a67e" />
+                                            {ans.text}
+                                        </div>
+                                    </div>
+                                )}
+
+                        </div>
+
+                })}
+            </div>
+        case 3:
+            return <>
+                <button className={`${expectedAns.includes("1") && "!bg-[#26a67e] !text-white !border-[#26a67e]"} font-Satoshi-Medium flex gap-1 items-center text-gray-900 bg-[#f2f2f3] w-fit px-4 p-1 rounded-full text-sm`}>True</button>
+                <button className={`${expectedAns.includes("2") && "bg-[#26a67e] !text-white !border-[#26a67e]"} font-Satoshi-Medium flex gap-1 items-center text-gray-900 bg-[#f2f2f3] w-fit px-4 p-1 rounded-full text-sm`}>False</button>
+            </>
+        case 4:
+            return <div className="flex flex-col gap-3">
+                {expectedAns.map((ans, i) => {
+                    return <div key={i} className="flex gap-5">
+                        <div className="font-Satoshi-Medium justify-center w-10 h-7 flex gap-1 items-center text-gray-700 bg-[#f2f2f3] px-4 p-1 rounded-full text-md">
+                            {ans.field}
+                        </div>
+                        <div className="font-Satoshi-Medium justify-center w-10 h-7 flex gap-1 items-center text-gray-700 bg-[#f2f2f3] px-4 p-1 rounded-full text-md">
+                            {userAns[i].match == ans.match ? (
+                                <>
+                                    <div className="w-4 h-4">
+                                        <Check size={16} weight="bold" color="#26a67e" />
+                                    </div>
+
+                                    <p>{userAns[i].match}</p>
+                                </>
+                            )
+                                : (
+                                    <>
+                                        <p><div className="w-4 h-4">
+                                            <Check size={16} weight="bold" color="#26a67e" />
+                                        </div> {userAns[i].match} </p>
+                                        <p><div className="w-4 h-4">
+                                            <X size={16} weight="bold" color="#26a67e" />
+                                        </div>  {ans.match}</p>
+                                    </>
+                                )}
+
+                        </div>
+                    </div>
+                })}
+            </div>
+        default:
+            return <>none</>
+    }
+}
+
 const UserQuizDetails = ({ result, setShowResults }) => {
-    const questionNumbers = Array.from({ length: 20 }, (_, i) => i + 1);
 
     return (
         <div className="flex items-center justify-center">
             <div className="main-user-wrapper flex justify-start no-scrollbar bg-white flex-col w-[620px] h-[500px] overflow-auto border-2  rounded-2xl">
                 <div className="flex items-center justify-between sticky p-4 z-50 top-0 bg-white w-full">
-                    <div className="flex     items-center justify-center gap-2">
+                    <div className="flex items-center justify-center gap-2">
                         <div className="w-8 h-8 font-Satoshi-Medium bg-blue-600 text-white flex items-center justify-center rounded-full">{result.firstname.charAt(0)}</div>
                         <div className="flex flex-col">
                             <p className="font-Satoshi-Bold text-md">
@@ -76,7 +151,7 @@ const UserQuizDetails = ({ result, setShowResults }) => {
                         <div className="flex items-center justify-center gap-1">
                             <SealQuestion size={16} />
                             <p className="text-black font-Satoshi-Bold">
-                                20 Questions
+                                {result.grades.totalQuestions} Questions
                             </p>
                         </div>
                     </div>
@@ -139,8 +214,8 @@ const UserQuizDetails = ({ result, setShowResults }) => {
                                             {response.correct ? "Correct" : "Incorrect"}
                                         </p>
                                     </div>
-                                    <div className="flex items-center font-Satoshi-Medium justify-center gap-2">
-                                        <div className="flex items-center justify-center text-xs bg-[#f2f2f3] rounded-full gap-2 py-1 px-2">
+                                    <div className="flex items-center font-Satoshi-Bold justify-center gap-2">
+                                        <div className="flex items-center justify-center text-[13px] bg-[#f2f2f3] rounded-full gap-2 py-1 px-2">
                                             {console.log(response.queType)}
                                             <RenderQueType type={response.queType} iconsize={15} />
                                         </div>
@@ -156,16 +231,17 @@ const UserQuizDetails = ({ result, setShowResults }) => {
                                     {response.que}
                                 </p>
                                 <div className="flex gap-2 flex-wrap">
-                                {response.choices.length > 0 ? response.choices.map((choice, i) => {
-                                    return <div className="font-Satoshi-Medium flex gap-1 items-center text-gray-700 bg-[#f2f2f3] w-fit px-4 p-1 rounded-full text-md" key={i}>
-                                        {response.expectedAns.includes(choice.id) ? (
-                                            <Check size={16} weight="bold" color="#26a67e" />
-                                        ) : (
-                                            <X size={16} weight="bold" color="#b94443" />
-                                        )}
-                                        {choice.text}
-                                    </div>
-                                }) : <div></div>}
+                                    {response.choices.length > 0 ? response.choices.map((choice, i) => {
+                                        return <div className="font-Satoshi-Medium flex gap-1 items-center text-gray-700 bg-[#f2f2f3] w-fit px-4 p-1 rounded-full text-md" key={i}>
+                                            {response.expectedAns.includes(choice.id) ? (
+                                                <Check size={16} weight="bold" color="#26a67e" />
+                                            ) : (
+                                                <X size={16} weight="bold" color="#b94443" />
+                                            )}
+                                            {choice.text}
+                                        </div>
+                                    }) : (<RenderCorrect type={response.queType} expectedAns={response.expectedAns} userAns={response.userAns} />)
+                                    }
                                 </div>
                             </div>
                         })}

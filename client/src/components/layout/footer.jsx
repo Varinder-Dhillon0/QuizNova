@@ -56,24 +56,24 @@ export default function Footer() {
                     </h1>
                 </div>
                 <div className="flex flex-col gap-5">
-                    <h2 className="font-Satoshi-Regular">
+                    {/* <h2 className="font-Satoshi-Regular">
                         *Only valueable resource no bullshit
-                    </h2>
-                    <div className="flex items-center gap-6 justify-center">
+                    </h2> */}
+                    <div className="flex items-center gap-6">
                         <input
                             type="email"
                             placeholder="Enter your e-mail"
-                            className="bg-[#f4f4f4] font-Satoshi-Regular rounded-full py-4 px-14 placeholder-[#888888]"
+                            className="bg-[#f4f4f4] font-Satoshi-Regular rounded-full py-4 px-4 placeholder-[#888888]"
                         />
-                        <div className="bg-[#000000] rounded-full h-14 w-14"></div>
+                        {/* <div className="bg-[#000000] rounded-full h-14 w-14"></div> */}
                     </div>
-                    <h1 className="font-Satoshi-Bold mt-4">SOCIAL MEDIA</h1>
+                    {/* <h1 className="font-Satoshi-Bold mt-4">SOCIAL MEDIA</h1>
                     <div className="flex items-center justify-start gap-4">
                         <div className="rounded-full bg-[#F4F4F4] h-10 w-10"></div>
                         <div className="rounded-full bg-[#F4F4F4] h-10 w-10"></div>
                         <div className="rounded-full bg-[#F4F4F4] h-10 w-10"></div>
                         <div className="rounded-full bg-[#F4F4F4] h-10 w-10"></div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

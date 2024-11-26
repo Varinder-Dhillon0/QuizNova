@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Ipadimg from "../../../assets/img/ipad_display.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
+
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<div className='flex flex-col w-full items-center justify-center text-center relative z-[10] max-h-screen'>
@@ -17,13 +21,13 @@ export default function Main() {
 				<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d3e22f1763bfb3a480_Blue%20Gradient%20Image%20(2)-p-500.png" className='absolute left-[-15vw] bottom-[-18vh]' alt="" />
 
 				<motion.div initial={{ y: 100, opacity: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 0.5 }} whileInView={{ y: 0, opacity: 1 }}>
-					<button className='bg-black flex items-center gap-3 text-white font-Satoshi-Bold uppercase rounded-full px-8 py-4 mt-10 ml-auto mr-auto'>
-						Try it on browser
+					<button onClick={() => navigate("/admin/dashboard")} className='bg-black flex items-center gap-3 text-white font-Satoshi-Bold uppercase rounded-full px-8 py-4 mt-10 ml-auto mr-auto'>
+						Try it Now
 						<ArrowUpRight size={24} />
 					</button>
 					<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute left-[-45vw] bottom-[8vh]' alt="" />
 					<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d3e22f1763bfb3a480_Blue%20Gradient%20Image%20(2)-p-500.png" className='absolute left-[-45vw] bottom-[-8vh]' alt="" />
-					<div className='logo-wrapper flex mt-10 gap-3'>
+					{/* <div className='logo-wrapper flex mt-10 gap-3'>
 						<div className='flex gap-2'>
 							<div className='flex flex-col items-center'>
 								<img src="https://assets.website-files.com/623865af2eee366912508587/623cac6366ae86422aabe738_Apple%20Black.svg" alt="" />
@@ -39,9 +43,9 @@ export default function Main() {
 							</div>
 						</div>
 
-						<div className='w-px h-6 bg-gray-300 mx-4 mt-1'></div>
+						<div className='w-px h-6 bg-gray-300 mx-4 mt-1'></div> */}
 
-						<div className='flex gap-2'>
+						{/* <div className='flex gap-2'>
 							<div className='flex flex-col items-center'>
 								<img src="https://assets.website-files.com/623865af2eee366912508587/623993f7fe0520e5de3252f4_chrome.svg" alt="" />
 								<p className='text-black text-opacity-70 font-Satoshi-Regular text-[10px] leading-8'>CHROME,</p>
@@ -54,12 +58,12 @@ export default function Main() {
 								<img src="https://assets.website-files.com/623865af2eee366912508587/623993f77547cffa504179a5_firefox.svg" alt="" />
 								<p className='text-black text-opacity-70 font-Satoshi-Regular text-[10px] leading-8'>& FIREFOX</p>
 							</div>
-						</div>
-					</div>
+						</div> */}
+					{/* </div> */}
 				</motion.div>
 				<img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-500.png" className='absolute h-[75%] right-[14vw] bottom-[-29vh] z-[-1]' alt="" />
 			</div>
-			<div className="flex items-center justify-center">
+			<div className="flex items-center justify-center mt-10">
 				<img src={Ipadimg} className='relative z-10 h-[71%] w-[71%] object-contain' alt="" />
 			</div>
 		</>

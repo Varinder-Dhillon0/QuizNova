@@ -17,12 +17,14 @@ import { useFormik } from "formik";
 import axios from "axios";
 import DropdownMenu from "../common/dropdownMenu";
 import { Pencil, Trash } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 export default function Workspace({ id, title, i , refetchWorkspaces,selectedworkspace, setselectedWorkspace}) {
 
     const [editingWorkspace, seteditingWorkspace] = useState(false);
     const [dropdown, setDropdown] = useState(false);
     const inputRef = useRef(null);
+    const navigate = useNavigate();
     const colors = ["#FFE600", "#EF5E2B", "#00DC89", "#CA48A5", "#2FABE1", "#FFB000", "#401E8C", "#5A4BEA"];
     const workspacetitle = useFormik({
         initialValues : {title : title},
@@ -63,7 +65,7 @@ export default function Workspace({ id, title, i , refetchWorkspaces,selectedwor
     }, [editingWorkspace])
 
     return (
-        <div className={`mt-2 mb-4 p-2 flex cursor-pointer justify-between items-center pr-3 pl-3 rounded-md  w-full ${selectedworkspace.id == id ? "bg-[#e6e6e6] font-Satoshi-Black" : ""}`} onClick={() => { selectedworkspace.id != id && setselectedWorkspace({ id: id, title: title }) }} >
+        <div className={`mt-2 mb-4 p-2 flex cursor-pointer justify-between items-center pr-3 pl-3 rounded-md  w-full ${selectedworkspace.id == id ? "bg-[#e6e6e6] font-Satoshi-Black" : ""}`} onClick={() => { selectedworkspace.id != id && setselectedWorkspace({ id: id, title: title }); navigate("/admin/dashboard") }} >
             <div className="flex items-center cursor-pointer">
                 <div className="w-2.5 rounded-sm h-2.5" style={{ background: colors[i > 7 ? i % 7 : i] }}></div>
                 <h1 className="ml-2 text-base">

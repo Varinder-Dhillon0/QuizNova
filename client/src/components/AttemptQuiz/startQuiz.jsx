@@ -80,7 +80,7 @@ export default function StartQuiz() {
                             </div>
                             <div className="text-center mt-5">
                                 <h1 className="text-4xl/tight font-Satoshi-Bold">{quiz.title}</h1>
-                                <p className="text-md font-Satoshi-Medium text-gray-900">{quiz.desc}</p>
+                                <p className="text-sm font-Satoshi-Medium text-gray-700">{quiz.desc}</p>
                             </div>
                         </div>
 
@@ -118,7 +118,7 @@ export default function StartQuiz() {
 
                         {/* determine if quiz is available or not */}
                         {isQuizAvailable && !QuizAlreadyEnded ?
-                            <button className="w-fit p-1.5 mr-auto mt-10 ml-52 border rounded-md bg-[#4e41e6] text-white"
+                            <button className="w-full p-1.5  mt-10 border rounded-md bg-[#4e41e6] text-white"
                                 onClick={handleStartQuiz}>
                                 {createResponsePending ? "Loading" : "Start Quiz"}
                             </button> : QuizAlreadyEnded ? <div>

@@ -3,7 +3,6 @@ import Main from "./components/main";
 import Testimonial from "./components/testimonial";
 import MoreFeatures from "./components/moreFeatures";
 import EarlyAccess from "./components/earlyAccess.jsx";
-import PageNotFound from "./components/pageNotFound.jsx";
 
 export default function Home() {
     return (
@@ -14,7 +13,6 @@ export default function Home() {
             <Features />
             <MoreFeatures />
             <EarlyAccess />
-            <PageNotFound />
         </>
     );
 }

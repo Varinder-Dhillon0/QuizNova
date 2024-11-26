@@ -9,7 +9,6 @@ import QuizTimer from "./quizTimer";
 export default function Navbar() {
     const { ques, response, timer, setEndQuiz , setQuesNav } = useContext(QuizContext);
 
-
     return (
         <>
             <div className="flex items-center h-[10%] pt-5 pl-10 pb-5 pr-10 border-b-2 bg-white/50 justify-between">
@@ -28,7 +27,7 @@ export default function Navbar() {
                         <div className="h-5 w-5 flex justify-center items-center rounded-full bg-yellow-500">
                             <Star size={11} weight="fill" />
                         </div>
-                        <h1 className="text-base">1</h1>
+                        <h1 className="text-base">{ques.reduce((total, q) => total + (q.points || 0), 0)}</h1>
                     </div>
 
                     <button

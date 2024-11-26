@@ -5,12 +5,12 @@ import SideRightImg from "../../../assets/img/side-right-img.svg";
 export default function MoreFeatures() {
     return (
         <>
-            <div className="flex items-center gap-6 p-32 py-16">
+            <div className="flex items-center gap-6 p-32 py-16" id="moreFeatures">
                 <div className="w-6/12">
                     <img src={SideLeftImg} alt="" />
                 </div>
                 <div className="w-6/12 flex flex-col font-Satoshi-Medium gap-10 px-5">
-                    <h1 className="text-6xl font-Satoshi-Bold">
+                    <h1 className="text-6xl/tight font-Satoshi-Bold">
                         Manage{" "}
                         <span className="font-Boska-BoldItalic">
                             all your quizzes{" "}
@@ -51,7 +51,7 @@ export default function MoreFeatures() {
             </div>
             <div className="flex items-center gap-6 p-32 py-16">
                 <div className="flex flex-col w-6/12 gap-10 px-5">
-                    <h1 className="font-Satoshi-Bold text-6xl">
+                    <h1 className="font-Satoshi-Bold text-6xl/tight">
                         Create quizzes,{" "}
                         <span className="font-Boska-BoldItalic">
                             effortlessly, anytime, anywhere{" "}

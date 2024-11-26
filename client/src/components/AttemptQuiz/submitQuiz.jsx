@@ -8,18 +8,34 @@ import { QuizContext } from ".";
 import FormatTime, { FormatTimerTime } from "../helpers/formatTime";
 import parseDateWithTime from "../helpers/parseDate";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 export default function SubmitQuiz() {
 
-    const { quiz, serverResponse, timer, response, updateServerResponse, updatingServerResponse } = useContext(QuizContext);
+    const { quiz,ques, serverResponse, timer, response, updateServerResponse, updatingServerResponse } = useContext(QuizContext);
 
     const { hours, minutes, seconds } = FormatTimerTime(timer.time);
 
     const navigate = useNavigate();
 
+    const { mutate: generateResult, isPending: generatingResult } = useMutation({
+        mutationFn: async (updated) => {
+            await axios.post("http://localhost:5000/response/generateresult", {
+                quizId : quiz._id,
+                responseId: serverResponse._id,
+            },)
+
+        }, onSuccess : () =>{
+            navigate(`/submit/success/${quiz._id}/${serverResponse._id}`);
+        }, onError: (err) => {
+            console.log(err)
+        }
+    })
+
     const handelSubmitQuiz = () => {
         updateServerResponse({submitted : true, quizResponse : response});
-        navigate(`/submit/success/${quiz._id}/${serverResponse._id}`);
+        generateResult();
     }
 
     return (
@@ -47,7 +63,7 @@ export default function SubmitQuiz() {
                         <p>Estimated Time: {FormatTime(quiz.timeLimit)} </p>
                         <img src={Dot} alt="" className="h-6 w-6" />
                         <img src={Score} alt="" className="h-5 w-5" />
-                        <p>300 points</p>
+                        <p>{ques.reduce((total, q) => total + (q.points || 0), 0)} points</p>
                     </div>
                 </div>
             </div>

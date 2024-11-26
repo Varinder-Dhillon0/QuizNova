@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import AppLoader from "../components/common/loaders";
 
 export default function ProtectedRoute() {
     const { loading, loggedin } = useAuth();
@@ -7,7 +8,7 @@ export default function ProtectedRoute() {
     console.log("protected : loading : " + loading + "logged in : " + loggedin);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <AppLoader/>;
     }
 
     return(loggedin ? <Outlet /> : <Navigate to="/login" />);

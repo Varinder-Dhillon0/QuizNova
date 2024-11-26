@@ -38,7 +38,7 @@ export default function Quiz({ quiz, selectedworkspace, getQuizzes }) {
     return (
         <div className="bg-white border-2 flex flex-col gap-3 h-auto rounded-xl p-2 cursor-pointer" onClick={(e) => { navigate(`${quiz._id}`); e.stopPropagation() }}>
             {/* Line 1: Thumbnail and Stats */}
-            <div className="relative bg-yellow-600 w-full h-32 rounded-xl p-2">
+            <div className="relative bg-yellow-600 h-32 rounded-xl p-2">
                 {quiz.quizThumbnail && (
                     <img
                         className="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
@@ -46,18 +46,18 @@ export default function Quiz({ quiz, selectedworkspace, getQuizzes }) {
                         alt="Quiz Thumbnail"
                     />
                 )}
-                <div className="absolute top-3 left-3 bg-opacity-60 bg-gray-700 px-2 text-xs h-6 rounded-md flex font-Satoshi-Medium text-white gap-1 items-center justify-center">
+                {/* <div className="absolute top-3 left-3 bg-opacity-60 bg-gray-700 px-2 text-xs h-6 rounded-md flex font-Satoshi-Medium text-white gap-1 items-center justify-center">
                     <Scroll size={14} />
                     <h1>10</h1>
                     <h1>Attempts</h1>
-                </div>
+                </div> */}
             </div>
 
             <div className="px-3 flex flex-col gap-5 overflow-hidden">
                 <h1 className="text-black font-Satoshi-Bold text-xl text-wrap break-all">
-                    {56 > 55 ? "welobkejrqbwgbrewwkjbgolrewepopjf3wlegf4welognf43w4ol3wgbloj4w3bol4wb3tjuolbwj4bojb".substring(0, 55) + "..." : quiz.que.length}
+                    {quiz.title.length > 55 ? quiz.title.substring(0, 55) + "...": quiz.title}
                 </h1>
-
+{/* 
                 <div className="flex items-center justify-between gap-2">
                     <div className="flex gap-2 items-center">
                         <RoundChart data={accuracy_data} />
@@ -78,7 +78,7 @@ export default function Quiz({ quiz, selectedworkspace, getQuizzes }) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Line 4: Tags */}
                 <div className="flex justify-between">
@@ -107,7 +107,7 @@ export default function Quiz({ quiz, selectedworkspace, getQuizzes }) {
                                 <div className="text-[5px]">●</div>
                                 <div className="flex items-center font-Satoshi-Bold text-black gap-1">
                                     <SealQuestion size={14} weight="bold" />
-                                    15 Questions
+                                    {quiz.questions.length} Questions
                                 </div>
                             </div>
 

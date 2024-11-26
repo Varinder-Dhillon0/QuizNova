@@ -5,7 +5,7 @@ import payment from "../../../assets/img/payment.svg";
 
 export default function Features() {
     return (
-        <div className="flex justify-center py-20 relative  ">
+        <div className="flex justify-center py-20 relative" id="features">
             <div className="absolute z-[-999] top-[200px] bottom-10 left-[300px]">
                 <img src="https://assets.website-files.com/623865af2eee366912508587/6241b2d3e22f1763bfb3a480_Blue%20Gradient%20Image%20(2)-p-500.png" alt="" className=""/>
             </div>
@@ -29,10 +29,10 @@ export default function Features() {
 
                 <div className="rounded-3xl flex flex-col items-start gap-4 p-6 shadow-custom-light bg-white">
                     <img src={brainQuest} alt="" className="w-24 h-24" />
-                    <h1 className="font-Satoshi-Bold text-4xl">
+                    <h1 className="font-Satoshi-Bold text-3xl/tight ">
                         Create Custom Quizzes
                     </h1>
-                    <p className="font-Satoshi-Regular text-lg">
+                    <p className="font-Satoshi-Medium text-gray-700 text-lg/snug">
                         Design quizzes with various question types, including
                         multiple-choice, fill-in-the-blank, and one-word
                         answers.
@@ -40,10 +40,10 @@ export default function Features() {
                 </div>
                 <div className="rounded-3xl flex flex-col items-start gap-4 p-6 shadow-custom-light bg-white">
                     <img src={leaderboard} alt="" className="w-24 h-24" />
-                    <h1 className="font-Satoshi-Bold text-4xl">
+                    <h1 className="font-Satoshi-Bold text-3xl/tight ">
                         Interactive Leaderboard
                     </h1>
-                    <p className="font-Satoshi-Regular text-lg">
+                    <p className="font-Satoshi-Medium text-gray-700 text-lg/snug">
                         Track your progress and compete with others. Climb the
                         leaderboard and showcase your knowledge.
                     </p>
@@ -54,20 +54,20 @@ export default function Features() {
                         alt=""
                         className="w-24 h-24"
                     />
-                    <h1 className="font-Satoshi-Bold text-4xl">
+                    <h1 className="font-Satoshi-Bold text-3xl/tight ">
                         Community Hub
                     </h1>
-                    <p className="font-Satoshi-Regular text-lg">
+                    <p className="font-Satoshi-Medium text-gray-700 text-lg/snug">
                         Join discussions, share tips, and connect with quiz
                         enthusiasts to expand your knowledge.
                     </p>
                 </div>
                 <div className="rounded-3xl flex flex-col items-start gap-4 p-6 shadow-custom-light bg-white">
                     <img src={payment} alt="" className="w-24 h-24" />
-                    <h1 className="font-Satoshi-Bold text-4xl">
+                    <h1 className="font-Satoshi-Bold text-3xl/tight ">
                         Secure Payment Integration
                     </h1>
-                    <p className="font-Satoshi-Regular text-lg">
+                    <p className="font-Satoshi-Medium text-gray-700 text-lg/snug">
                         Unlock premium quizzes and features with a secure and
                         seamless payment process.
                     </p>

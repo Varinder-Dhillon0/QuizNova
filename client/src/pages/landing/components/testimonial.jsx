@@ -1,7 +1,7 @@
 
 export default function Testimonial(){
     return(
-        <div className="flex flex-col justify-center items-center mt-16">
+        <div className="flex flex-col justify-center items-center mt-16" id="testimonial">
 			<h1 className="font-Satoshi-Bold text-5xl w-7/12 text-center leading-tight">
 				Customers have consistently <br /> <span className="font-Boska-BoldItalic">rated</span> QuizNova 4.9/5
 			</h1>

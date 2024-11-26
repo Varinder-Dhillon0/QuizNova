@@ -44,7 +44,7 @@ export default function Content() {
                      </button>
                 </div>
 
-                <div className="grid grid-cols-3 grid-rows-auto gap-4 pt-5">
+                <div className="grid grid-cols-3 grid-rows-auto gap-10 pt-5">
                     {getPending ? "loading" :
                         quizzes.map((quiz) => {
                             return <Quiz key={quiz._id} quiz={quiz} selectedworkspace={selectedworkspace} getQuizzes={getQuizzes}/>

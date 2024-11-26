@@ -8,6 +8,7 @@ import Editor from "../components/Editor";
 import Layout from "../components/layout/layout";
 import Admin from "../pages/admin";
 import Home from "../pages/landing";
+import PageNotFound from "../pages/landing/components/pageNotFound";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import VerifyUser from "../pages/verifyUser";
@@ -63,5 +64,8 @@ export const AppRoutes = [
             path : "submit/success/:quizId/:responseId",
             element : <QuizSubmitted/>
         }]
+    },{
+        path : "*",
+        element :<PageNotFound />
     }
 ]

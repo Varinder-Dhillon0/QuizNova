@@ -58,7 +58,7 @@ const update_response = async (req, res) => {
   }
 };
 
-const get_result = async (req, res) => {
+const generate_result = async (req, res) => {
   const { quizId, responseId } = req.body;
 
   const quiz = await quizModel.findOne({ _id: quizId });
@@ -216,10 +216,28 @@ const get_results = async (req, res) => {
   }
 };
 
+const get_result = async (req, res) => {
+  const { quizId, responseId } = req.body;
+
+  try {
+    const result = await resultModel.findOne({ quizId: quizId , responseId : responseId});
+    if (result) {
+      res.json({ success: "result found", result });
+    } else {
+      res.json({ warning: "no results found" });
+    }
+  } catch (err) {
+    console.log("error while getting results : ", err);
+    res.json({ error: "Internal Server Error" });
+  }
+};
+
+
 module.exports = {
   create_response,
   get_response,
   update_response,
-  get_result,
   get_results,
+  generate_result,
+  get_result
 };
