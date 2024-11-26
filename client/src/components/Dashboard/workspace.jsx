@@ -33,18 +33,21 @@ export default function Workspace({ id, title, i , refetchWorkspaces,selectedwor
 
     const {mutate : updateWorkspace} = useMutation({
         mutationFn : async(values) =>{
-            console.log(values);
             const res = await axios.post("http://localhost:5000/workspace/update",{
                 id : id,
                 ...values
             })
+            console.log(res);
+            setselectedWorkspace({id : res.data.update._id , title : res.data.update.title})
             return res.data;
+        },
+        onError : (err) =>{
+            console.log(err);
         }
     })
 
     const {mutate : deleteWorkspace} = useMutation({
-        mutationFn : async(values) =>{
-            console.log(values);
+        mutationFn : async() =>{
             const res = await axios.post("http://localhost:5000/workspace/delete",{
                 id : id
             })

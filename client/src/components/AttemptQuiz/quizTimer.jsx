@@ -1,51 +1,34 @@
 import { useContext, useEffect, useRef } from "react";
 import { QuizContext } from ".";
+import { FormatTimerTime } from "../helpers/formatTime";
 
 export default function QuizTimer() {
     const { timer, setTimer, setEndQuiz } = useContext(QuizContext);
-    const startTimeRef = useRef(Date.now()); // Store the start time
 
     useEffect(() => {
-        const updateTimer = () => {
-            // Calculate the elapsed time in seconds based on system time
-            const elapsedSeconds = Math.floor((Date.now() - startTimeRef.current) / 1000);
-            const remainingTime = Math.max(0, timer.time - elapsedSeconds); // Use time to track the original time limit
+        let intervalId;
 
-            // Update timer state
-            setTimer(prevTimer => ({
-                ...prevTimer,
-                time: remainingTime,
-                started: remainingTime > 0,
-            }));
-
-            // End quiz if time runs out
-            if (remainingTime <= 0) {
-                setEndQuiz(true);
-                return;
-            }
-
-            // Continue updating every second
-            setTimeout(updateTimer, 1000);
-        };
-
-        // Start the timer if it hasn't already started
         if (timer.started && timer.time > 0) {
-            startTimeRef.current = Date.now(); // Reset start time when (re)starting
-            updateTimer();
+            const startTime = Date.now();
+            intervalId = setInterval(() => {
+                const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+                const remainingTime = Math.max(0, timer.time - elapsedSeconds);
+
+                setTimer(prevTimer => ({
+                    ...prevTimer,
+                    time: remainingTime
+                }));
+            }, 1000);
+        } else {
+            clearInterval(intervalId);
+            setEndQuiz(true);
         }
 
         return () => {
-            // Cleanup any running timeouts
-            clearTimeout(updateTimer);
+            if (intervalId) clearInterval(intervalId);
         };
-    }, [timer.started]);
-
-    // Format time into HH:MM:SS
-    const hours = Math.floor(timer.time / 3600);
-    const minutes = Math.floor((timer.time % 3600) / 60);
-    const seconds = timer.time % 60;
-
-    const formatTime = (time) => time.toString().padStart(2, "0");
+    }, [timer.started, timer.time]);
+    const { hours, minutes, seconds } = FormatTimerTime(timer.time);
 
     return (
         <>
@@ -53,15 +36,15 @@ export default function QuizTimer() {
                 Time Left :
             </h1>
             <div className="h-7 w-7 rounded-md bg-black text-white flex items-center justify-center font-Satoshi-Medium text-base">
-                {formatTime(hours)}
+                {hours}
             </div>
             <h1>:</h1>
             <div className="h-7 w-7 rounded-md bg-black text-white flex items-center justify-center font-Satoshi-Medium text-base">
-                {formatTime(minutes)}
+                {minutes}
             </div>
             <h1>:</h1>
             <div className="h-7 w-7 rounded-md bg-black text-white flex items-center justify-center font-Satoshi-Medium text-base">
-                {formatTime(seconds)}
+                {seconds}
             </div>
         </>
     );

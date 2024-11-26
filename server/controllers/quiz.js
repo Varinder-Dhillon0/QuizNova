@@ -89,4 +89,20 @@ const update_quiz = async(req,res) =>{
     }
 }
 
-module.exports = {create_quiz , get_quizzes, get_quiz, update_quiz};
+const delete_quiz = async(req,res) => {
+
+    const {quizId} = req.body;
+
+    try{
+        const result = await quizModel.deleteOne({_id : quizId});
+
+        if(result.deletedCount){
+            res.json({success : "deleted quiz successfully"});
+        }
+    }catch(err){
+        console.log("an error occured while deleting quiz",err);
+        res.json({error : "Internal server error"});
+    }
+}
+
+module.exports = {create_quiz , get_quizzes, get_quiz, update_quiz, delete_quiz};

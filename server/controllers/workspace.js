@@ -39,7 +39,8 @@ const update_workspace = async(req,res) =>{
         );
 
         if(update.modifiedCount){
-            res.json({success : "updated workspace"})
+            console.log(update)
+            res.json({success : "updated workspace", update : {id, title}})
         }else{
             res.json({error : "error updating workspaces"})
         }

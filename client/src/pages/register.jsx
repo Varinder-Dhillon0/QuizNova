@@ -1,30 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BsFillExclamationDiamondFill } from "react-icons/bs";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import Logo2 from "../assets/img/logo2.png";
+import { useToast } from "../hooks/useToast";
 
 // Validation schema for fields 
 const userValidationSchema = Yup.object({
-	name: Yup.string()
+	firstname: Yup.string()
 		.required("required")
-		.min(2, "Name must be at least 2 characters"),
+		.min(2, "First Name must be at least 2 characters"),
+	lastname: Yup.string()
+		.required("required")
+		.min(2, "Last Name must be at least 2 characters"),
 	email: Yup.string()
 		.email("Email is invalid")
 		.required("required"),
 	password: Yup.string()
 		.min(6, "Password must be at least 6 characters")
 		.required("required"),
-	dob: Yup.date().required("required"),
-	mobile: Yup.string()
-		.matches(/^[0-9]{10}$/, "Mobile number must be 10 digits")
-		.required("required"),
-	gender: Yup.string().required("required"),
 });
 
 export default function Register() {
+
+	const showToast = useToast();
+	const [msg, setMsg] = useState("");
 
 	const { mutate: userMutation, isPending } = useMutation({
 		mutationFn: async (values) => {
@@ -33,13 +36,15 @@ export default function Register() {
 		},
 		onSuccess: (data) => {
 			if (data.success) {
-				console.log("Success:", data.success);
+				setMsg(data.warning);
+				formik.resetForm();
 			}
 			if (data.warning) {
-				console.log("Warning:", data.warning);
+				setMsg(data.warning);
+				formik.resetForm();
 			}
 			if (data.error) {
-				console.log("Error:", data.error);
+				showToast(2 , data.warning)
 			}
 		},
 		onError: (error) => {
@@ -50,12 +55,10 @@ export default function Register() {
 	// Formik form handling
 	const formik = useFormik({
 		initialValues: {
-			name: "",
+			firstname: "",
+			lastname: "",
 			email: "",
 			password: "",
-			dob: "",
-			mobile: "",
-			gender: "",
 		},
 		validationSchema: userValidationSchema,
 		onSubmit: (values) => {
@@ -74,30 +77,51 @@ export default function Register() {
 	};
 
 	return (
-		<div className="main-wrapper flex">
+		<div className="main-wrapper flex h-[120vh]">
 			<div className="left-container bg-black w-1/2 flex items-center justify-center">
-				<div className="min-h-[520px] min-w-[520px] bg-gray-900 flex flex-col items-center mx-auto my-auto p-8 rounded-2xl">
-					<form onSubmit={formik.handleSubmit} className="flex flex-col">
+			<div className="flex absolute items-center justify-center gap-2 left-16 top-10">
+                <img src={Logo2} alt="" className="h-6 w-6" />
+                <h1 className="text-white font-Satoshi-Bold leading-none text-3xl">
+                    QuizNova
+                </h1>
+            </div>
+				<div className="min-h-[570px] min-w-[555px] bg-[#111827] flex flex-col items-center justify-center mx-auto my-auto p-8 rounded-2xl">
+					<form onSubmit={formik.handleSubmit} className="flex flex-col w-full">
 						<h1 className="text-white font-Satoshi-Bold text-4xl mb-6 text-center">
 							Create an Account
 						</h1>
 
 						{/* Name Field */}
-						<input
-							type="text"
-							name="name"
-							placeholder="Enter your name*"
-							className={`bg-gray-800 text-white p-[10px] text-[15px] font-Satoshi-Regular rounded mt-2 w-full outline-none ${formik.touched.name && formik.errors.name && "border-red-500 border-[1px]"}`}
-							{...formik.getFieldProps('name')}
-						/>
-						{renderError('name')}
+						<div className="w-full flex gap-4">
+							<div className="w-1/2">
+								<input
+									type="text"
+									name="firstname"
+									placeholder="First Name*"
+									className={`bg-gray-800 text-white mb-4 p-3 text-[15px] font-Satoshi-Regular rounded w-full outline-none ${formik.touched.firstname && formik.errors.firstname && "border-red-500 border-[1px]"}`}
+									{...formik.getFieldProps('firstname')}
+								/>
+								{renderError('firstname')}
+							</div>
+
+							<div className="w-1/2">
+								<input
+									type="text"
+									name="lastname"
+									placeholder="Last Name*"
+									className={`bg-gray-800 text-white mb-4 p-3 text-[15px] font-Satoshi-Regular rounded w-full outline-none ${formik.touched.lastname && formik.errors.lastname && "border-red-500 border-[1px]"}`}
+									{...formik.getFieldProps('lastname')}
+								/>
+								{renderError('lastname')}
+							</div>
+						</div>
 
 						{/* Email Field */}
 						<input
 							type="email"
 							name="email"
 							placeholder="E-mail address*"
-							className={`bg-gray-800 text-white p-[10px] text-[15px] font-Satoshi-Regular rounded mt-2 w-full outline-none ${formik.touched.email && formik.errors.email && "border-red-500 border-[1px]"}`}
+							className={`bg-gray-800 text-white mb-4 p-3 text-[15px] font-Satoshi-Regular rounded w-full outline-none ${formik.touched.email && formik.errors.email && "border-red-500 border-[1px]"}`}
 							{...formik.getFieldProps('email')}
 						/>
 						{renderError('email')}
@@ -107,54 +131,26 @@ export default function Register() {
 							type="password"
 							name="password"
 							placeholder="Password*"
-							className={`bg-gray-800 text-white p-[10px] text-[15px] font-Satoshi-Regular rounded mt-2 w-full outline-none ${formik.touched.password && formik.errors.password && "border-red-500 border-[1px]"}`}
+							className={`bg-gray-800 text-white mb-4 p-3 text-[15px] font-Satoshi-Regular rounded w-full outline-none ${formik.touched.password && formik.errors.password && "border-red-500 border-[1px]"}`}
 							{...formik.getFieldProps('password')}
 						/>
 						{renderError('password')}
 
-						{/* Date of Birth Field */}
-						<input
-							type="date"
-							name="dob"
-							className={`bg-gray-800 text-white p-[10px] text-[15px] font-Satoshi-Regular rounded mt-2 w-full outline-none ${formik.touched.dob && formik.errors.dob && "border-red-500 border-[1px]"}`}
-							{...formik.getFieldProps('dob')}
-						/>	
-						{renderError('dob')}
-
-						{/* Mobile Number Field */}
-						<input
-							type="text"
-							name="mobile"
-							placeholder="Enter your mobile number*"
-							className={`bg-gray-800 text-white p-[10px] text-[15px] font-Satoshi-Regular rounded mt-2 w-full outline-none ${formik.touched.mobile && formik.errors.mobile && "border-red-500 border-[1px]"}`}
-							{...formik.getFieldProps('mobile')}
-						/>
-						{renderError('mobile')}
-
-						{/* Gender Field */}
-						<input
-							type="text"
-							name="gender"
-							placeholder="Enter your gender*"
-							className={`bg-gray-800 text-white p-[10px] text-[15px] font-Satoshi-Regular rounded mt-2 w-full outline-none ${formik.touched.gender && formik.errors.gender && "border-red-500 border-[1px]"}`}
-							{...formik.getFieldProps('gender')}
-						/>
-						{renderError('gender')}
-
 						{/* Submit Button */}
 						<button
 							type="submit"
-							className="text-black font-Satoshi-Bold text-md rounded-full bg-[#caef45] px-40 py-4 mb-4 mt-4"
+							className="text-black font-Satoshi-Bold mb-4 text-md rounded-full bg-[#caef45] px-40 py-4"
 							disabled={isPending}
 						>
 							{isPending ? "Loading" : "REGISTER"}
 						</button>
 
-						<h1 className="text-white mb-2">
+						<h1 className="text-white mb-2 text-center">
 							Already have an account?
 							<Link to="/login" className="text-[#caef45] ml-1">
 								Login
 							</Link>
+							<p className="text-red-500 text-center mt-3 text-base font-Satoshi-Medium">{msg}</p>
 						</h1>
 					</form>
 				</div>

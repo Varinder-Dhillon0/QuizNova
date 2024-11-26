@@ -1,22 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
-import { useQues } from "../../hooks/useQues";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import Backdrop from "../common/backdrop";
-import Popup from "../common/popup";
+import { useContext, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import workspaceimg from "../../assets/img/workspace.svg"
-import QuizManager from "./QuizManager";
-import plus from "../../assets/img/plus-white.svg"
 import { useNavigate } from "react-router-dom";
 import Quiz from "./quiz";
+import { Plus } from "@phosphor-icons/react";
+import { WorkspaceContext } from ".";
 
-export default function Content({selectedworkspace}) {
+export default function Content() {
     const [quizzes, setQuizzes] = useState([]);
-    const [popup, setPopup] = useState(false);
     const { user } = useAuth();
     const navigate = useNavigate();
+
+    const {selectedworkspace} = useContext(WorkspaceContext);
 
     const { mutate: getQuizzes, isPending: getPending } = useMutation({
         mutationFn: async () => {
@@ -28,7 +24,7 @@ export default function Content({selectedworkspace}) {
             if (data.success) {
                 setQuizzes([...data.quizzes]);
             }
-        }
+        },
     });
 
     useEffect(() => {
@@ -37,21 +33,21 @@ export default function Content({selectedworkspace}) {
 
     return (
         <>
-            <div className="overflow-auto">
+            <div className="relative z-0 pb-10">
                 <div className="text-2xl flex justify-between">
                     <div className="font-Silka-Bold">
                         <h1>{selectedworkspace.title}</h1>
                     </div>
-                    <button className="bg-[#5a4bea] text-white flex justify-between items-center font-Silka-Medium p-[6px] w-[102px] pr-3 pl-3 text-xs rounded-md" 
+                    <button className="bg-[#5a4bea] flex items-center gap-1 h-9 text-white font-Satoshi-Bold px-3 text-sm rounded-md" 
                     onClick={() =>  navigate(`create/${selectedworkspace.id}`)}>
-                     New Quiz
+                     <Plus size={16} weight="bold"/> New Quiz 
                      </button>
                 </div>
 
-                <div className="grid grid-cols-3 overflow-auto grid-rows-auto gap-4">
+                <div className="grid grid-cols-3 grid-rows-auto gap-4 pt-5">
                     {getPending ? "loading" :
                         quizzes.map((quiz) => {
-                            return <Quiz key={quiz._id} quiz={quiz} selectedworkspace={selectedworkspace}/>
+                            return <Quiz key={quiz._id} quiz={quiz} selectedworkspace={selectedworkspace} getQuizzes={getQuizzes}/>
                         })}
                 </div>
             </div>

@@ -8,13 +8,13 @@ export default function FillInTheBlank({ que, response, updateResponse }) {
 
     const [correct, setCorrect] = useState(response?.correct || []);
 
-    const handleCorrect = (choice) => {
-        if (correct.includes(choice.id)) {
-            setCorrect(correct.filter((prev) => prev !== choice.id))
-        } else {
-            setCorrect([...correct, choice.id]);
-        }
-    }
+    // const handleCorrect = (choice) => {
+    //     if (correct.includes(choice.id)) {
+    //         setCorrect(correct.filter((prev) => prev !== choice.id))
+    //     } else {
+    //         setCorrect([...correct, choice.id]);
+    //     }
+    // }
 
     useEffect(() => {
         updateResponse({ queId: que._id, correct: correct, notsure: response?.notsure || 0 });
@@ -37,7 +37,7 @@ export default function FillInTheBlank({ que, response, updateResponse }) {
                     Fill out the answers in following
                 </h1>
                 <div className="flex flex-col gap-3 h-52 relative">
-                    {que.Blanks.map((blank, i) => {
+                    {que.correct.map((blank, i) => {
                         return <div key={blank._id} className="flex relative items-center gap-3 w-full font-Satoshi-Bold text-md">
                             <h1 className="absolute left-4">{i + 1}.</h1>
                             <input type="text" className=" bg-[#fefefe] rounded-lg w-full outline-none px-9 py-3 "

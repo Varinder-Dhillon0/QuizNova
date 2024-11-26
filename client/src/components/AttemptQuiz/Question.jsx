@@ -13,7 +13,7 @@ import axios from "axios";
 
 export default function Question() {
 
-    const { selectedQue, response, ques, setResponse, serverResponse, setTimer } = useContext(QuizContext);
+    const { selectedQue, response, ques,updateServerResponse, setResponse } = useContext(QuizContext);
     const [saveDebounce, cancelSaveDebounce] = useDebounce(async (updated) => {
         updateServerResponse(updated);
     }, 1000)
@@ -54,19 +54,7 @@ export default function Question() {
         });
     }, [response]);
 
-    const { mutate: updateServerResponse, isPending: updatingServerResponse } = useMutation({
-        mutationFn: async (updated) => {
-            await axios.post("http://localhost:5000/response/update", {
-                responseId: serverResponse._id,
-                updated: { ...updated }
-            },)
-
-
-
-        }, onError: (err) => {
-            console.log(err)
-        }
-    })
+    
 
 
 

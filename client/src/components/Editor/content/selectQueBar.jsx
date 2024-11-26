@@ -11,31 +11,38 @@ export const QueTypes = [
         type: 1,
         que: "",
         choices: [{ id: Date.now(), text: "" }],
-        correct: []
+        correct: [],
+        points : 1,
+        randomizedOptions : 0
     },
     //Fill in the Blanks
     {
         type: 2,
         que: "",
-        Blanks: [{ id: Date.now(), text: "" }],
-        correct: ""
+        correct: [{ id: Date.now(), text: "" }],
+        points : 1,
+        randomizedOptions : 0
     },
     // True / false
     {
         type: 3,
         que: "",
-        OneCorrect: "1"
+        correct: ["1"],
+        points : 1,
+        randomizedOptions : 0
     },
     //Matching
     {
         type: 4,
         que: "",
-        matchFields: [{ id: Date.now(), field: "", match: "" }]
+        correct: [{ id: Date.now(), field: "", match: "" }],
+        points : 1,
+        randomizedOptions : 0
     }]
 
 export default function SelectQueBar({ setShowTypes, position , actionType, index}) {
 
-    const { setQues,selectedQue ,setSelectedQue } = useQues();
+    const { setQues ,setSelectedQue } = useQues();
 
     const addQuestion = (e) => {
         const id = parseInt(e.currentTarget.id);

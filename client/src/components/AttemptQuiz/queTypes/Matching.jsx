@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import NotSure from "../notsure";
 import { RearrangeableGroup, RearrangeableItem } from "../../common/rearrangeable";
+import seededShuffle from "../../helpers/shuffle";
 
 export default function Matching({ que, response, updateResponse }) {
 
@@ -8,25 +9,18 @@ export default function Matching({ que, response, updateResponse }) {
         const responseMap = new Map(
             (response.correct || []).map(item => [item.id, item])
         );
-        return que.matchFields.map(item => {
+        
+        const initialItems = que.correct.map(item => {
             return responseMap.get(item.id) || {
                 id: item.id,
                 match: item.match
             };
         });
+
+        return seededShuffle(initialItems, 189);
     });
 
-
-
     console.log("matching que : ", que)
-
-    // const handleCorrect = (choice) => {
-    //     if(correct.includes(choice.id)){
-    //         setCorrect(correct.filter((prev) => prev !== choice.id))
-    //     }else{
-    //         setCorrect([...correct , choice.id]);
-    //     }
-    // }
 
     useEffect(() => {
         updateResponse({ queId: que._id, correct: correct, notsure: response?.notsure || 0 });
@@ -44,7 +38,7 @@ export default function Matching({ que, response, updateResponse }) {
                 </h1>
                 <div className="flex flex-col gap-3 h-52 relative">
                     <RearrangeableGroup values={correct} onReorder={newOrder => setCorrect(newOrder)}>
-                        {que.matchFields.map((matchField, i) => {
+                        {que.correct.map((matchField, i) => {
                             return <div key={correct[i]?.id} className="w-full gap-3 mb-4 flex items-center font-Satoshi-Bold text-md">
                                 {console.log(correct, i)}
                                 <h1 className="w-6 py-auto">{i + 1}.</h1>

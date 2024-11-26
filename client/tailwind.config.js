@@ -29,6 +29,10 @@ export default {
       loose: '2',
     },
     extend: {
+      height: {
+        'min-screen': 'max(100vh, auto)',
+      },
+
       blur:{
         '80':'80px'
       },
