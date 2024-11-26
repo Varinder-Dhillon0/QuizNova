@@ -2,7 +2,7 @@ import Features from "./components/features";
 import Main from "./components/main";
 import Testimonial from "./components/testimonial";
 import MoreFeatures from "./components/moreFeatures";
-import Share from "../../components/common/Share";
+import Share from "../../components/common/shareLink";
 import Login from "../login.jsx";
 import SubmitQuizSection from "../../components/common/submitQuiz";
 import QuizOverviewCard from "../../components/common/QuizOverviewCard.jsx";
