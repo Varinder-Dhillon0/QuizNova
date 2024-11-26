@@ -7,6 +7,11 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import Logo2 from "../assets/img/logo2.png";
 import { useToast } from "../hooks/useToast";
+import blueglowLogin from "../assets/img/blueglowLogin.png";
+import greenGlowLogin from "../assets/img/greenGlowLogin.png";
+import Pie from "../assets/img/pie.png";
+import CreateQuiz from "../assets/img/createQuiz.png";
+import Pin from "../assets/img/pin.png";
 
 // Validation schema for fields 
 const userValidationSchema = Yup.object({
@@ -156,82 +161,97 @@ export default function Register() {
 				</div>
 			</div>
 
-			<div className="right-container bg-white w-1/2 h-full">
-				<div className="right-wrapper w-3/4 flex flex-col mx-auto my-auto px-12 py-24 gap-8">
-					<div className="content flex gap-5">
-						<img
-							src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png"
-							alt=""
-							className="w-16 h-16 object-contain"
-						/>
-						<div className="sub-content flex flex-col gap-2">
-							<h1 className="font-Satoshi-Bold text-2xl">
-								Boost your Payments
-							</h1>
-							<p>
-								On top of all that, we takes care of other
-								common issues such as missing system-fonts,
-								missing. Increased conversion and expansion on
-								new markets
-							</p>
-						</div>
-					</div>
-					<div className="content flex gap-5">
-						<img
-							src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png"
-							alt=""
-							className="w-16 h-16 object-contain"
-						/>
-						<div className="sub-content flex flex-col gap-2">
-							<h1 className="font-Satoshi-Bold text-2xl">
-								Boost your Payments
-							</h1>
-							<p>
-								On top of all that, we takes care of other
-								common issues such as missing system-fonts,
-								missing. Increased conversion and expansion on
-								new markets
-							</p>
-						</div>
-					</div>
-					<div className="content flex gap-5">
-						<img
-							src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png"
-							alt=""
-							className="w-16 h-16 object-contain"
-						/>
-						<div className="sub-content flex flex-col gap-2">
-							<h1 className="font-Satoshi-Bold text-2xl">
-								Boost your Payments
-							</h1>
-							<p>
-								On top of all that, we takes care of other
-								common issues such as missing system-fonts,
-								missing. Increased conversion and expansion on
-								new markets
-							</p>
-						</div>
-					</div>
-					<div className="content flex gap-5">
-						<img
-							src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png"
-							alt=""
-							className="w-16 h-16 object-contain"
-						/>
-						<div className="sub-content flex flex-col gap-2">
-							<h1 className="font-Satoshi-Bold text-2xl">
-								Boost your Payments
-							</h1>
-							<p>
-								On top of all that, we takes care of other
-								common issues such as missing system-fonts,
-								missing. Increased conversion and expansion on
-								new markets
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div className="right-container bg-white w-1/2 h-full flex items-center overflow-hidden justify-center relative">
+                <img
+                    src={blueglowLogin}
+                    alt=""
+                    className="absolute right-[-155px] bottom-[-369px] w-auto h-auto"
+                />
+                <img
+                    src={greenGlowLogin}
+                    alt=""
+                    className="absolute right-[-508px] bottom-[-302px] w-auto h-auto"
+                />
+                <img
+                    src="https://assets.website-files.com/623865af2eee366912508587/6241b2d41327941b39683db0_Peach%20Gradient%20Image%20(1)-p-800.png"
+                    alt=""
+                    className="absolute w-72 h-72 bottom-[190px] opacity-85 z-0"
+                />
+
+                <div className="right-wrapper w-3/4 flex flex-col px-12 gap-10">
+                    <div className="content flex gap-5">
+                        <img
+                            src={CreateQuiz}
+                            alt=""
+                            className="w-16 h-16 object-contain"
+                        />
+                        <div className="sub-content flex flex-col gap-1">
+                            <h1 className="font-Satoshi-Bold text-2xl">
+                                Create Your Quizzes
+                            </h1>
+                            <p className="font-Satoshi-Medium text-md text-gray-800">
+                                Design custom quizzes with ease and upload them
+                                to share with others. Customize your quizzes
+                                with various question types to make them
+                                engaging.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="content flex gap-5">
+                        <img
+                            src="https://assets.website-files.com/623865af2eee366912508587/62387f9ffc386a444ec10114_image%2070.png"
+                            alt=""
+                            className="w-16 h-16 object-contain"
+                        />
+                        <div className="sub-content flex flex-col gap-1">
+                            <h1 className="font-Satoshi-Bold text-2xl">
+                                Challenge Yourself
+                            </h1>
+                            <p className="font-Satoshi-Medium text-md text-gray-800">
+                                Explore a wide range of quizzes crafted by the
+                                community and test your knowledge. Discover
+                                quizzes across diverse topics and levels.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="content flex gap-5">
+                        <img
+                            src={Pie}
+                            alt=""
+                            className="w-14 h-14 object-contain"
+                        />
+                        <div className="sub-content flex flex-col gap-1">
+                            <h1 className="font-Satoshi-Bold text-2xl">
+                                Track Your Progress
+                            </h1>
+                            <p className="font-Satoshi-Medium text-md text-gray-800">
+                                Monitor your performance with detailed stats and
+                                stay motivated to improve. Analyze your
+                                weaknesses to focus on areas that need
+                                attention.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="content flex gap-5">
+                        <img
+                            src={Pin}
+                            alt=""
+                            className="w-14 h-14 object-contain"
+                        />
+                        <div className="sub-content flex flex-col gap-1">
+                            <h1 className="font-Satoshi-Bold text-2xl">
+                                Instant Results
+                            </h1>
+                            <p className="font-Satoshi-Medium text-md text-gray-800">
+                                Receive quick and accurate results for every
+                                quiz you attempt, complete with feedback!
+                                Compare your scores with others and climb the
+                                leaderboard.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</div>
 	);
 }
