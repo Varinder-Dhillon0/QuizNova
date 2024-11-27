@@ -43,12 +43,12 @@ export default function Navbar() {
                 </div>
                 <div className="flex text-[13px] gap-4 justify-between items-center font-Silka-SemiBold">
                     <User />
-                    <button className="flex items-center p-[5.5px] border-2 rounded-lg ">
+                    {/* <button className="flex items-center p-[5.5px] border-2 rounded-lg ">
                         <img src={gear} alt="" />
-                    </button>
-                    <button className="flex items-center p-[4px] border-2 pl-2 pr-2 rounded-lg ">
-                        <img src={play} className="mr-1" alt="" /> Preview
-                    </button>
+                    </button> */}
+                        {/* <button className="flex items-center p-[4px] border-2 pl-2 pr-2 rounded-lg ">
+                            <img src={play} className="mr-1" alt="" /> Preview
+                        </button> */}
                     {quiz?.published ?
                         <button className="flex items-center bg-black text-white p-[4px] pl-2 pr-2 rounded-lg " onClick={() => {setSharePopup(true)}}>
                             <img src={paperplane} className="mr-1" alt="" />Share Link

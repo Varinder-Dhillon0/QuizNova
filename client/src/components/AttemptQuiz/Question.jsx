@@ -78,9 +78,8 @@ export default function Question() {
                 <NavigationBtns />
             </div>
 
-            <div className="bg-[#d4d4d4] rounded-xl h-[400px] w-[50%]">
-                {/* Photo container */}
-            </div>
+            {/* <div className="bg-[#d4d4d4] rounded-xl h-[400px] w-[50%]">
+            </div> */}
         </div>
     )
 }

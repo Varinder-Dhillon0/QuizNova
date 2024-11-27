@@ -33,14 +33,14 @@ export default function QuizResponses() {
     })
 
     const { data: results, isLoading: isResultLoading, refetch: refetchResult } = useQuery({
-        queryKey: [`${quizId}` ,quizId],
+        queryKey: [`${quizId}Result` ,quizId],
         queryFn: async () => {
             try {
                 const serverResponse = await axios.post(`http://localhost:5000/response/results`, {
                     quizId: quizId
                 });
                 console.log("server response : ", serverResponse.data.results)
-                return serverResponse.data.results;
+                return serverResponse.data.results || [];
             } catch (err) {
                 console.log("error finding result ", err);
             }

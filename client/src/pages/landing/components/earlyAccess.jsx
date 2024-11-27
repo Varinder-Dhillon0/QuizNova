@@ -109,7 +109,7 @@ const EarlyAccess = () => {
                             animate={{
                                 x: [0, "-100%"],
                                 transition: {
-                                    duration: 100,
+                                    duration: 10,
                                     repeat: Infinity,
                                     ease: "linear",
                                     repeatType: "loop"
