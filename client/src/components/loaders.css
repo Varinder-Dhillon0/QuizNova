@@ -1,0 +1,27 @@
+/* HTML: <div class="loader"></div> */
+.apploader {
+    width: 28px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #caef45;
+    animation: l2 1.2s infinite;
+}
+@keyframes l2 {
+    0%,
+    100% {
+        transform: translate(-60px);
+        box-shadow: 0 0 #52ee98, 0 0 #000;
+    }
+    40% {
+        transform: translate(60px);
+        box-shadow: -15px 0 #52ee98, -30px 0 #000;
+    }
+    50% {
+        transform: translate(60px);
+        box-shadow: 0 0 #52ee98, 0 0 #000;
+    }
+    90% {
+        transform: translate(-60px);
+        box-shadow: 15px 0 #52ee98, 30px 0 #000;
+    }
+}

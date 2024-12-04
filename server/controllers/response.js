@@ -78,7 +78,7 @@ const generate_result = async (req, res) => {
 
     const result = {
       quizId: quiz._id,
-      title : quiz.title,
+      title: quiz.title,
       responseId: response._id,
       userId: response.userId,
       firstname: user.firstname,
@@ -86,7 +86,7 @@ const generate_result = async (req, res) => {
       queResponses: [],
       grades: {},
       timeSpent: Math.floor((response.endedAt - response.createdAt) / 1000),
-      finishTime : response.endedAt
+      finishTime: response.endedAt,
     };
 
     quiz.questions.forEach((que) => {
@@ -150,7 +150,7 @@ const generate_result = async (req, res) => {
       }
 
       result.queResponses.push({
-        points : que.points,
+        points: que.points,
         queType: que.type,
         queId: que._id.toString(),
         userResId: queRes._id,
@@ -158,7 +158,7 @@ const generate_result = async (req, res) => {
         expectedAns: que.correct,
         userAns: queRes.correct,
         correct: isCorrect,
-        choices : que.choices
+        choices: que.choices,
       });
     });
 
@@ -220,7 +220,10 @@ const get_result = async (req, res) => {
   const { quizId, responseId } = req.body;
 
   try {
-    const result = await resultModel.findOne({ quizId: quizId , responseId : responseId});
+    const result = await resultModel.findOne({
+      quizId: quizId,
+      responseId: responseId,
+    });
     if (result) {
       res.json({ success: "result found", result });
     } else {
@@ -232,12 +235,11 @@ const get_result = async (req, res) => {
   }
 };
 
-
 module.exports = {
   create_response,
   get_response,
   update_response,
   get_results,
   generate_result,
-  get_result
+  get_result,
 };
