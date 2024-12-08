@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import NotSure from "../notsure";
 import seededShuffle from "../../../helpers/shuffle";
+import { useAuth } from "../../../hooks/useAuth";
 
 export default function MultipleChoice({ que, response, updateResponse }) {
 
     console.log("querandomized is : ", que.randomizedOptions)
 
+    const {user} = useAuth();
+
+    console.log("user random seed is : ", user.randomSeed)
+
     const [correct, setCorrect] = useState(response?.correct || []);
     const [choices] = useState(() => {
         if(!que.randomizedOptions) return que.choices;
-        return seededShuffle(que.choices, 21);
+        return seededShuffle(que.choices, user.randomSeed);
     });
 
 

@@ -1,9 +1,7 @@
 import { ClockCountdown, SealCheck, SquaresFour, Star, X } from "@phosphor-icons/react";
-import { useContext, memo } from "react";
+import { useContext } from "react";
 import { QuizContext } from ".";
 import QuizTimer from "./quizTimer";
-
-const MemoizedQuizTimer = memo(QuizTimer);
 
 export default function Navbar() {
     const { ques, previewMode , setQuesNav, setEndQuiz } = useContext(QuizContext);
@@ -19,7 +17,7 @@ export default function Navbar() {
                     </button>
                     <div className="flex items-center gap-1">
                         <ClockCountdown size={19} color="#747474" />
-                        <MemoizedQuizTimer key={10}/>
+                        <QuizTimer  key={10}/>
                     </div>
                 </div>
                 <div className="nav-right flex items-center gap-4">
