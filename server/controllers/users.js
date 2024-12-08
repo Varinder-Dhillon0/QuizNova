@@ -397,8 +397,8 @@ const google_login = async (req, res) => {
 
     console.log('Token Request Payload:', {
       code,
-      client_id: "254976336751-iaf4mta61chfn0nn8qbt5h4m68u1hlap.apps.googleusercontent.com",
-      client_secret: "GOCSPX-_08Q5XjFQ5XjFQ5XjFQ5XjFQ",
+      client_id: `${process.env.GOOGLE_CLIENT_ID}`,
+      client_secret: `${process.env.GOOGLE_CLIENT_SECRET}`,
       redirect_uri: `${process.env.API_BASE_URL}googlelogin`,
       grant_type: 'authorization_code',
     });
@@ -407,8 +407,8 @@ const google_login = async (req, res) => {
 
     const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
       code,
-      client_id: "254976336751-iaf4mta61chfn0nn8qbt5h4m68u1hlap.apps.googleusercontent.com",
-      client_secret: "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",
+      client_id: `${process.env.GOOGLE_CLIENT_ID}`,
+      client_secret: `${process.env.GOOGLE_CLIENT_SECRET}`,
       redirect_uri: `${process.env.API_BASE_URL}googlelogin`,
       grant_type: 'authorization_code',
     }).catch((err) => {
