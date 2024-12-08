@@ -405,7 +405,15 @@ const google_login = async (req, res) => {
     console.log("Authorization code:", code);
     console.log("Requested scopes:", decodedScope);
 
-
+    const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
+      code,
+      client_id: `${process.env.GOOGLE_CLIENT_ID}`,
+      client_secret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+      redirect_uri: `${process.env.API_BASE_URL}googlelogin`,
+      grant_type: 'authorization_code',
+    }).catch((err) => {
+      console.log("error while getting access token : ", err);
+    });
 
     const { access_token, id_token } = tokenResponse.data;
     console.log("Tokens received:", { access_token, id_token });
