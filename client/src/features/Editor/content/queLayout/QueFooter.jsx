@@ -6,7 +6,7 @@ export default function QueFooter({ values, updatePoints, updateRandomized }) {
 
     return (
         <motion.div className="mt-5 border-t-2 pt-5 pb-5 flex font-Satoshi-Bold">
-            <div className="flex flex-col text-[13px]  cursor-pointer" >
+            {updateRandomized && <div className="flex flex-col text-[13px] mr-7 cursor-pointer" >
                 <p>Option's Order</p>
                 <div onClick={() => updateRandomized(values.randomizedOptions == 1 ? 0 : 1) } className="flex mt-2 relative gap-14 bg-[#F3F3F3] p-[6px] pl-3 pr-3 rounded-sm items-center">
                     {values.randomizedOptions ? <> <p>Randomize order each time </p><ArrowsCounterClockwise size={15} weight="bold"/></>
@@ -14,8 +14,8 @@ export default function QueFooter({ values, updatePoints, updateRandomized }) {
                         </>}
                 </div>
 
-            </div>
-            <div className="flex flex-col text-[13px] ml-7">
+            </div>}
+            <div className="flex flex-col text-[13px]">
                 <p>Mark as point</p>
                 <div className="flex mt-2 bg-[#F3F3F3] p-[6px] pl-3 pr-3 rounded-sm items-center w-fit">
                     <input type="number" 

@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react"
-import { QuizContext } from "..";
-import { useContext } from "react";
 import NotSure from "../notsure";
+import seededShuffle from "../../../helpers/shuffle";
 
 export default function MultipleChoice({ que, response, updateResponse }) {
 
+    console.log("querandomized is : ", que.randomizedOptions)
+
     const [correct, setCorrect] = useState(response?.correct || []);
+    const [choices] = useState(() => {
+        if(!que.randomizedOptions) return que.choices;
+        return seededShuffle(que.choices, 21);
+    });
+
 
     const handleCorrect = (choice) => {
         if (correct.includes(choice.id)) {
@@ -16,6 +22,7 @@ export default function MultipleChoice({ que, response, updateResponse }) {
     }
 
     useEffect(() => {
+        console.log("correct is : ", correct)
         updateResponse({ queId: que._id, correct: correct, notsure: response?.notsure || 0 });
     }, [correct, setCorrect])
 
@@ -29,7 +36,7 @@ export default function MultipleChoice({ que, response, updateResponse }) {
                     Select the correct answer
                 </h1>
                 <div className="flex flex-col gap-3 h-52">
-                    {que.choices.map((choice, i) => {
+                    {choices.map((choice, i) => {
                         return <div key={choice._id} className="flex bg-[#fefefe] rounded-lg gap-3 cursor-pointer items-center px-4 py-3" onClick={() => handleCorrect(choice)}>
                             <label className="flex items-center cursor-pointer relative">
                                 <input type="checkbox" readOnly checked={correct.includes(choice.id)} className="peer h-5 w-5 cursor-pointer transition-all appearance-none border-[1.5px] border-gray-400 rounded-full checked:bg-[#6466E9] checked:border-[#6466E9]" id="check" />

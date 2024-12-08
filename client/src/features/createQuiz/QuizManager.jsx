@@ -18,8 +18,9 @@ import quizValidationSchema from "../../schemas/quiz";
 import { useNavigate, useParams } from "react-router-dom";
 import RenderFormikError from "../../components/renderFormikError"; // Updated import
 import { useCreateQuiz } from "./api/createQuiz";
+import { useUpdateQuiz } from "./api/updateQuiz";
 
-export default function QuizManager() {
+export default function QuizManager({edit, quiz}) {
 
     const { user } = useAuth();
     const imageInputRef = useRef(null);
@@ -29,25 +30,31 @@ export default function QuizManager() {
 
     const [thumbnailPreview, setThumbnailPreview] = useState('');
 
+    console.log(quiz, thumbnailPreview);
+
     const formik = useFormik({
         initialValues: {
-            quizThumbnail: "",
-            title: "",
-            desc: "",
-            timeLimit: 0,
-            category: [],
+            quizThumbnail: "" || quiz?.quizThumbnail,
+            title: quiz?.title || "",
+            desc: quiz?.desc || "",
+            timeLimit: quiz?.timeLimit || 0,
+            category: quiz?.category || [],
             settings: {
-                shuffleQues: false,
-                adaptiveQueBank: false,
-                shuffleOptions: false,
-                showQueAnswers: false,
+                shuffleQues: quiz?.settings?.shuffleQues || false,
+                adaptiveQueBank: quiz?.settings?.adaptiveQueBank || false,
+                shuffleOptions: quiz?.settings?.shuffleOptions || false,
+                showQueAnswers: quiz?.settings?.showQueAnswers || false,
             },
-            startTime: new Date().toISOString(),
-            lineantTime: 0,
+            startTime: new Date().toISOString() || quiz?.startTime,
+            lineantTime: quiz?.lineantTime > 0 ? quiz?.lineantTime : 0,
         },
         validationSchema: quizValidationSchema,
         onSubmit: (values) => {
-            createQuiz({values, user, workspaceId});
+            if(edit) {
+                updateQuiz({values, user, workspaceId, quizId: quiz._id});
+            } else {
+                createQuiz({values, user, workspaceId});
+            }
         },
     });
 
@@ -58,10 +65,21 @@ export default function QuizManager() {
         });
     }
 
+    const { mutate: updateQuiz, isPending: updatePending } = useUpdateQuiz({
+        onSuccess: (data) => {
+            if (data.success) {
+                window.history.back();
+            }
+        },
+        onError: (error) => {
+            console.log("An error occurred while updating the quiz:", error);
+        }
+    });
+
     const { mutate: createQuiz, isPending: createPending } = useCreateQuiz({
         onSuccess: (data) => {
             if (data.success) {
-                navigate("/admin/dashboard")
+                window.history.back();
             }
         },
         onError: (error) => {
@@ -97,9 +115,9 @@ export default function QuizManager() {
 
                 {/* Navbar for the quiz maker */}
                 <div className="flex z-50 justify-between sticky top-0 p-3 pl-7 pr-7 font-Satoshi-Bold border-b-2 items-center bg-white text-sm">
-                    <button className="p-1 rounded-md bg-[#f3f3f3]" onClick={() => navigate("/admin/dashboard")}><img src={cross} alt="" /></button>
+                    <button className="p-1 rounded-md bg-[#f3f3f3]" onClick={() => window.history.back()}><img src={cross} alt="" /></button>
                     <h1 className="text-md font-Satoshi-Black">Create New Quiz</h1>
-                    <button type="submit" className="bg-[#5a4bea] text-white font-Satoshi-Bold p-[6px] pr-3 pl-3 text-sm rounded-md" onClick={formik.handleSubmit}>{createPending ? "Loading" : "Continue"}</button>
+                    <button type="submit" className="bg-[#5a4bea] text-white font-Satoshi-Bold p-[6px] pr-3 pl-3 text-sm rounded-md" onClick={formik.handleSubmit}>{createPending || updatePending ? "Loading" : "Continue"}</button>
                 </div>
 
                 {/* content div for quiz */}
@@ -114,20 +132,18 @@ export default function QuizManager() {
 
                                 {/* displays image which is selected */}
                                 <div
-                                    className={`w-[100%] relative z-50 h-40 mb-5 rounded-tl-xl rounded-tr-xl ${thumbnailPreview
+                                    className={`w-[100%] relative z-50 h-40 mb-5 rounded-tl-xl rounded-tr-xl ${thumbnailPreview || quiz?.quizThumbnail
                                         ? ""
                                         : "bg-[#28a0dc]"
                                         } bg-cover bg-center`}
                                     style={{
-                                        backgroundImage: thumbnailPreview
-                                            ? `url('${thumbnailPreview}')`
-                                            : "none"
+                                        backgroundImage: `url('${thumbnailPreview ? thumbnailPreview : `http://localhost:5000/uploads/${user.email}/${workspaceId}/${quiz?.quizThumbnail}`}')`
                                     }}
                                 >
-                                    <input type="file" name="quizthumbnail" ref={imageInputRef} onChange={(e) => handleImageUpload(e)} hidden />
+                                    <input type="file" accept="image/*" name="quizthumbnail" ref={imageInputRef} onChange={(e) => handleImageUpload(e)} hidden />
                                     <button onClick={() => imageInputRef.current.click()} className="font-Satoshi-Bold p-1 rounded-md text-xs bg-white pr-1 pl-1 flex items-center gap-1 absolute bottom-3 right-3"><Images size={16} /> Add Thumbnail</button>
                                 </div>
-                                <RenderFormikError field="quizThumbnail" formik={formik} /> {/* Updated usage */}
+                                <RenderFormikError field="quizThumbnail" formik={formik} />
 
                                 {/* captures other details of quiz */}
                                 <input
@@ -137,7 +153,7 @@ export default function QuizManager() {
                                     placeholder="Title of this Quiz?"
                                     {...formik.getFieldProps("title")}
                                 />
-                                <RenderFormikError field="title" formik={formik} /> {/* Updated usage */}
+                                <RenderFormikError field="title" formik={formik} />
 
 
                                 {/* categories */}
@@ -154,14 +170,14 @@ export default function QuizManager() {
                                     </div>
 
                                 </div>
-                                <RenderFormikError field="category" formik={formik} /> {/* Updated usage */}
+                                <RenderFormikError field="category" formik={formik} />
 
 
                                 <div className="text-base h-11 items-center font-Silka-Bold flex justify-normal text-[#5f5f5f]">
                                     <p className="mr-2 w-[30%]">Expected Duration</p>
-                                    <QuizTime updateTimeLimit={(value) => formik.setFieldValue("timeLimit", value)} />
+                                    <QuizTime value={formik.values.timeLimit} updateTimeLimit={(value) => formik.setFieldValue("timeLimit", value)} />
                                 </div>
-                                <RenderFormikError field="timeLimit" formik={formik} /> {/* Updated usage */}
+                                <RenderFormikError field="timeLimit" formik={formik} />
 
 
                                 <div className="text-base items-center h-11 relative font-Silka-Bold flex justify-normal text-[#5f5f5f]">
@@ -188,13 +204,13 @@ export default function QuizManager() {
                                         }}
                                     />
                                 </div>
-                                <RenderFormikError field="startTime" formik={formik} /> {/* Updated usage */}
+                                <RenderFormikError field="startTime" formik={formik} />
 
                                 <div className="text-base items-center font-Silka-Bold flex justify-normal text-[#5f5f5f]">
                                     <p className="mr-2 w-[30%]">Start till</p>
-                                    <QuizTime updateTimeLimit={(value) => formik.setFieldValue("lineantTime", value)} />
+                                    <QuizTime value={formik.values.lineantTime} updateTimeLimit={(value) => formik.setFieldValue("lineantTime", value)} />
                                 </div>
-                                <RenderFormikError field="lineantTime" formik={formik} /> {/* Updated usage */}
+                                <RenderFormikError field="lineantTime" formik={formik} />
 
 
                                 {/* textarea for capturing description */}
@@ -202,7 +218,7 @@ export default function QuizManager() {
                                     <textarea {...formik.getFieldProps("desc")} onChange={(e) => { formik.handleChange(e); handleTextboxSize(e, 40) }} type="text" className="w-full pb-5 border-b-2 resize-none  overflow-hidden font-Satoshi-Medium text-md !leading-6 outline-none rounded-sm" placeholder="Type description here..." />
                                     <p className="absolute right-0 bottom-[-10] font-Satoshi-Bold text-xs text-gray-700"><span className={`${formik.values.desc.length > 400 && "text-red-500"}`}>{formik.values.desc.length}</span> / 400</p>
                                 </div>
-                                <RenderFormikError field="desc" formik={formik} /> {/* Updated usage */}
+                                <RenderFormikError field="desc" formik={formik} />
 
                             </div>
                         </motion.div>

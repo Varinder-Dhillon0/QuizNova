@@ -4,6 +4,7 @@ const { userModel } = require("../schema/users");
 const UserVerificationModel = require("../schema/userVerification");
 const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
+const axios = require('axios');
 
 const ACCESS_URL = "http://localhost:5173";
 
@@ -22,8 +23,8 @@ transporter.verify((error, success) => {
   }
 });
 
-const generate_jwt = (name, email) => {
-  const token = jwt.sign({ name, email }, "wnrikwebffhiu", {
+const generate_jwt = (profile_pic = "", name, email, randomSeed) => {
+  const token = jwt.sign({ profile_pic, name, email, randomSeed }, "wnrikwebffhiu", {
     expiresIn: "1d",
     algorithm: "HS256",
   });
@@ -306,6 +307,9 @@ const register_user = async (req, res) => {
     if (userExists.verified) {
       res.json({ warning: "user is already registered" });
       return;
+    }else if(userExists.password === ""){
+      res.json({ warning: "login with google" });
+      return;
     } else {
       res.json({ warning: "check you email for verification" });
       return;
@@ -346,6 +350,12 @@ const login_user = async (req, res) => {
 
   try {
     if (user) {
+
+      if(user.password === ""){
+        res.json({ warning: "login with google" });
+        return;
+      }
+
       if (!user.verified) {
         res.json({ warning: "check you email for verification" });
         return;
@@ -354,7 +364,7 @@ const login_user = async (req, res) => {
       const verifiedPass = await bcrypt.compare(password, user.password);
 
       if (verifiedPass) {
-        const jwt_token = generate_jwt(user.firstname, email);
+        const jwt_token = generate_jwt(user.firstname, email, user.randomSeed);
 
         const expireDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
@@ -380,4 +390,80 @@ const login_user = async (req, res) => {
   }
 };
 
-module.exports = { register_user, login_user, validate_user, verify_user };
+const google_login = async (req, res) => {
+  try {
+    const { code, scope } = req.query;
+    const decodedScope = decodeURIComponent(scope);
+
+    console.log('Token Request Payload:', {
+      code,
+      client_id: "254976336751-iaf4mta61chfn0nn8qbt5h4m68u1hlap.apps.googleusercontent.com",
+      client_secret: "GOCSPX-_08Q5XjFQ5XjFQ5XjFQ5XjFQ",
+      redirect_uri: `${process.env.API_BASE_URL}googlelogin`,
+      grant_type: 'authorization_code',
+    });
+    console.log("Authorization code:", code);
+    console.log("Requested scopes:", decodedScope);
+
+    const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
+      code,
+      client_id: "254976336751-iaf4mta61chfn0nn8qbt5h4m68u1hlap.apps.googleusercontent.com",
+      client_secret: "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",
+      redirect_uri: `${process.env.API_BASE_URL}googlelogin`,
+      grant_type: 'authorization_code',
+    }).catch((err) => {
+      console.log("error while getting access token : ", err);
+    });
+
+    const { access_token, id_token } = tokenResponse.data;
+    console.log("Tokens received:", { access_token, id_token });
+
+    // Get user information using the access token
+    const userInfoResponse = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    }).catch((err) => {
+      console.log("error while getting user info : ", err);
+    });
+
+    const userInfo = userInfoResponse.data;
+
+    const user = await userModel.findOne({ email: userInfo.email });
+
+    if(!user){
+      const time = new Date();
+
+      const randomSeed = Math.floor(1000 + Math.random() * 9000);
+  
+      const user = new userModel({
+        profile_pic: userInfo.picture,
+        firstname: userInfo.given_name,
+        lastname: userInfo.family_name,
+        email: userInfo.email,
+        password: "",
+        registered_at: time,
+        verified: true,
+        randomSeed : randomSeed
+      });
+  
+      await user.save();
+    }
+
+    const jwt_token = generate_jwt(userInfo.picture , userInfo.given_name, userInfo.email, user.randomSeed);
+
+    const expireDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    res.cookie("token", jwt_token, {
+      expires: expireDate,
+      httpOnly: false,
+    });
+
+    res.redirect(`${ACCESS_URL}`);
+
+  } catch (err) {
+    console.log("Error during Google OAuth:", err);
+    res.redirect(`${ACCESS_URL}?login=failed`);
+  }
+};
+
+module.exports = { register_user, login_user, validate_user, verify_user, google_login };

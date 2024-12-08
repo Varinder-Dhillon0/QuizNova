@@ -13,7 +13,7 @@ export default function QuizTimer() {
             intervalId = setInterval(() => {
                 const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
                 const remainingTime = Math.max(0, timer.time - elapsedSeconds);
-
+                
                 setTimer(prevTimer => ({
                     ...prevTimer,
                     time: remainingTime

@@ -1,21 +1,9 @@
 import { useEffect, useState } from "react"
-import { QuizContext } from "..";
-import { useContext } from "react";
 import NotSure from "../notsure";
 
 export default function MultipleChoice({ que, response, updateResponse }) {
 
-    console.log(response)
-
     const [correct, setCorrect] = useState(response?.correct || []);
-
-    const handleCorrect = (choice) => {
-        if (correct.includes(choice.id)) {
-            setCorrect(correct.filter((prev) => prev !== choice.id))
-        } else {
-            setCorrect([...correct, choice.id]);
-        }
-    }
 
     useEffect(() => {
         updateResponse({ queId: que._id, correct: correct, notsure: response?.notsure || 0 });

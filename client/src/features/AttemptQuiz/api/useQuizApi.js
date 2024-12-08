@@ -24,10 +24,11 @@ export const useFetchQuiz = (quizId, userEmail, onSuccess, onError) => {
     });
 };
 
-export const useUpdateServerResponse = (onError) => {
+export const useUpdateServerResponse = () => {
     return useMutation({
         mutationFn: async ({ updated, responseId }) => {
             try {
+                console.log("updating response is : ", updated)
                 await axios.post(`${API_BASE_URL}/response/update`, {
                     responseId,
                     updated: { ...updated }

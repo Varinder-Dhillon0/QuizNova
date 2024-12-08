@@ -20,8 +20,6 @@ export default function Matching({ que, index }) {
             <Formik initialValues={{ ...que }} >
                 {(formik) => {
 
-
-
                     useEffect(() => {
                         console.log("values t", formik.values);
                         const timer = setTimeout(() => {
@@ -33,7 +31,7 @@ export default function Matching({ que, index }) {
 
                     return (
                         <>
-                            <QueHeader form={{ ...formik.getFieldProps("type") }} index={index} />
+                            <QueHeader formik={formik} index={index}/>
                             <div className="flex pt-5 pb-2 items-center font-bold">
                                 <QuestionMark size={19} weight="fill" />
                                 <p className="ml-1 text-sm">Question {index + 1}</p>
@@ -62,18 +60,18 @@ export default function Matching({ que, index }) {
                                             <Info size={18} />
                                             options to match will automatically shuffle for each participant
                                         </p>
-                                        <motion.button
+                                        <button
                                             layout
                                             type="button"
                                             onClick={() => { push({ id: Date.now(), field: "", match: "" }) }}
                                             className="border-dashed rounded-md border-[2px] font-Satoshi-Bold border-[#D7D9DB] text-xs mt-5 pr-4 pl-4 w-fit p-2 flex justify-center"
                                         >
                                             + Add Match Option
-                                        </motion.button>
+                                        </button>
                                     </>
                                 )}
                             </FieldArray>
-                            <QueFooter values={{ points: formik.values.points, randomizedOptions: formik.values.randomizedOptions }} updatePoints={(value) => formik.setFieldValue("points", value || 0)} updateRandomized={(value) => formik.setFieldValue("randomizedOptions", value)} />
+                            <QueFooter values={{ points: formik.values.points, randomizedOptions: formik.values.randomizedOptions }} updatePoints={(value) => formik.setFieldValue("points", value || 0)} />
                         </>
                     )
                 }}

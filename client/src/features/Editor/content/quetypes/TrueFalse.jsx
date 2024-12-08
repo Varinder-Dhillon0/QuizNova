@@ -25,7 +25,7 @@ export default function TrueFalse({ que, index }) {
 
                     return (
                         <>
-                            <QueHeader form={{...formik.getFieldProps("type")}} index={index}/>
+                            <QueHeader formik={formik} index={index}/>
                             <div className="flex pt-5 pb-2 items-center font-bold">
                                 <QuestionMark size={19} weight="fill"/>
                                 <p className="ml-1 text-sm">Question {index + 1}</p>
@@ -40,7 +40,7 @@ export default function TrueFalse({ que, index }) {
                                 <button className={`${formik.values.correct.includes("1") && "bg-[#fde9f7] !border-[#cc8cb9]"} rounded-md border-2 border-transparent bg-[#f3f3f3] w-fit p-2`} onClick={() => {formik.setFieldValue("correct", ["1"] ) }}>True</button>
                                 <button className={`${formik.values.correct.includes("2") && "bg-[#fde9f7] !border-[#cc8cb9]"} rounded-md border-2 border-transparent bg-[#f3f3f3] w-fit p-2`} onClick={() => {formik.setFieldValue("correct", ["2"] )}}>False</button>
                             </div>
-                            <QueFooter values={{points : formik.values.points, randomizedOptions : formik.values.randomizedOptions}} updatePoints={(value) => formik.setFieldValue("points" , value || 0)} updateRandomized={(value) => formik.setFieldValue("randomizedOptions" , value)}/>
+                            <QueFooter values={{points : formik.values.points, randomizedOptions : formik.values.randomizedOptions}} updatePoints={(value) => formik.setFieldValue("points" , value || 0)}/>
                         </>
                     )
                 }}

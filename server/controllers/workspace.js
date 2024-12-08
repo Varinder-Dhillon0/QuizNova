@@ -7,7 +7,7 @@ const create_workspace = async(req,res) => {
         const workspace = new workspaceModel({creator : creator,title : title , created_at : new Date()});
         await workspace.save();
 
-        res.json({success : "workspace created successfully"});
+        res.json({success : "workspace created successfully", id : workspace._id});
     }catch(err){
         console.log("error while creating workspace" + err);
         res.json({error : "internal server error"})

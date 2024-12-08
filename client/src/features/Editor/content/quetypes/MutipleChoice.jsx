@@ -32,7 +32,7 @@ export default function MultipleChoice({ que, index }) {
 
                     return (
                         <Form>
-                            <QueHeader form={formik.getFieldProps("type")} index={index}/>
+                            <QueHeader formik={formik} index={index}/>
                             <div className="flex pt-5 pb-2 items-center font-bold">
                                 <QuestionMark size={19} weight="fill" />
                                 <p className="ml-1 text-sm">Question {index + 1}</p>
@@ -41,9 +41,6 @@ export default function MultipleChoice({ que, index }) {
 
                             <div className="flex pt-3 text-sm">
                                 <p className="border-r-[2.5px] pr-2 font-Satoshi-Bold mr-4">Choices *</p>
-                                <div>
-                                    <p>Multiple answers</p>
-                                </div>
                             </div>
                             <FieldArray name="choices">
                                 {({ remove, push }) => (
@@ -63,14 +60,13 @@ export default function MultipleChoice({ que, index }) {
                                                     ))}
                                                 </RearrangeableGroup>
                                         </div>
-                                        <motion.button
-                                            layout
+                                        <button
                                             type="button"
                                             onClick={() => push({ id: Date.now(), text: "" })}
                                             className="border-dashed rounded-md border-[2px] font-Satoshi-Bold border-[#D7D9DB] text-xs ml-10 pr-4 pl-4 w-fit p-2 flex justify-center"
                                         >
                                             + Add Choice
-                                        </motion.button>
+                                        </button>
                                     </>
                                 )}
                             </FieldArray>

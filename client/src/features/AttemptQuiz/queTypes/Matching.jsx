@@ -5,6 +5,7 @@ import seededShuffle from "../../../helpers/shuffle";
 
 export default function Matching({ que, response, updateResponse }) {
 
+
     const [correct, setCorrect] = useState(() => {
         const responseMap = new Map(
             (response.correct || []).map(item => [item.id, item])
@@ -17,10 +18,8 @@ export default function Matching({ que, response, updateResponse }) {
             };
         });
 
-        return seededShuffle(initialItems, 189);
+        return seededShuffle(initialItems, 10);
     });
-
-    console.log("matching que : ", que)
 
     useEffect(() => {
         updateResponse({ queId: que._id, correct: correct, notsure: response?.notsure || 0 });
@@ -42,7 +41,7 @@ export default function Matching({ que, response, updateResponse }) {
                             return <div key={correct[i]?.id} className="w-full gap-3 mb-4 flex items-center font-Satoshi-Bold text-md">
                                 {console.log(correct, i)}
                                 <h1 className="w-6 py-auto">{i + 1}.</h1>
-                                <div className="bg-[#fefefe] rounded-lg w-1/2 outline-none px-3 py-1">
+                                <div className="bg-[#fefefe] h-[1.87rem] rounded-lg w-1/2 outline-none px-3 py-1">
                                     <h1>
                                         {matchField.field}
                                     </h1>

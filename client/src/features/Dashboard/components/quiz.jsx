@@ -4,10 +4,12 @@ import DropdownMenu from "../../../components/dropdownMenu";
 import HamburgerLink from "../../../components/hamburgerLink";
 import { useNavigate } from "react-router-dom";
 import { useDeleteQuiz } from "../api/useDeleteQuiz";
+import { useAuth } from "../../../hooks/useAuth";
 
 export default function Quiz({ quiz, selectedworkspace, getQuizzes }) {
     const [dropdown, showDropdown] = useState(false);
     const navigate = useNavigate();
+    const {user} = useAuth();
 
     const { mutate: deleteQuiz } = useDeleteQuiz({
         onSuccess: (data) => {
@@ -27,7 +29,7 @@ export default function Quiz({ quiz, selectedworkspace, getQuizzes }) {
                 {quiz.quizThumbnail && (
                     <img
                         className="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
-                        src={`http://localhost:5000/uploads/${quiz.quizThumbnail}`}
+                        src={`http://localhost:5000/uploads/${user.email}/${selectedworkspace.id}/${quiz.quizThumbnail}`}
                         alt="Quiz Thumbnail"
                     />
                 )}
@@ -82,7 +84,7 @@ export default function Quiz({ quiz, selectedworkspace, getQuizzes }) {
                             <div className="text-black gap-2 flex">
                                 {dropdown && (
                                     <DropdownMenu dropdown={dropdown} setDropdown={showDropdown}>
-                                        <HamburgerLink icon={<Pencil size={18} />} title="Edit" action={() => { }} />
+                                        {/* <HamburgerLink icon={<Pencil size={18} />} title="Edit" action={() => {  }} /> */}
                                         <HamburgerLink icon={<Trash size={18} color="#ff0000" />} title="Delete" action={() => deleteQuiz(quiz._id)} />
                                     </DropdownMenu>
                                 )}

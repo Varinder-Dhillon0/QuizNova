@@ -14,7 +14,7 @@ export default function Sidebar() {
     const { mutate: createWorkspace } = useCreateWorkspace({
         onSuccess: (data) => {
             if (data.success) {
-                setselectedWorkspace({ id: selectedworkspace.id, title: "Untitled Workspace" });
+                setselectedWorkspace({ id: data.id, title: "Untitled Workspace" });
                 refetchWorkspaces();
             } else if (data.warning) {
                 console.log("warning", data.warning);
@@ -27,20 +27,14 @@ export default function Sidebar() {
         }
     });
 
-    const { data, isLoading, refetch: refetchWorkspaces } = useGetWorkspaces(user.email, {
-        onSuccess: (res) => {
-            const totalWorkspaces = res.workspaces.length;
-            if (totalWorkspaces > 0) {
-                setselectedWorkspace({ id: res.workspaces[0]._id, title: res.workspaces[0].title });
-            }
-        },
-        refetchOnWindowFocus: false
-    });
+    const { data, isLoading, refetch: refetchWorkspaces } = useGetWorkspaces(user.email);
 
     return (
         <div className="no-scrollbar sticky z-50 top-2">
             <div className="flex justify-between border-b-2 p-4 w-full">
-                <p className="ml-1">QuizNova</p>
+                <p className="ml-1 font-Satoshi-Black flex items-center gap-2">
+                    QuizNova
+                </p>
                 <User />
             </div>
             <div className="p-4">

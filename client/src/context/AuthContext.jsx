@@ -10,7 +10,7 @@ export default function AuthProvider({children}){
 
     const Toast = useToast();
     const [loggedin , setLoggedin] = useState(false);
-    const [user , setUser] = useState({name : "" , email : ""});
+    const [user , setUser] = useState({name : "" , email : "" , profile_pic : "" , randomSeed : 0});
     const [loading, setLoading] = useState(true);
 
     const {mutate : authenticateMutation} = useMutation({
@@ -20,7 +20,7 @@ export default function AuthProvider({children}){
         },
         onSuccess : (data) => {
             if(data.success){
-                setUser({name : data.name , email : data.email});
+                setUser({name : data.name , email : data.email , profile_pic : data.profile_pic, randomSeed : data.randomSeed});
                 setLoggedin(true);  
                 console.log(data.success);
             }
@@ -48,7 +48,7 @@ export default function AuthProvider({children}){
     const logout = () =>{
         Cookies.remove("token");
         setLoggedin(false);
-        setUser({name : "" , email : ""});
+        setUser({name : "" , email : "" , profile_pic : "" , randomSeed : 0});
         Toast(2 , "Logged out!" , 3000);
     }
 

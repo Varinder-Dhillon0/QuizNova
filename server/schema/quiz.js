@@ -9,9 +9,9 @@ const quizSchema = new mongoose.Schema({
     published : {type : Number,default : 0},
     settings : {
         shuffleQues : Boolean,
-        passMarks : Number,
-        pickQuesRandom : Boolean,
-        showAnswer : Boolean
+        adaptiveQueBank : Boolean,
+        shuffleOptions : Boolean,
+        showQueAnswers : Boolean
     },
     created_at : Date,
     workspace : String,
@@ -19,6 +19,7 @@ const quizSchema = new mongoose.Schema({
     startTime : Date,
     lineantTime : Number,
     questions : [{
+        imageUrl : String,
         type : {type : Number},
         que : {type : String},
         choices : [{id : Number , text : String}],
@@ -26,7 +27,8 @@ const quizSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.Mixed,
         },
         points : {type : Number,default : 1},
-        randomizedOptions : {type : Number , default : 0}
+        randomizedOptions : {type : Number , default : 0},
+        required : {type : Boolean, default : true }
     }]
 })
 

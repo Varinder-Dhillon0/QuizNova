@@ -1,43 +1,48 @@
 import { useQues } from "../../../hooks/useQues";
-import multiCorrect from "../../../assets/img/multiple_correct.svg"
 import { motion } from "framer-motion";
 import RenderQueType from "../../../components/renderQueType";
-import { scrolltoQue } from "../sidebar";
-import { useState } from "react";
 
 export const QueTypes = [
     //MultipleChoice
     {
+        imageUrl : "",
         type: 1,
         que: "",
         choices: [{ id: Date.now(), text: "" }],
         correct: [],
         points : 1,
-        randomizedOptions : 0
+        randomizedOptions : 0,
+        required : true
     },
     //Fill in the Blanks
     {
+        imageUrl : "",
         type: 2,
         que: "",
         correct: [{ id: Date.now(), text: "" }],
         points : 1,
-        randomizedOptions : 0
+        randomizedOptions : 0,
+        required : true
     },
     // True / false
     {
+        imageUrl : "",
         type: 3,
         que: "",
         correct: ["1"],
         points : 1,
-        randomizedOptions : 0
+        randomizedOptions : 0,
+        required : true
     },
     //Matching
     {
+        imageUrl : "",
         type: 4,
         que: "",
         correct: [{ id: Date.now(), field: "", match: "" }],
         points : 1,
-        randomizedOptions : 0
+        randomizedOptions : 0,
+        required : true
     }]
 
 export default function SelectQueBar({ setShowTypes, position , actionType, index}) {

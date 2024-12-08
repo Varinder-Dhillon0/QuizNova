@@ -12,8 +12,10 @@ export default function User() {
 
     return (
         <div className="relative">
-            <button className="bg-blue-400 text-white h-7 w-7 text-sm rounded-full" onClick={() => setMenu(!menu)}>
-                {user.name.charAt(0)}
+            <button className={`text-white h-7 flex items-center justify-center w-7 text-sm rounded-full`} onClick={() => setMenu(!menu)}>
+                {user.profile_pic ? 
+                <img src={user.profile_pic} referrerPolicy="no-referrer" alt="Profile" className="w-full h-full object-cover rounded-full" /> : 
+                user.name.charAt(0)}
             </button>
             <AnimatePresence>
                 {menu &&

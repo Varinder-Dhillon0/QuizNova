@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowsClockwise, CaretDown, ShuffleSimple } from "@phosphor-icons/react";
+import { ArrowLeft, ArrowsClockwise, CaretDown, Eye, ShuffleSimple } from "@phosphor-icons/react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Shuffle } from "@phosphor-icons/react";
@@ -53,14 +53,13 @@ export default function QuizOptions({ settings, updateSetting }) {
                                 <div className="border p-3 border-1 mt-4 border-gray-300 rounded-xl flex gap-4 w-full items-start justify-between">
 
                                     <div className="flex items-start gap-3 w-[85%]">
-                                        <Shuffle weight="bold" size={29} />
+                                        <Shuffle weight="bold" size={21} />
                                         <div>
                                             <h1 className="font-Satoshi-Bold text-[14.5px] leading-none">
                                                 Shuffle Questions
                                             </h1>
                                             <p className="font-Satoshi-Medium text-[12px]/snug pt-1 text-gray-600">
-                                                Let the system randomly select a defined amount
-                                                of questions from your question pool
+                                                Let the system randomize the order of questions for each learner
                                             </p>
                                         </div>
                                     </div>
@@ -112,7 +111,7 @@ export default function QuizOptions({ settings, updateSetting }) {
                                 <div className="border p-3 border-1 mt-4 border-gray-300 rounded-xl flex gap-4 w-full items-start justify-between">
 
                                     <div className="flex items-start gap-3 w-[85%]">
-                                        <ArrowsClockwise weight="bold" size={24.5} />
+                                        <Eye weight="bold" size={20} />
 
                                         <div>
                                         <h1 className="font-Satoshi-Bold text-[14.5px] leading-none">

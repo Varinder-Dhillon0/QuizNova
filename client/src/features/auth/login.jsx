@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import RightBanner from "./components/rightBanner";
 import { loginValidationSchema } from "../../schemas/auth";
 import Input from "./components/input";
 import { useLogin } from "./api/login";
+import SimpleLoader from "../../components/loaders/simpleLoader";
+import GoogleLogin from "./googleLogin";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -57,46 +59,56 @@ export default function Login() {
                         <h1 className="text-white font-Satoshi-Bold text-3xl mb-6">
                             Welcome back
                         </h1>
-                        <button className="text-white font-sans text-md border border-[#caef45] rounded-full px-40 py-4 mb-4">
-                            SIGN IN VIA GOOGLE
-                        </button>
-                        <h1 className="font-Satoshi-Regular text-white w-full mb-4">
+                        <GoogleLogin label="Sign In with Google" isPending={isPending} />
+                       
+						<h1 className=" text-white w-full mb-4">
                             <span className="text-[#646464]">
-                                ---------------------------------{" "}
+                                ------------------------------------{" "}
                             </span>
-                            <span className="font-Satoshi-Medium">OR</span> 
+                            <span className="font-Satoshi-Medium">OR</span>
                             <span className="text-[#646464]">
                                 {" "}
-                                ---------------------------------
+                                ------------------------------------
                             </span>
                         </h1>
 
-                        <div className="flex flex-col gap-4 w-full mb-4">
-                            <Input name={"email"} type="email" placeholder="E-mail address*" formik={formik} />
-                            <Input name={"password"} type="password" placeholder="Password*" formik={formik} />
+                        <div className="flex flex-col gap-4 w-full mb-4" >
+                            <Input
+                                disabled={isPending}
+                                readOnly={isPending}
+                                name={"email"}
+                                type="email"
+                                placeholder="E-mail address*"
+                                formik={formik}
+                            />
+                            <Input
+                                disabled={isPending}
+                                readOnly={isPending}
+                                name={"password"}
+                                type="password"
+                                placeholder="Password*"
+                                formik={formik}
+                            />
                         </div>
 
                         <button
                             type="submit"
-                            className="text-black font-Satoshi-Bold text-md rounded-full bg-[#caef45] px-52 py-4 mb-4"
+                            className="text-black disabled:cursor-not-allowed font-Satoshi-Bold text-md rounded-full w-full flex justify-center items-center bg-[#caef45] px-52 h-12 mb-4"
                             disabled={isPending}
                         >
-                            {isPending ? "Loading" : "SIGN IN"}
+                            {isPending ? <SimpleLoader /> : "SIGN IN"}
                         </button>
 
                         <h1 className="text-white mb-2">
                             Don't have an account?
-                            <Link
-                                to="/register"
-                                className="text-[#caef45] ml-1"
-                            >
-                                Register
-                            </Link>
+                            {isPending ? (
+                                <span className="text-[#caef45] ml-1 cursor-not-allowed">Register</span>
+                            ) : (
+                                <Link to="/register" className="text-[#caef45] ml-1">
+                                    Register
+                                </Link>
+                            )}
                         </h1>
-
-                        <a href="#" className="text-[#caef45]">
-                            Forgot Password?
-                        </a>
                     </form>
                 </div>
             </div>

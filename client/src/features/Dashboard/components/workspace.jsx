@@ -28,7 +28,8 @@ export default function Workspace({ id, title, i , refetchWorkspaces,selectedwor
                 id : id,
                 ...values
             })
-            setselectedWorkspace({id : res.data.update._id , title : res.data.update.title})
+            console.log(res.data);
+            setselectedWorkspace({id : res.data.update.id , title : res.data.update.title})
             return res.data;
         },
         onError : (err) =>{

@@ -1,6 +1,6 @@
 import paperplane from "../../assets/img/paper-plane-right.svg"
 import User from "../../components/user";
-import { ArrowLeft, CloudArrowUp, CloudCheck, PaperPlaneRight, Play } from "@phosphor-icons/react"
+import { ArrowLeft, CloudArrowUp, CloudCheck, Gear, PaperPlaneRight, Play } from "@phosphor-icons/react"
 import { useQues } from "../../hooks/useQues";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -9,8 +9,9 @@ import { useState } from "react";
 import Popup from "../../components/popup";
 import ShareLink from "./ShareLink";
 import { AnimatePresence } from "framer-motion";
+import QuizManager from "../createQuiz/QuizManager";
 
-export default function Navbar() {
+export default function Navbar({setEditQuizSettings}) {
 
     const { quiz, setQuiz, setQues, updatingQuiz, updateQuiz } = useQues();
     const [sharePopup, setSharePopup] = useState(false);
@@ -42,14 +43,17 @@ export default function Navbar() {
                 </div>
                 <div className="flex text-[13px] gap-4 justify-between items-center ">
                     <User />
-                    <button 
+                    <button className="p-1 rounded-md border-2" onClick={() => {setEditQuizSettings(true)}}>
+                        <Gear size={20} />
+                    </button>
+                    <button
                         className="flex items-center justify-center gap-2 py-2 font-Satoshi-Bold leading-none border-2 pl-2 pr-2 rounded-lg"
                         onClick={() => window.open(`/preview/${quizId}`, '_blank')}
                     >
-                        <Play size={14} weight="bold"/>Preview
+                        <Play size={14} weight="bold" />Preview
                     </button>
                     {quiz?.published ?
-                        <button className="flex items-center justify-center bg-black text-white gap-1 py-2 font-Satoshi-Bold leading-none border-2 pl-2 pr-2 rounded-lg " onClick={() => {setSharePopup(true)}}>
+                        <button className="flex items-center justify-center bg-black text-white gap-1 py-2 font-Satoshi-Bold leading-none border-2 pl-2 pr-2 rounded-lg " onClick={() => { setSharePopup(true) }}>
                             <PaperPlaneRight weight="bold" size={14} />Share Link
                         </button>
                         :
@@ -65,6 +69,7 @@ export default function Navbar() {
                     </Popup>
                 }
             </AnimatePresence>
+            
         </>
     )
 }

@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { useQues } from "../../hooks/useQues";
 import Backdrop from "../../components/backdrop";
 import RenderQueType from "../../components/renderQueType";
-import { Plus } from "@phosphor-icons/react";
+import { Plus, Trash } from "@phosphor-icons/react";
 import SelectQueBar from "./content/selectQueBar";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -51,7 +51,8 @@ export default function Sidebar() {
 export function SidebarItem({ q, i, selectedQue }) {
 
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.2   });
+  const { deleteQue } = useQues();
+  const isInView = useInView(ref, { threshold: 0.2 });
 
   useEffect(() => {
     if (!isInView && selectedQue == i + 1) {
@@ -59,10 +60,19 @@ export function SidebarItem({ q, i, selectedQue }) {
     }
   }, [selectedQue])
 
-  return <div ref={ref} key={i} className={`border-[#DDDDDD] border-2 p-2 rounded-lg cursor-pointer mb-4 ${(selectedQue == i) ? "bg-[#f2f1fd] !border-[#aea2e7]" : ""}`} onClick={() => { scrolltoQue(i) }}>
+  return <div ref={ref} key={i} className={`border-[#DDDDDD] border-2 p-2 rounded-lg cursor-pointer mb-4 ${(selectedQue == i) ? "bg-[#f2f1fd] !border-[#aea2e7]" : ""}`} onClick={() => { scrolltoQue(i); e.stopPropagation() }}>
     <div className="flex cursor-pointer items-center">
-      <p className="font-Silka-Bold text-sm bg-[#d6d8db] w-4 h-4 rounded-lg">{i + 1}.</p>
-      <h4 className="ml-2 text-sm">{q.que?.length > 18 ? q.que.substring(0, 18) + "..." : q.que.length == 0 ? "..." : q.que}</h4>
+      <p className="font-Silka-Bold text-sm bg-[#d6d8db] w-4 h-4 rounded-lg">
+        {i + 1}.
+      </p>
+
+      <h4 className="ml-2 text-sm">
+        {q.que?.length > 18 ? q.que.substring(0, 18) + "..." : q.que.length == 0 ? "..." : q.que}
+      </h4>
+
+      <button className="ml-auto" onClick={() => deleteQue(i)}>
+        <Trash size={16} weight="bold" />
+      </button>
     </div>
     <div className="flex bg-[#EBEBEB] p-[4px] mt-3 rounded-full text-xs items-center w-fit">
       <p className="text-xs pl-1 pr-1 flex items-center gap-1">

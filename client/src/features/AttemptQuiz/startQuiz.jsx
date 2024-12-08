@@ -75,7 +75,7 @@ export default function StartQuiz() {
                     <div className="h-full w-full p-10 rounded-lg flex items-center justify-between flex-col bg-white">
                         <div className="w-full">
                             <div className="w-full h-[140px] rounded-t-xl overflow-hidden  bg-black">
-                                <img src={`http://localhost:5000/uploads/${quiz.quizThumbnail}`}
+                                <img src={`http://localhost:5000/uploads/${user.email}/${quiz.workspace}/${quiz.quizThumbnail}`}
                                     className="w-full h-full  object-cover" alt="" />
                             </div>
                             <div className="text-center mt-5">

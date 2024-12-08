@@ -20,7 +20,7 @@ export default function QuesProvider({ children }) {
 
     const { mutate : updateQuiz, isPending: updatingQuiz} = useMutation({
         mutationFn: async ({quizId, updates}) => {
-            await axios.post("http://localhost:5000/quiz/update", {
+            await axios.post("http://localhost:5000/quiz/ques/update", {
                 id: quizId,
                 updated: {...updates}
             },
@@ -43,8 +43,20 @@ export default function QuesProvider({ children }) {
 
     }, [quiz, saveDebounce, cancelSaveDebounce, setQues])
 
+    const deleteQue = useCallback((index) => {
+
+        cancelSaveDebounce();
+
+        setQues((prev) => {
+            const updated = [...prev];
+            updated.splice(index, 1);
+            saveDebounce(updated, quiz._id);
+            return updated;
+        })
+    }, [setQues])
+
     return (
-        <QuesContext.Provider value={{ quiz, setQuiz, ques, setQues, selectedQue, setSelectedQue, updateQuesContext, isUserSelect, setisUserSelect ,updateQuiz ,updatingQuiz}}>
+        <QuesContext.Provider value={{ quiz, setQuiz, ques,deleteQue, setQues, selectedQue, setSelectedQue, updateQuesContext, isUserSelect, setisUserSelect ,updateQuiz ,updatingQuiz}}>
             {children}
         </QuesContext.Provider>
     )

@@ -1,5 +1,5 @@
-import { QuestionMark } from "@phosphor-icons/react";
-import { useCallback, useContext } from "react";
+import { ArrowsOutSimple, QuestionMark } from "@phosphor-icons/react";
+import { useCallback, useContext, useState } from "react";
 import { QuizContext } from ".";
 import NavigationBtns from "./navigateQuizBtns";
 import MultipleChoice from "./queTypes/MultipleChoice";
@@ -7,12 +7,15 @@ import FillInTheBlank from "./queTypes/FillInTheBlank";
 import TrueFalse from "./queTypes/TrueFalse";
 import Matching from "./queTypes/Matching";
 import { useDebounce } from "../../hooks/useDebounce";
+import { AnimatePresence } from "framer-motion";
+import Popup from "../../components/popup";
 
 export default function Question() {
 
-    const { selectedQue, previewMode, response, ques, updateServerResponse, setResponse } = useContext(QuizContext);
+    const { selectedQue, previewMode, response, serverResponse, ques, updateServerResponse, setResponse } = useContext(QuizContext);
+    const [showFullImage, setShowFullImage] = useState(false)
     const [saveDebounce, cancelSaveDebounce] = useDebounce(async (updated) => {
-        updateServerResponse(updated);
+        updateServerResponse({ updated, responseId: serverResponse._id });
     }, 1000)
 
     const renderQuestion = (question) => {
@@ -38,6 +41,7 @@ export default function Question() {
 
             setResponse((prev) => {
                 const existingIndex = prev.findIndex((res) => res.queId === obj.queId);
+                console.log("obj is : ", obj)
 
                 if (existingIndex !== -1) {
                     const updated = [...prev];
@@ -47,6 +51,7 @@ export default function Question() {
 
                     return updated;
                 }
+                console.log("prev is : ", [...prev, obj])
                 return [...prev, obj];
             });
 
@@ -69,8 +74,19 @@ export default function Question() {
             </div>
 
 
-            <div className="bg-[#d4d4d4] rounded-xl h-[400px] w-1/2">
-            </div>
+            {ques[selectedQue - 1].imageUrl && <div className="bg-white rounded-xl h-[400px] w-1/2 overflow-hidden relative">
+                <div className="w-full h-full bg-contain bg-no-repeat bg-center" style={{ backgroundImage: `url('${ques[selectedQue - 1].imageUrl}')` }} onClick={() => setShowFullImage(true)}></div>
+                <button onClick={() => setShowFullImage(true)} className="bg-[#f3f3f3] p-1 absolute top-3 right-3 rounded-full">
+                    <ArrowsOutSimple size={16} color="#5a4bea" />
+                </button>
+            </div>}
+            <AnimatePresence>
+                {showFullImage && (
+                    <Popup action={() => setShowFullImage(false)} bg="bg-white">
+                        <img src={ques[selectedQue - 1].imageUrl} alt="Full size preview" className="mx-auto max-w-[80%] object-contain" />
+                    </Popup>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

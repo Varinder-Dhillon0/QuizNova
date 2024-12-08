@@ -2,7 +2,7 @@ import Navbar from "./navbar";
 import Footer from "./footer";
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
-import AppLoader from "../../../components/loaders";
+import AppLoader from "../../../components/loaders/loaders";
 import { useEffect } from "react";
 
 export default function Layout() {

@@ -1,14 +1,24 @@
 import Content from "./content";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
+import QuizManager from "../createQuiz/QuizManager";
+import { useState } from "react";
+import { useQues } from "../../hooks/useQues";
 
 export default function Editor(){
+
+    const [editQuizSettings, setEditQuizSettings] = useState(false);
+    const { quiz } = useQues();
+
+    if(editQuizSettings) {
+        return <QuizManager edit={true} quiz={quiz}/>
+    }
 
     return(
             <div className="flex flex-col w-[100vw] h-[100vh] font-Satoshi-Medium bg-white">
                 {/* Navbar */}
                 <div className="h-[60px]">
-                    <Navbar/>
+                    <Navbar setEditQuizSettings={setEditQuizSettings}/>
                 </div>
 
                 <div className="flex" style={{height : "calc(100% - 60px)"}}>

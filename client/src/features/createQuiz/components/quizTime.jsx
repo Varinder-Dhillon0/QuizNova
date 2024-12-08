@@ -1,7 +1,7 @@
 import { CaretDown, CaretUp } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 
-const QuizTime = ({updateTimeLimit}) => {
+const QuizTime = ({value, updateTimeLimit}) => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -19,8 +19,13 @@ const QuizTime = ({updateTimeLimit}) => {
   };
 
   useEffect(() => {
+    if(value) {
+      setHours(Math.floor(value / 3600));
+      setMinutes(Math.floor((value % 3600) / 60));
+      setSeconds(value % 60);
+    }
     updateTimeLimit((hours * 3600) + (minutes * 60) + seconds);
-  }, [hours, minutes , seconds])
+  }, [hours, minutes , seconds , value])
 
   const incrementHours = () => setHours(Math.min(hours + 1, 99));
   const decrementHours = () => setHours(Math.max(hours - 1, 0));

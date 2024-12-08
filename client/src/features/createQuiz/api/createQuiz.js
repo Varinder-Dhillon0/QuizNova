@@ -12,6 +12,8 @@ export const useCreateQuiz = (mutationConfig = {}) => {
                     values[key].forEach((category) => {
                         formData.append('category[]', category);
                     });
+                } else if (key === 'settings') {
+                    formData.append(key, JSON.stringify(values[key]));
                 } else {
                     formData.append(key, values[key]);
                 }
@@ -30,4 +32,4 @@ export const useCreateQuiz = (mutationConfig = {}) => {
         },
         ...mutationConfig,
     });
-}; 
+};
