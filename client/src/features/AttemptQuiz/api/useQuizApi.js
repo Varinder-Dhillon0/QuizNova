@@ -12,10 +12,12 @@ export const useFetchQuiz = (quizId, userEmail, onSuccess, onError) => {
                     axios.get(`${API_BASE_URL}/quiz/getQuiz?id=${quizId}`),
                     axios.get(`${API_BASE_URL}/response/get?userId=${userEmail}&&quizId=${quizId}`)
                 ]);
+                console.log(quizRes);
                 const result = { quiz: quizRes.data.quiz, response: userResponse.data.response };
                 onSuccess(result);
                 return result;
             } catch (error) {
+                console.log(error);
                 if (onError) onError(error);
                 throw error;
             }
