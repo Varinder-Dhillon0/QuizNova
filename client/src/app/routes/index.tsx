@@ -43,7 +43,7 @@ export const AppRoutes = [
     element: <Register />,
   },
   {
-    element: <ProtectedRoute />,
+    // element: <ProtectedRoute />,
     children: [
       {
         path: "/admin",

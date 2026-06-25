@@ -36,12 +36,12 @@ export default function AttemptQuiz({ previewMode = false }) {
     QuizAlreadyStarted,
     QuizAlreadySubmitted,
   ] = [
-    new Date(quiz?.startTime).getTime() > Date.now(),
-    quiz?.published === 0,
-    quiz?.published === 1 && serverResponse === undefined,
-    quiz?.published === 1 && serverResponse,
-    serverResponse?.submitted,
-  ];
+      new Date(quiz?.startTime).getTime() > Date.now(),
+      quiz?.published === 0,
+      quiz?.published === 1 && serverResponse === undefined,
+      quiz?.published === 1 && serverResponse,
+      serverResponse?.submitted,
+    ];
 
   const [endQuiz, setEndQuiz] = useState(false);
   const [timer, setTimer] = useState({
@@ -63,14 +63,14 @@ export default function AttemptQuiz({ previewMode = false }) {
         const remainingTime = previewMode
           ? quiz.timeLimit
           : calculateRemainingTime(
-              quiz.startTime,
-              0,
-              quiz.timeLimit,
-              quiz.lineantTime,
-              new Date(),
-              false,
-            );
-        setTimer({ time: remainingTime });
+            quiz.startTime,
+            0,
+            quiz.timeLimit,
+            quiz.lineantTime,
+            new Date(),
+            false,
+          );
+        setTimer({ time: remainingTime, started: false });
         setQuiz(quiz);
         setQues(quiz.questions);
       }

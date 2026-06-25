@@ -10,6 +10,10 @@ export default function User() {
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
 
+  const getUserInitials = (username: string) => {
+    username;
+  };
+
   return (
     <div className="relative">
       <button
@@ -24,7 +28,9 @@ export default function User() {
             className="w-full h-full object-cover rounded-full"
           />
         ) : (
-          user.name.charAt(0)
+          <div className="bg-black text-white p-2 w-full h-full flex justify-center items-center rounded-full">
+            {user.name.charAt(0)}
+          </div>
         )}
       </button>
       <AnimatePresence>

@@ -15,7 +15,6 @@ export default function QueFooter({ values, updatePoints, updateRandomized }) {
           >
             {values.randomizedOptions ? (
               <>
-                {" "}
                 <p>Randomize order each time </p>
                 <ArrowsCounterClockwise size={15} weight="bold" />
               </>

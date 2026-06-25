@@ -1,13 +1,13 @@
-import React, { createContext, useState, useCallback } from "react";
+import React, { createContext, useState, useCallback, type ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import Toast from "../shared/components/toast";
 
-export const ToastContext = createContext();
+export const ToastContext = createContext<any>(() => {});
 
-export default function ToastProvider({ children }) {
-  const [toast, setToast] = useState(null);
+export default function ToastProvider({ children }: { children: ReactNode }) {
+  const [toast, setToast] = useState<any>(null);
 
-  const showToast = useCallback((status, msg, duration = 3000) => {
+  const showToast = useCallback((status: number, msg: string, duration = 3000) => {
     setToast({ status, msg, duration });
 
     setTimeout(() => {

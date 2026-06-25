@@ -1,33 +1,34 @@
 import {
   createContext,
   useCallback,
-  useContext,
-  useEffect,
   useState,
+  type ReactNode,
 } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { useDebounce } from "../hooks/useDebounce";
 
-export const QuesContext = createContext();
+export const QuesContext = createContext<any>({});
 
-export default function QuesProvider({ children }) {
-  const [quiz, setQuiz] = useState();
-  const [ques, setQues] = useState([]);
+export default function QuesProvider({ children }: { children: ReactNode }) {
+  const [quiz, setQuiz] = useState<any>();
+  const [ques, setQues] = useState<any[]>([]);
   const [selectedQue, setSelectedQue] = useState(1);
   const [isUserSelect, setisUserSelect] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const [saveDebounce, cancelSaveDebounce] = useDebounce(
-    async (questions, quizId) => {
-      updateQuiz({ quizId: quiz._id, updates: { questions: questions } });
+    async (questions: any[], quizId?: string) => {
+      updateQuiz({
+        quizId: quizId || quiz?._id,
+        updates: { questions },
+      });
     },
     1000,
   );
 
   const { mutate: updateQuiz, isPending: updatingQuiz } = useMutation({
-    mutationFn: async ({ quizId, updates }) => {
+    mutationFn: async ({ quizId, updates }: { quizId: string; updates: any }) => {
       await axios
         .post("http://localhost:5000/quiz/ques/update", {
           id: quizId,
@@ -38,13 +39,13 @@ export default function QuesProvider({ children }) {
   });
 
   const updateQuesContext = useCallback(
-    (edited, index) => {
+    (edited: any, index: number) => {
       cancelSaveDebounce();
 
       setQues((prev) => {
         const updated = [...prev];
 
-        console.log(quiz._id);
+        console.log(quiz?._id);
         updated[index] = edited;
         saveDebounce(updated);
         return updated;
@@ -54,7 +55,7 @@ export default function QuesProvider({ children }) {
   );
 
   const deleteQue = useCallback(
-    (index) => {
+    (index: number) => {
       cancelSaveDebounce();
 
       setQues((prev) => {
