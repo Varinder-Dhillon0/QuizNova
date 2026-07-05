@@ -3,7 +3,7 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:5000";
 
-export const useFetchQuiz = (quizId, userEmail, onSuccess, onError) => {
+export const useFetchQuiz = (quizId: any, userEmail: any, onSuccess: any, onError: any) => {
     return useQuery({
         queryKey: ["quiz", quizId, userEmail],
         queryFn: async () => {
@@ -28,7 +28,7 @@ export const useFetchQuiz = (quizId, userEmail, onSuccess, onError) => {
 
 export const useUpdateServerResponse = () => {
     return useMutation({
-        mutationFn: async ({ updated, responseId }) => {
+        mutationFn: async ({ updated, responseId }: any) => {
             try {
                 console.log("updating response is : ", updated)
                 await axios.post(`${API_BASE_URL}/response/update`, {
@@ -36,7 +36,6 @@ export const useUpdateServerResponse = () => {
                     updated: { ...updated }
                 });
             } catch (error) {
-                if (onError) onError(error);
                 throw error;
             }
         }

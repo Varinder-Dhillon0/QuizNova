@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>QuizNova - Full Application Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {font-family: system-ui, sans-serif; margin: 24px; line-height: 1.6; color: #1a202c; background: #f7fafc;}
+    code {background: #edf2f7; color: #2d3748; padding: 2px 4px; border-radius: 4px;}
+    pre {background:#2d3748; color:#f7fafc; padding:12px; border-radius:8px; overflow:auto;}
+    h1, h2, h3, h4 {color:#1a202c;}
+    ul {margin-left: 16px;}
+    .section {background:#fff; border:1px solid #e2e8f0; padding:16px; border-radius:10px; margin-bottom:20px;}
+    .badge {display:inline-block; padding:2px 8px; margin:3px; background:#bee3f8; color:#2a4365; border-radius:6px; font-size:.8rem;}
+    a {color:#3182ce;}
+  </style>
+</head>
+<body>
+  <h1>QuizNova - Full Application Documentation</h1>
+  <p><strong>Location:</strong> <code>d:\MERN Projects\QuizNova</code></p>
+  <p><strong>Date generated:</strong> March 27, 2026</p>
+
+  <div class="section" id="overview">
+    <h2>Overview</h2>
+    <ul>
+      <li>Stack: <span class="badge">MongoDB</span> / <span class="badge">Express</span> / <span class="badge">React</span> / <span class="badge">Node.js</span> (MERN)</li>
+      <li>Key features: quiz creation, editor, attempt flow, response tracking, result generation, admin dashboard, user auth</li>
+      <li>Frontend client: <code>client/</code>; Backend server: <code>server/</code></li>
+      <li>Dev server ports: client on 5173, backend on 5000</li>
+    </ul>
+  </div>
+
+  <div class="section" id="frontend-structure">
+    <h2>Frontend Architecture</h2>
+    <h3>Entry points</h3>
+    <ul>
+      <li><code>client/src/app/main.jsx</code>: root render pipeline</li>
+      <li><code>client/src/app/App.jsx</code>: router setup + Sentry config</li>
+      <li><code>client/src/app/routes/index.jsx</code>: route declarations</li>
+    </ul>
+    <h3>Route Map</h3>
+    <pre>
+/
+/verified/:status
+/login
+/register
+/admin
+  /admin/editor/:workspaceId/:quizId
+  /admin/dashboard
+  /admin/dashboard/:quizId
+  /admin/dashboard/create/:workspaceId
+/attempt/:quizId
+/submit/success/:quizId/:responseId
+/preview/:quizId
+*</pre>
+    <h3>Main providers</h3>
+    <ul>
+      <li><code>GoogleOAuthProvider</code> from <code>@react-oauth/google</code></li>
+      <li><code>QueryClientProvider</code> from <code>@tanstack/react-query</code></li>
+      <li><code>ToastProvider</code> from <code>client/src/context/ToastContext.jsx</code></li>
+      <li><code>AuthProvider</code> from <code>client/src/context/AuthContext.jsx</code></li>
+    </ul>
+  </div>
+
+  <div class="section" id="frontend-feature-modules">
+    <h2>Frontend Features</h2>
+    <h3>Attempt Quiz</h3>
+    <ul>
+      <li>Path: <code>/attempt/:quizId</code> and <code>/preview/:quizId</code></li>
+      <li>File: <code>client/src/features/AttemptQuiz/index.jsx</code></li>
+      <li>Context: <code>QuizContext</code> created with <code>createContext()</code></li>
+      <li>Loading states: <code>isLoading</code>, <code>QuizNotFound</code>, <code>QuizAlreadySubmitted</code></li>
+      <li>Subcomponents: <code>StartQuiz</code>, <code>Question</code>, <code>Navbar</code>, <code>QuizNavigation</code>, <code>SubmitQuiz</code>, <code>Popup</code></li>
+      <li>Hooks: <code>useFetchQuiz</code>, <code>useUpdateServerResponse</code> in <code>client/src/features/AttemptQuiz/api/useQuizApi</code></li>
+      <li>Timer logic: <code>calculateRemainingTime()</code> from <code>client/src/helpers/calculateRemainingTime.jsx</code></li>
+      <li>Auto sync: mutations to backend <code>/response/update</code> via axios and <code>@tanstack/react-query</code></li>
+    </ul>
+
+    <h3>Quiz editor / creation</h3>
+    <ul>
+      <li>Editor: <code>client/src/features/Editor</code></li>
+      <li>Quiz manager: <code>client/src/features/createQuiz/QuizManager.jsx</code></li>
+      <li>Routes: <code>/admin/editor/:workspaceId/:quizId</code>, <code>/admin/dashboard/create/:workspaceId</code></li>
+      <li>APIs: <code>/quiz/create</code>, <code>/quiz/update</code>, <code>/quiz/delete</code>, file upload endpoints</li>
+    </ul>
+
+    <h3>Dashboard / Responses</h3>
+    <ul>
+      <li>Dashboard root: <code>client/src/features/Dashboard/index.jsx</code></li>
+      <li>Quiz responses: <code>client/src/features/Dashboard/components/quizResponses.jsx</code></li>
+      <li>Router wraps <code>Dashboard</code> and subviews for schedule and results</li>
+    </ul>
+
+    <h3>Authentication</h3>
+    <ul>
+      <li>Paths: <code>/login</code>, <code>/register</code></li>
+      <li>Files: <code>client/src/features/auth/login.jsx</code>, <code>client/src/features/auth/register.jsx</code></li>
+      <li>Hooks: <code>useAuth</code> from <code>client/src/hooks/useAuth.jsx</code></li>
+      <li>Google login: <code>client/src/features/auth/googleLogin.jsx</code></li>
+    </ul>
+
+    <h3>Shared utilities</h3>
+    <ul>
+      <li><code>client/src/shared/components</code>: popup, loaders, pageNotFound, etc.</li>
+      <li><code>client/src/helpers</code>: <code>shuffle</code>, <code>parseDate</code>, <code>formatTime</code>, <code>handleTextboxSize</code></li>
+      <li><code>client/src/utils/axios.js</code> (likely axios wrapper), <code>client/src/utils/sentry.js</code></li>
+      <li><code>client/src/schemas</code>: validation schemas for auth and quiz</li>
+    </ul>
+
+    <h3>Route protection</h3>
+    <ul>
+      <li><code>client/src/app/routes/protectedRoutes.jsx</code> suggests future route guard (currently commented out in routes)</li>
+    </ul>
+  </div>
+
+  <div class="section" id="backend-architecture">
+    <h2>Backend Architecture</h2>
+    <h3>Entrypoint</h3>
+    <ul>
+      <li><code>server/index.js</code>: sets up Express, JSON, bodyParser, CORS, static uploads, db connect and routes</li>
+      <li>CORS allowed origin: <code>http://localhost:5173</code></li>
+      <li>API base: <code>http://localhost:5000</code></li>
+    </ul>
+
+    <h3>MongoDB</h3>
+    <ul>
+      <li><code>server/utils/mongodb.js</code> exports <code>connectDb</code></li>
+      <li>Schemas: <code>server/schema/*.js</code> for users, workspace, quiz, response, result, userVerification</li>
+    </ul>
+
+    <h3>Routes</h3>
+    <ul>
+      <li><code>server/routes/users.js</code>: user sign in/up and verification paths</li>
+      <li><code>server/routes/workspace.js</code>: workspace management endpoints</li>
+      <li><code>server/routes/quiz.js</code>: quiz endpoints plus file upload and image management</li>
+      <li><code>server/routes/response.js</code>: quiz response CRUD and results generation</li>
+    </ul>
+
+    <h3>API endpoint summary</h3>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+      <tr><td>GET</td><td>/</td><td>Health check, returns JSON</td></tr>
+      <tr><td>GET</td><td>/quiz/get</td><td>List quizzes</td></tr>
+      <tr><td>GET</td><td>/quiz/getQuiz</td><td>Get quiz by id</td></tr>
+      <tr><td>POST</td><td>/quiz/create</td><td>Create quiz (multipart with quizThumbnail)</td></tr>
+      <tr><td>POST</td><td>/quiz/update</td><td>Update quiz (multipart with quizThumbnail)</td></tr>
+      <tr><td>POST</td><td>/quiz/delete</td><td>Delete quiz</td></tr>
+      <tr><td>POST</td><td>/quiz/ques/update</td><td>Update question(s)</td></tr>
+      <tr><td>POST</td><td>/quiz/ques/uploadImage</td><td>Upload question image</td></tr>
+      <tr><td>POST</td><td>/quiz/ques/deleteImage</td><td>Delete question image</td></tr>
+      <tr><td>GET</td><td>/response/get</td><td>Get response record</td></tr>
+      <tr><td>POST</td><td>/response/create</td><td>Create new response</td></tr>
+      <tr><td>POST</td><td>/response/update</td><td>Update response in-progress</td></tr>
+      <tr><td>POST</td><td>/response/results</td><td>Get results list</td></tr>
+      <tr><td>POST</td><td>/response/singleresult</td><td>Get one result by responseId</td></tr>
+      <tr><td>POST</td><td>/response/generateresult</td><td>Generate and save result</td></tr>
+    </table>
+
+    <h3>File uploads</h3>
+    <ul>
+      <li>Storage path: <code>server/uploads/{creator}/{workspace_id}/</code> for quiz thumbnails, and <code>.../{quizId}/{queId}.*</code> for question images</li>
+      <li>Routes manage file naming, directory creation, and deletion using node <code>fs</code></li>
+    </ul>
+  </div>
+
+  <div class="section" id="data-flow-diagrams">
+    <h2>Data Flow Diagrams</h2>
+    <h3>Frontend Routing Flow (Mermaid)</h3>
+    <pre>
+graph LR
+  A[App] --> B[RouterProvider]
+  B --> C[/]
+  B --> D[/login]
+  B --> E[/register]
+  B --> F[/attempt/:quizId]
+  B --> G[/preview/:quizId]
+  B --> H[/admin/dashboard]
+  B --> I[/admin/editor/:workspaceId/:quizId]
+</pre>
+    <h3>API Flow (Mermaid)</h3>
+    <pre>
+sequenceDiagram
+  participant FE as Frontend
+  participant BE as Backend
+  FE->>BE: GET /quiz/getQuiz?quizId=...
+  BE->>DB: find quiz
+  DB-->>BE: quiz record
+  BE-->>FE: quiz + response data
+  FE->>BE: POST /response/update (auto-save)
+  FE->>BE: POST /response/create (on submit)
+</pre>
+  </div>
+
+  <div class="section" id="useful-links">
+    <h2>Useful Internal Links</h2>
+    <ul>
+      <li><a href="file:///d:/MERN%20Projects/QuizNova/client/src/app/main.jsx">client/src/app/main.jsx</a></li>
+      <li><a href="file:///d:/MERN%20Projects/QuizNova/client/src/app/App.jsx">client/src/app/App.jsx</a></li>
+      <li><a href="file:///d:/MERN%20Projects/QuizNova/client/src/app/routes/index.jsx">client/src/app/routes/index.jsx</a></li>
+      <li><a href="file:///d:/MERN%20Projects/QuizNova/client/src/features/AttemptQuiz/index.jsx">client/src/features/AttemptQuiz/index.jsx</a></li>
+      <li><a href="file:///d:/MERN%20Projects/QuizNova/server/index.js">server/index.js</a></li>
+      <li><a href="file:///d:/MERN%20Projects/QuizNova/server/routes/quiz.js">server/routes/quiz.js</a></li>
+      <li><a href="file:///d:/MERN%20Projects/QuizNova/server/routes/response.js">server/routes/response.js</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Next steps</h2>
+    <ul>
+      <li>Confirm if you want this document extended to include detailed endpoint schemas from <code>server/schema</code>.</li>
+      <li>Add a developer quick-start section with commands (npm install/start, env var list) if needed.</li>
+      <li>Use README section to mention environment variables (VITE_API_BASE_URL, VITE_GOOGLE_CLIENT_ID, etc.).</li>
+    </ul>
+  </div>
+</body>
+</html>

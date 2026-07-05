@@ -1,16 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "../hooks/useToast";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext<any>({});
 
-export default function AuthProvider({ children }) {
+export default function AuthProvider({ children }: { children: ReactNode }) {
   const Toast = useToast();
-  const [loggedin, setLoggedin] = useState(false);
+  const [loggedin, setLoggedin] = useState(true);
   const [user, setUser] = useState({
-    name: "",
+    name: "varinder",
     email: "",
     profile_pic: "",
     randomSeed: 0,
@@ -18,7 +18,7 @@ export default function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const { mutate: authenticateMutation } = useMutation({
-    mutationFn: async (token) => {
+    mutationFn: async (token: string) => {
       const res = await axios.post("http://localhost:5000/validateuser", {
         token: token,
       });

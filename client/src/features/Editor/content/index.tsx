@@ -6,6 +6,7 @@ import Backdrop from "../../../shared/components/backdrop";
 import quizpic from "../../../assets/img/createquiz.svg";
 import SelectQueBar from "./selectQueBar";
 import { Pencil } from "@phosphor-icons/react";
+import SkeletonBox from "../../../shared/components/skeleton";
 
 export default function Content() {
   const { ques } = useQues();
@@ -16,6 +17,8 @@ export default function Content() {
       className="flex flex-col align-middle scoll-pt-10 h-[100%] overflow-auto scrollbar font-Stoshi-Medium"
       id="content"
     >
+      {!ques && <SkeletonBox height={400} width={500} borderRadius={10} />}
+
       {ques.length == 0 ? (
         <div className="grid place-content-center pt-20 pb-10 text-center">
           <img className="max-w-80 max-h-80" src={quizpic} alt="" />
@@ -46,6 +49,7 @@ export default function Content() {
           </AnimatePresence>
         </button>
       </div>
+
     </div>
   );
 }

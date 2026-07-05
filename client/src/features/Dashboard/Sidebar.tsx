@@ -12,6 +12,7 @@ export default function Sidebar() {
     useContext(WorkspaceContext);
 
   const { mutate: createWorkspace } = useCreateWorkspace({
+
     onSuccess: (data) => {
       if (data.success) {
         setselectedWorkspace({
@@ -59,7 +60,7 @@ export default function Sidebar() {
         {isLoading ? (
           <h1>loading</h1>
         ) : (
-          data.workspaces.map((workspace, i) => {
+          data?.workspaces.map((workspace, i) => {
             return (
               <Workspace
                 key={i}

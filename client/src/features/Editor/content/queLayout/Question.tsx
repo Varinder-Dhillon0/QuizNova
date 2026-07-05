@@ -8,12 +8,17 @@ import FillInTheBlank from "../quetypes/FillInTheBlank";
 import Matching from "../quetypes/Matching";
 import { scrolltoQue } from "../../sidebar";
 
+/**
+ * Creates new question on each enter
+ * @param {*} param0 
+ * @returns 
+ */
 export default function Question({ question, index }) {
   const { setSelectedQue, selectedQue, ques } = useQues();
 
   const ref = useRef(null);
 
-  //above code weren't working so we used this one
+  //above code wasn't working so we used this one
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

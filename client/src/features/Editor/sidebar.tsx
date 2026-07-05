@@ -33,7 +33,6 @@ export default function Sidebar() {
           <AnimatePresence>
             {showTypes && (
               <Backdrop action={() => setShowTypes(false)}>
-                {" "}
                 <SelectQueBar
                   setShowTypes={setShowTypes}
                   actionType="add"
