@@ -9,7 +9,8 @@ import FormatTime, { FormatTimerTime } from "../../helpers/formatTime";
 import parseDateWithTime from "../../helpers/parseDate";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 
 export default function SubmitQuiz() {
   const {
@@ -28,7 +29,7 @@ export default function SubmitQuiz() {
 
   const { mutate: generateResult, isPending: generatingResult } = useMutation({
     mutationFn: async (updated) => {
-      await axios.post("http://localhost:5000/response/generateresult", {
+      await axiosInstance.post(API_URLS.RESPONSE.GENERATE_RESULT, {
         quizId: quiz._id,
         responseId: serverResponse._id,
       });

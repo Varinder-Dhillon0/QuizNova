@@ -12,7 +12,7 @@ import QuizResponses from "../../features/Dashboard/components/quizResponses";
 import Editor from "../../features/Editor";
 import Admin from "../../pages/admin";
 
-import PageNotFound from "../../shared/components/pageNotFound";
+import PageNotFound from "@shared/components/pageNotFound";
 
 import Login from "../../features/auth/login";
 import Register from "../../features/auth/register";

@@ -1,5 +1,5 @@
 import paperplane from "../../assets/img/paper-plane-right.svg";
-import User from "../../shared/components/user";
+import User from "@shared/components/user";
 import {
   ArrowLeft,
   CloudArrowUp,
@@ -11,9 +11,10 @@ import {
 import { useQues } from "../../hooks/useQues";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 import { useState } from "react";
-import Popup from "../../shared/components/popup";
+import Popup from "@shared/components/popup";
 import ShareLink from "./shareLink";
 import { AnimatePresence } from "framer-motion";
 import { useToast } from "../../hooks/useToast";
@@ -29,8 +30,8 @@ export default function Navbar() {
   const { isLoading, refetch } = useQuery({
     queryKey: ["quiz"],
     queryFn: async () => {
-      const res = await axios.get(
-        `http://localhost:5000/quiz/getQuiz?id=${quizId}`,
+      const res = await axiosInstance.get(
+        `${API_URLS.QUIZ.GET_QUIZ}?id=${quizId}`,
         {},
       );
       console.log("res is ", res.data);
@@ -43,7 +44,7 @@ export default function Navbar() {
 
   const { mutate: publishQuiz, isPending: publishingQuiz } = useMutation({
     mutationFn: async ({ quizId }) => {
-      await axios.post("http://localhost:5000/quiz/publish", {
+      await axiosInstance.post(API_URLS.QUIZ.PUBLISH, {
         quizId: quizId,
       });
       console.log("published");

@@ -1,6 +1,6 @@
 import { useQues } from "../../../hooks/useQues";
 import { motion } from "framer-motion";
-import RenderQueType from "../../../shared/components/renderQueType";
+import RenderQueType from "@shared/components/renderQueType";
 
 export const QueTypes = [
   //MultipleChoice

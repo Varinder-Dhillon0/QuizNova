@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useAuth } from "../../hooks/useAuth";
 import { motion } from "framer-motion";
-import axios from "axios";
 
-import Popup from "../../shared/components/popup";
+import Popup from "@shared/components/popup";
 import SubmitQuiz from "./submitQuiz";
 import StartQuiz from "./startQuiz";
 import Question from "./Question";
@@ -13,8 +12,10 @@ import Navbar from "./navbar";
 import calculateRemainingTime from "../../helpers/calculateRemainingTime";
 import QuizNavigation from "./quizNavigation";
 import { useFetchQuiz, useUpdateServerResponse } from "./api/useQuizApi";
-import AppLoader from "../../shared/components/loaders/loaders";
+import AppLoader from "@shared/components/loaders/loaders";
 import { useMutation } from "@tanstack/react-query";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 
 export const QuizContext = createContext();
 
@@ -36,12 +37,12 @@ export default function AttemptQuiz({ previewMode = false }) {
     QuizAlreadyStarted,
     QuizAlreadySubmitted,
   ] = [
-      new Date(quiz?.startTime).getTime() > Date.now(),
-      quiz?.published === 0,
-      quiz?.published === 1 && serverResponse === undefined,
-      quiz?.published === 1 && serverResponse,
-      serverResponse?.submitted,
-    ];
+    new Date(quiz?.startTime).getTime() > Date.now(),
+    quiz?.published === 0,
+    quiz?.published === 1 && serverResponse === undefined,
+    quiz?.published === 1 && serverResponse,
+    serverResponse?.submitted,
+  ];
 
   const [endQuiz, setEndQuiz] = useState(false);
   const [timer, setTimer] = useState({
@@ -63,13 +64,13 @@ export default function AttemptQuiz({ previewMode = false }) {
         const remainingTime = previewMode
           ? quiz.timeLimit
           : calculateRemainingTime(
-            quiz.startTime,
-            0,
-            quiz.timeLimit,
-            quiz.lineantTime,
-            new Date(),
-            false,
-          );
+              quiz.startTime,
+              0,
+              quiz.timeLimit,
+              quiz.lineantTime,
+              new Date(),
+              false,
+            );
         setTimer({ time: remainingTime, started: false });
         setQuiz(quiz);
         setQues(quiz.questions);

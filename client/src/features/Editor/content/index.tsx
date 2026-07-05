@@ -2,11 +2,11 @@ import { useState } from "react";
 import Question from "./queLayout/Question";
 import { useQues } from "../../../hooks/useQues";
 import { AnimatePresence } from "framer-motion";
-import Backdrop from "../../../shared/components/backdrop";
+import Backdrop from "@shared/components/backdrop";
 import quizpic from "../../../assets/img/createquiz.svg";
 import SelectQueBar from "./selectQueBar";
 import { Pencil } from "@phosphor-icons/react";
-import SkeletonBox from "../../../shared/components/skeleton";
+import SkeletonBox from "@shared/components/skeleton";
 
 export default function Content() {
   const { ques } = useQues();
@@ -49,7 +49,6 @@ export default function Content() {
           </AnimatePresence>
         </button>
       </div>
-
     </div>
   );
 }

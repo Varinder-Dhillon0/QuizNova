@@ -1,12 +1,13 @@
 import { CheckCircle } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import FormatTime from "../../helpers/formatTime";
 import { AnimatePresence } from "framer-motion";
-import UserQuizDetails from "../../shared/components/userQuizDetails";
-import Popup from "../../shared/components/popup";
+import UserQuizDetails from "@shared/components/userQuizDetails";
+import Popup from "@shared/components/popup";
 
 export default function QuizSubmitted() {
   const { quizId, responseId } = useParams();
@@ -22,8 +23,8 @@ export default function QuizSubmitted() {
     queryKey: ["result", quizId, responseId],
     queryFn: async () => {
       try {
-        const serverResponse = await axios.post(
-          "http://localhost:5000/response/singleresult",
+        const serverResponse = await axiosInstance.post(
+          API_URLS.RESPONSE.SINGLE_RESULT,
           {
             quizId: quizId,
             responseId: responseId,

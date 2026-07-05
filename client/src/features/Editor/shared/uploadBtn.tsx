@@ -1,11 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 import { useCallback, useRef } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { useQues } from "../../../hooks/useQues";
 import { useToast } from "../../../hooks/useToast";
 import { Images, Plus } from "@phosphor-icons/react";
-import SimpleLoader from "../../../shared/components/loaders/simpleLoader";
+import SimpleLoader from "@shared/components/loaders/simpleLoader";
 
 export default function UploadButton({ formik, imagePreview, index }) {
   const { user } = useAuth();
@@ -16,8 +17,8 @@ export default function UploadButton({ formik, imagePreview, index }) {
 
   const { mutate: uploadQuizImage, isPending: uploadPending } = useMutation({
     mutationFn: async (formData) => {
-      const response = await axios.post(
-        `http://localhost:5000/quiz/ques/uploadImage?creator=${user.email}&workspace_id=${quiz.workspace}&quizId=${quiz._id}&queId=${index}`,
+      const response = await axiosInstance.post(
+        `${API_URLS.QUIZ.QUES.UPLOAD_IMAGE}?creator=${user.email}&workspace_id=${quiz.workspace}&quizId=${quiz._id}&queId=${index}`,
         formData,
         {
           headers: {

@@ -1,5 +1,5 @@
-import { useRef, useState, useCallback } from "react";
-import RenderQueType from "../../../../shared/components/renderQueType";
+import { useRef, useState } from "react";
+import RenderQueType from "@shared/components/renderQueType";
 import {
   CaretDown,
   Images,
@@ -8,20 +8,12 @@ import {
   Plus,
 } from "@phosphor-icons/react";
 import { AnimatePresence } from "framer-motion";
-import Backdrop from "../../../../shared/components/backdrop";
+import Backdrop from "@shared/components/backdrop";
 import SelectQueBar from "../selectQueBar";
 import { motion } from "framer-motion";
-import ToggleButton from "../../../../shared/components/toggleButton";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { useAuth } from "../../../../hooks/useAuth";
-import { useQues } from "../../../../hooks/useQues";
-import Popup from "../../../../shared/components/popup";
-import SimpleLoader from "../../../../shared/components/loaders/simpleLoader";
-import { useDebounce } from "../../../../hooks/useDebounce";
-import { useToast } from "../../../../hooks/useToast";
-import UploadButton from "../../shared/uploadBtn";
+import ToggleButton from "@shared/components/toggleButton";
 import ImagePreview from "../../shared/imagePreview";
+import UploadButton from "../../shared/uploadBtn";
 
 export default function QueHeader({ formik, index }) {
   const [showTypes, setShowTypes] = useState(false);

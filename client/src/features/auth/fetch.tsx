@@ -1,8 +1,9 @@
-import axios from "axios";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 
 export default function fetch() {
   const result = async () =>
-    await axios.post("http://localhost:5000/fetch", {
+    await axiosInstance.post(API_URLS.AUTH.FETCH, {
       fetchthis: "ok",
     });
 

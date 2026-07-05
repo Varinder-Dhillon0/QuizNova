@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useQues } from "../../hooks/useQues";
-import Backdrop from "../../shared/components/backdrop";
-import RenderQueType from "../../shared/components/renderQueType";
+import Backdrop from "@shared/components/backdrop";
+import RenderQueType from "@shared/components/renderQueType";
 import { Plus, Trash } from "@phosphor-icons/react";
 import SelectQueBar from "./content/selectQueBar";
 import { useEffect, useRef, useState } from "react";

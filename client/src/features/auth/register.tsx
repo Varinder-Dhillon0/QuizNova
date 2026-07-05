@@ -6,7 +6,7 @@ import RightBanner from "./components/rightBanner";
 import { registerValidationSchema } from "../../schemas/auth";
 import Input from "./components/input";
 import { useRegister } from "./api/register";
-import SimpleLoader from "../../shared/components/loaders/simpleLoader";
+import SimpleLoader from "@shared/components/loaders/simpleLoader";
 import GoogleLogin from "./googleLogin";
 
 export default function Register() {

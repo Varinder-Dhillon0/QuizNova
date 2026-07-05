@@ -2,20 +2,19 @@ import Workspace from "./components/workspace";
 import { useContext } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { Plus } from "@phosphor-icons/react";
-import User from "../../shared/components/user";
+import User from "@shared/components/user";
 import { WorkspaceContext } from ".";
 import { useCreateWorkspace, useGetWorkspaces } from "./api/useWorkspaceApi";
 
 export default function Sidebar() {
   const { user } = useAuth();
-  const { selectedworkspace, setselectedWorkspace } =
+  const { selectedWorkspace, setSelectedWorkspace } =
     useContext(WorkspaceContext);
 
   const { mutate: createWorkspace } = useCreateWorkspace({
-
     onSuccess: (data) => {
       if (data.success) {
-        setselectedWorkspace({
+        setSelectedWorkspace({
           id: data.id,
           title: "Untitled Workspace",
         });
@@ -68,8 +67,8 @@ export default function Sidebar() {
                 id={workspace._id}
                 refetchWorkspaces={refetchWorkspaces}
                 title={workspace.title}
-                selectedworkspace={selectedworkspace}
-                setselectedWorkspace={setselectedWorkspace}
+                selectedWorkspace={selectedWorkspace}
+                setSelectedWorkspace={setSelectedWorkspace}
               />
             );
           })

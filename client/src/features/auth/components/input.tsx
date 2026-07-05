@@ -1,4 +1,4 @@
-import RenderFormikError from "../../../shared/components/renderFormikError";
+import RenderFormikError from "@shared/components/renderFormikError";
 
 export default function Input({
   name,
