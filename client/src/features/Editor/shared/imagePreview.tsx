@@ -1,11 +1,12 @@
-import axios from "axios";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 import { useAuth } from "../../../hooks/useAuth";
 import { useQues } from "../../../hooks/useQues";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import Popup from "../../../shared/components/popup";
+import Popup from "@shared/components/popup";
 import { AnimatePresence } from "framer-motion";
-import SimpleLoader from "../../../shared/components/loaders/simpleLoader";
+import SimpleLoader from "@shared/components/loaders/simpleLoader";
 import { ArrowsOutSimple, Trash } from "@phosphor-icons/react";
 
 export default function ImagePreview({ formik, imagePreview, index }) {
@@ -16,8 +17,8 @@ export default function ImagePreview({ formik, imagePreview, index }) {
 
   const { mutate: deleteQuizImage, isPending: deletePending } = useMutation({
     mutationFn: async () => {
-      const response = await axios.post(
-        `http://localhost:5000/quiz/ques/deleteImage?creator=${user.email}&workspace_id=${quiz.workspace}&quizId=${quiz._id}&queId=${index}`,
+      const response = await axiosInstance.post(
+        `${API_URLS.QUIZ.QUES.DELETE_IMAGE}?creator=${user.email}&workspace_id=${quiz.workspace}&quizId=${quiz._id}&queId=${index}`,
       );
       return response.data;
     },

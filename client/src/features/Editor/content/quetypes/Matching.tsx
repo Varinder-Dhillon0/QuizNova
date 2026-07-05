@@ -5,7 +5,7 @@ import { useQues } from "../../../../hooks/useQues";
 import QueHeader from "../queLayout/QueHeader";
 import QueFooter from "../queLayout/QueFooter";
 import { Info, QuestionMark } from "@phosphor-icons/react";
-import { RearrangeableGroup } from "../../../../shared/components/rearrangeable";
+import { RearrangeableGroup } from "@shared/components/rearrangeable";
 import Match from "../queOptions/match";
 import { motion } from "framer-motion";
 

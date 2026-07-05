@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Shuffle } from "@phosphor-icons/react";
-import ToggleButton from "../../shared/components/toggleButton";
+import ToggleButton from "@shared/components/toggleButton";
 
 export default function QuizOptions({ settings, updateSetting }) {
   const [showOptions, setShowOptions] = useState(false);

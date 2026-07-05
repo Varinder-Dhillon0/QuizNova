@@ -8,7 +8,7 @@ import QueFooter from "../queLayout/QueFooter";
 import QueHeader from "../queLayout/QueHeader";
 
 import { motion } from "framer-motion";
-import { RearrangeableGroup } from "../../../../shared/components/rearrangeable";
+import { RearrangeableGroup } from "@shared/components/rearrangeable";
 
 export default function MultipleChoice({ que, index }) {
   const { updateQuesContext } = useQues();

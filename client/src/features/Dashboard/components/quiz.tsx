@@ -11,13 +11,14 @@ import {
   SealQuestion,
   Trash,
 } from "@phosphor-icons/react";
-import DropdownMenu from "../../../shared/components/dropdownMenu";
-import HamburgerLink from "../../../shared/components/hamburgerLink";
+import DropdownMenu from "@shared/components/dropdownMenu";
+import HamburgerLink from "@shared/components/hamburgerLink";
 import { useNavigate } from "react-router-dom";
 import { useDeleteQuiz } from "../api/useDeleteQuiz";
 import { useAuth } from "../../../hooks/useAuth";
+import { BASE_URL, API_URLS } from "@shared/constants/ApiUrls.constants";
 
-export default function Quiz({ quiz, selectedworkspace, refetchQuizzes }) {
+export default function Quiz({ quiz, selectedWorkspace, refetchQuizzes }) {
   const [dropdown, showDropdown] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -41,7 +42,7 @@ export default function Quiz({ quiz, selectedworkspace, refetchQuizzes }) {
         {quiz.quizThumbnail && (
           <img
             className="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
-            src={`http://localhost:5000/uploads/${user.email}/${selectedworkspace.id}/${quiz.quizThumbnail}`}
+            src={`${BASE_URL}${API_URLS.UPLOADS.BASE}/${user.email}/${selectedWorkspace.id}/${quiz.quizThumbnail}`}
             alt="Quiz Thumbnail"
           />
         )}
@@ -93,7 +94,7 @@ export default function Quiz({ quiz, selectedworkspace, refetchQuizzes }) {
           </div>
 
           {/* <div className="flex flex-col gap-3">
-                        <a href={`/admin/editor/${selectedworkspace.id}/${quiz._id}`} onClick={(e) => e.stopPropagation()}>
+                        <a href={`/admin/editor/${selectedWorkspace.id}/${quiz._id}`} onClick={(e) => e.stopPropagation()}>
                             <button className="border-2 p-1 rounded-full">
                                 <ArrowUpRight size={14} />
                             </button>
@@ -116,7 +117,7 @@ export default function Quiz({ quiz, selectedworkspace, refetchQuizzes }) {
           <button
             className="bg-[#5a4bea] rounded-sm gap-2 justify-center p-1 w-[85%] flex items-center text-white"
             onClick={() =>
-              window.open(`/admin/editor/${selectedworkspace.id}/${quiz._id}`)
+              window.open(`/admin/editor/${selectedWorkspace.id}/${quiz._id}`)
             }
           >
             <NotePencil size={17} weight="bold" />

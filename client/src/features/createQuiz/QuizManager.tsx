@@ -5,14 +5,15 @@ import handleTextboxSize from "../../helpers/handleTextboxSize";
 import { AnimatePresence, motion } from "framer-motion";
 import { Calendar, Images } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
+import { BASE_URL, API_URLS } from "@shared/constants/ApiUrls.constants";
 import QuizOptions from "./quizOptions";
 import QuizTime from "./components/quizTime";
 import quizValidationSchema from "../../schemas/quiz";
 import { useParams, useSearchParams } from "react-router-dom";
-import RenderFormikError from "../../shared/components/renderFormikError"; // Updated import
+import RenderFormikError from "@shared/components/renderFormikError"; // Updated import
 import { useCreateQuiz } from "./api/createQuiz";
 import { useUpdateQuiz } from "./api/updateQuiz";
-import Spinner from "../../shared/components/loaders/spinner";
+import Spinner from "@shared/components/loaders/spinner";
 import { useLocation } from "react-router-dom";
 
 export default function QuizManager({ quiz }) {
@@ -177,7 +178,7 @@ export default function QuizManager({ quiz }) {
                           : "bg-[#28a0dc]"
                       } bg-cover bg-center`}
                       style={{
-                        backgroundImage: `url('${thumbnailPreview ? thumbnailPreview : `http://localhost:5000/uploads/${user.email}/${quiz?.workspace}/${quiz?.quizThumbnail}`}')`,
+                        backgroundImage: `url('${thumbnailPreview ? thumbnailPreview : `${BASE_URL}${API_URLS.UPLOADS.BASE}/${user.email}/${quiz?.workspace}/${quiz?.quizThumbnail}`}')`,
                       }}
                     >
                       <input

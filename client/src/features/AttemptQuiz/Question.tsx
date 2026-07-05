@@ -8,7 +8,7 @@ import TrueFalse from "./queTypes/TrueFalse";
 import Matching from "./queTypes/Matching";
 import { useDebounce } from "../../hooks/useDebounce";
 import { AnimatePresence } from "framer-motion";
-import Popup from "../../shared/components/popup";
+import Popup from "@shared/components/popup";
 
 export default function Question() {
   const {

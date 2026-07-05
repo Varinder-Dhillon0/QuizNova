@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import QuesProvider from "../context/quesContext";
+import QuesProvider from "@context/quesContext";
 
 export default function Admin() {
   return (

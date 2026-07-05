@@ -3,7 +3,7 @@ import NotSure from "../notsure";
 import {
   RearrangeableGroup,
   RearrangeableItem,
-} from "../../../shared/components/rearrangeable";
+} from "@shared/components/rearrangeable";
 import seededShuffle from "../../../helpers/shuffle";
 
 export default function Matching({ que, response, updateResponse }) {

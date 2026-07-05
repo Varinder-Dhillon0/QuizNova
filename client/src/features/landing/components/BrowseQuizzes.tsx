@@ -1,5 +1,5 @@
 import React from "react";
-import QuizOverviewCard from "../../../shared/components/common/QuizOverviewCard";
+import QuizOverviewCard from "@shared/components/common/QuizOverviewCard";
 
 const BrowseQuizzes = () => {
   return (

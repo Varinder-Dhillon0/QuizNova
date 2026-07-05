@@ -1,11 +1,7 @@
-import {
-  createContext,
-  useCallback,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useState, type ReactNode } from "react";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 import { useDebounce } from "../hooks/useDebounce";
 
 export const QuesContext = createContext<any>({});
@@ -28,13 +24,17 @@ export default function QuesProvider({ children }: { children: ReactNode }) {
   );
 
   const { mutate: updateQuiz, isPending: updatingQuiz } = useMutation({
-    mutationFn: async ({ quizId, updates }: { quizId: string; updates: any }) => {
-      await axios
-        .post("http://localhost:5000/quiz/ques/update", {
-          id: quizId,
-          updated: { ...updates },
-        })
-        .then((res) => {});
+    mutationFn: async ({
+      quizId,
+      updates,
+    }: {
+      quizId: string;
+      updates: any;
+    }) => {
+      await axiosInstance.post(API_URLS.QUIZ.QUES.UPDATE, {
+        id: quizId,
+        updated: { ...updates },
+      });
     },
   });
 

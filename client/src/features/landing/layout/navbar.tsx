@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
-import User from "../../../shared/components/user";
+import User from "@shared/components/user";
 import Logo from "../../../assets/img/logo.svg";
 import { Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";

@@ -2,13 +2,15 @@ import { useGoogleLogin } from "@react-oauth/google";
 import googleIcon from "../../assets/img/googlelogo.svg";
 import { backIn, motion } from "framer-motion";
 
+import { BASE_URL, API_URLS } from "@shared/constants/ApiUrls.constants";
+
 export default function GoogleLogin({ label, isPending }) {
   const login = useGoogleLogin({
     flow: "auth-code",
     ux_mode: "redirect",
     auto_select: true,
     prompt: "select_account",
-    redirect_uri: `${import.meta.env.VITE_API_BASE_URL}googlelogin`,
+    redirect_uri: `${BASE_URL}${API_URLS.AUTH.GOOGLE_LOGIN_REDIRECT}`,
     onError: (error) => {
       console.error("Login Error:", error);
       Toast(2, "Google login failed", 3000);

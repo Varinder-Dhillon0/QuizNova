@@ -8,7 +8,7 @@ import RightBanner from "./components/rightBanner";
 import { loginValidationSchema } from "../../schemas/auth";
 import Input from "./components/input";
 import { useLogin } from "./api/login";
-import SimpleLoader from "../../shared/components/loaders/simpleLoader";
+import SimpleLoader from "@shared/components/loaders/simpleLoader";
 import GoogleLogin from "./googleLogin";
 import { motion } from "framer-motion";
 

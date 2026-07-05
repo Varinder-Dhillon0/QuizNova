@@ -5,11 +5,11 @@ import { createContext } from "react";
 export const WorkspaceContext = createContext();
 
 export default function Dashboard({ children }) {
-  const [selectedworkspace, setselectedWorkspace] = useState({});
+  const [selectedWorkspace, setSelectedWorkspace] = useState({});
 
   return (
     <WorkspaceContext.Provider
-      value={{ selectedworkspace, setselectedWorkspace }}
+      value={{ selectedWorkspace, setSelectedWorkspace }}
     >
       <div className="flex flex-col w-[100vw] font-Satoshi-Medium bg-white">
         <div className="flex  min-h-screen h-auto items-start">

@@ -11,7 +11,7 @@ export default function Content() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const context = useContext(WorkspaceContext);
-  const selectedworkspace = context?.selectedworkspace || {};
+  const selectedWorkspace = context?.selectedWorkspace || {};
 
   const {
     mutate: getQuizzes,
@@ -26,28 +26,28 @@ export default function Content() {
   });
 
   useEffect(() => {
-    if (selectedworkspace.id) {
+    if (selectedWorkspace.id) {
       getQuizzes({
-        workspaceId: selectedworkspace.id,
+        workspaceId: selectedWorkspace.id,
         creatorEmail: user.email,
       });
     }
-  }, [selectedworkspace]);
+  }, [selectedWorkspace]);
 
   return (
     <>
       <div className="relative z-0 pb-10">
-        {selectedworkspace.id && (
+        {selectedWorkspace.id && (
           <div className="text-2xl flex justify-between">
             <div className="font-Silka-Bold">
-              <h1>{selectedworkspace.title}</h1>
+              <h1>{selectedWorkspace.title}</h1>
             </div>
 
             <button
               className="bg-[#5a4bea] flex items-center gap-1 h-9 text-white font-Satoshi-Bold px-3 text-sm rounded-md"
               onClick={() =>
-                selectedworkspace.id &&
-                navigate(`create/${selectedworkspace.id}`)
+                selectedWorkspace.id &&
+                navigate(`create/${selectedWorkspace.id}`)
               }
             >
               <Plus size={16} weight="bold" /> New Quiz
@@ -63,7 +63,7 @@ export default function Content() {
                   <Quiz
                     key={quiz._id}
                     quiz={quiz}
-                    selectedworkspace={selectedworkspace}
+                    selectedWorkspace={selectedWorkspace}
                     refetchQuizzes={refetchQuizzes}
                   />
                 );

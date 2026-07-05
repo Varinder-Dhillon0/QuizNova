@@ -1,4 +1,4 @@
-import { RearrangeableItem } from "../../../../shared/components/rearrangeable";
+import { RearrangeableItem } from "@shared/components/rearrangeable";
 
 export default function Choice({
   choice,

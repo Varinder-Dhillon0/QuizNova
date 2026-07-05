@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import Backdrop from "../../../shared/components/backdrop";
-import HamburgerLink from "../../../shared/components/hamburgerLink";
+import Backdrop from "@shared/components/backdrop";
+import HamburgerLink from "@shared/components/hamburgerLink";
 import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
-import axios from "axios";
-import DropdownMenu from "../../../shared/components/dropdownMenu";
+import axiosInstance from "@utils/axios";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
+import DropdownMenu from "@shared/components/dropdownMenu";
 import { DotsThreeVertical, Pencil, Trash } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,8 +14,8 @@ export default function Workspace({
   title,
   i,
   refetchWorkspaces,
-  selectedworkspace,
-  setselectedWorkspace,
+  selectedWorkspace,
+  setSelectedWorkspace,
 }) {
   const [editingWorkspace, seteditingWorkspace] = useState(false);
   const [dropdown, setDropdown] = useState(false);
@@ -39,12 +40,12 @@ export default function Workspace({
 
   const { mutate: updateWorkspace } = useMutation({
     mutationFn: async (values) => {
-      const res = await axios.post("http://localhost:5000/workspace/update", {
+      const res = await axiosInstance.post(API_URLS.WORKSPACE.UPDATE, {
         id: id,
         ...values,
       });
       console.log(res.data);
-      setselectedWorkspace({
+      setSelectedWorkspace({
         id: res.data.update.id,
         title: res.data.update.title,
       });
@@ -57,7 +58,7 @@ export default function Workspace({
 
   const { mutate: deleteWorkspace } = useMutation({
     mutationFn: async () => {
-      const res = await axios.post("http://localhost:5000/workspace/delete", {
+      const res = await axiosInstance.post(API_URLS.WORKSPACE.DELETE, {
         id: id,
       });
       return res.data;
@@ -73,10 +74,10 @@ export default function Workspace({
 
   return (
     <div
-      className={`mt-2 mb-4 p-2 flex cursor-pointer justify-between items-center pr-3 pl-3 rounded-md  w-full ${selectedworkspace.id == id ? "bg-[#e6e6e6] font-Satoshi-Black" : ""}`}
+      className={`mt-2 mb-4 p-2 flex cursor-pointer justify-between items-center pr-3 pl-3 rounded-md  w-full ${selectedWorkspace.id == id ? "bg-[#e6e6e6] font-Satoshi-Black" : ""}`}
       onClick={() => {
-        selectedworkspace.id != id &&
-          setselectedWorkspace({ id: id, title: title });
+        selectedWorkspace.id != id &&
+          setSelectedWorkspace({ id: id, title: title });
         navigate("/admin/dashboard");
       }}
     >

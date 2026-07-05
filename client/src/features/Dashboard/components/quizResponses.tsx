@@ -1,11 +1,12 @@
 import { ArrowLeft, Check, SealQuestion, X } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axiosInstance from "@utils/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { parseDate } from "../../../helpers/parseDate";
+import { BASE_URL, API_URLS } from "@shared/constants/ApiUrls.constants";
 import { AnimatePresence } from "framer-motion";
-import Popup from "../../../shared/components/popup";
-import UserQuizDetails from "../../../shared/components/userQuizDetails";
+import Popup from "@shared/components/popup";
+import UserQuizDetails from "@shared/components/userQuizDetails";
 import { useState } from "react";
 import { WorkspaceContext } from "../index";
 import { useAuth } from "../../../hooks/useAuth";
@@ -16,7 +17,7 @@ export default function QuizResponses() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [showResults, setShowResults] = useState(false);
-  const { selectedworkspace } = useContext(WorkspaceContext);
+  const { selectedWorkspace } = useContext(WorkspaceContext);
 
   const {
     data: quiz,
@@ -26,8 +27,8 @@ export default function QuizResponses() {
     queryKey: ["quiz", quizId],
     queryFn: async () => {
       try {
-        const serverResponse = await axios.get(
-          `http://localhost:5000/quiz/getQuiz?id=${quizId}`,
+        const serverResponse = await axiosInstance.get(
+          `${API_URLS.QUIZ.GET_QUIZ}?id=${quizId}`,
         );
         return serverResponse.data.quiz || null;
       } catch (err) {
@@ -47,8 +48,8 @@ export default function QuizResponses() {
     queryKey: ["quizResults", quizId],
     queryFn: async () => {
       try {
-        const serverResponse = await axios.post(
-          `http://localhost:5000/response/results`,
+        const serverResponse = await axiosInstance.post(
+          `${API_URLS.RESPONSE.RESULTS}`,
           {
             quizId: quizId,
           },
@@ -89,7 +90,7 @@ export default function QuizResponses() {
           <div className="w-full h-full">
             <img
               className="object-cover w-full h-full"
-              src={`http://localhost:5000/uploads/${user.email}/${selectedworkspace.id}/${quiz.quizThumbnail}`}
+              src={`${BASE_URL}${API_URLS.UPLOADS.BASE}/${user.email}/${selectedWorkspace.id}/${quiz.quizThumbnail}`}
               alt="Quiz Thumbnail"
             />
           </div>

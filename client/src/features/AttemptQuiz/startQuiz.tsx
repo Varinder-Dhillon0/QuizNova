@@ -1,9 +1,10 @@
-import axios from "axios";
+import axiosInstance from "@utils/axios";
 import { useContext, useEffect, useState } from "react";
 import { QuizContext } from ".";
 import { useAuth } from "../../hooks/useAuth";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import { API_URLS } from "@shared/constants/ApiUrls.constants";
 import startbg from "../../assets/img/QuizStart.svg";
 import parseDateWithTime, {
   parseDate,
@@ -48,7 +49,7 @@ export default function StartQuiz() {
   const { mutate: createResponse, isPending: createResponsePending } =
     useMutation({
       mutationFn: async () => {
-        const res = await axios.post("http://localhost:5000/response/create", {
+        const res = await axiosInstance.post(API_URLS.RESPONSE.CREATE, {
           userId: user?.email,
           quizId: quizId,
         });
@@ -89,7 +90,7 @@ export default function StartQuiz() {
             <div className="w-full">
               <div className="w-full h-[140px] rounded-t-xl overflow-hidden  bg-black">
                 <img
-                  src={`http://localhost:5000/uploads/${user.email}/${quiz.workspace}/${quiz.quizThumbnail}`}
+                  src={`${BASE_URL}${API_URLS.UPLOADS.BASE}/${user.email}/${quiz.workspace}/${quiz.quizThumbnail}`}
                   className="w-full h-full  object-cover"
                   alt=""
                 />
